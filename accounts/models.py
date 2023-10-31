@@ -1,4 +1,5 @@
 from django.db import models
+from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from django.db.models.signals import post_save
 import uuid
@@ -6,7 +7,7 @@ import uuid
 
 # Create your models here.
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email, first_name, last_name, user_type, contact_number, password=None):
+    def create_user(self, email, first_name, last_name, user_type, phone_number, password=None):
         if not email:
             raise ValueError('Users must have an email address')
 
@@ -15,20 +16,20 @@ class CustomUserManager(BaseUserManager):
             first_name=first_name,
             last_name=last_name,
             user_type=user_type,
-            contact_number=contact_number,
+            phone_number=phone_number,
         )
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, first_name, last_name, user_type, contact_number, password):
+    def create_superuser(self, email, first_name, last_name, user_type, phone_number, password):
         user = self.create_user(
             email,
             first_name=first_name,
             last_name=last_name,
             user_type=user_type,
-            contact_number=contact_number,
+            phone_number=phone_number,
             password=password,
         )
         user.is_admin = True
@@ -47,7 +48,7 @@ class CustomUser(AbstractBaseUser):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     user_type = models.CharField(max_length=10, choices=USER_TYPE, default='HOMME')
-    contact_number = models.CharField(max_length=20)
+    phone_number = PhoneNumberField(region='SN', unique=True)
     date_joined = models.DateTimeField(verbose_name='date joined', auto_now_add=True)
     last_login = models.DateTimeField(verbose_name='last login', auto_now=True)
     is_admin = models.BooleanField(default=False)
@@ -57,7 +58,7 @@ class CustomUser(AbstractBaseUser):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'user_type', 'contact_number']
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'user_type', 'phone_number']
 
     objects = CustomUserManager()
 
