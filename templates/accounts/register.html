@@ -1,0 +1,94 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<!-- **************** MAIN CONTENT START **************** -->
+<main>
+    <section class="pt-4 pt-md-5 pb-0 py-5 bg-success text-light">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-12 mx-auto text-center">
+                    <h1 class="fs-2 mb-2 text-light">Inscription</h1>
+                    <p class="mb-0">Créer un compte pour publier un trajet ou contacter un membre</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- =======================
+    Main Content START -->
+    <section class="py-5j">
+        <div class="container py-5j">
+            <div class="row justify-content-center align-items-center m-auto">
+                <div class="col-lg-10">
+                    <div class="card border">
+                        <div class="card-body">
+                            <!-- Form START -->
+                            <form class="text-start" method="POST">
+                                {% csrf_token %}
+                                <!-- Firstname -->
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+									<label class="form-label">Vous êtes ? <span class="text-danger">*</span></label>
+                                        {% for sexe in form.user_type %}
+									<div class="d-flex gap-4">
+										<div class="form-check radio-bg-light">
+                                            {{ sexe }}
+										</div>
+                                        {% endfor %}
+									</div>
+								</div>
+                                </div>
+
+                                <div class="row">
+                                <div class="col-lg-6 mb-3">
+                                    <label class="form-label">Prénom</label>
+                                    {{ form.first_name }}
+                                </div>
+                                <!-- Firstname -->
+                                <div class="col-lg-6 mb-3">
+                                    <label class="form-label">Nom</label>
+                                    {{ form.last_name }}
+                                </div>
+                                    </div>
+                                <!-- Email -->
+                                <!-- Email -->
+                                <div class="row">
+                                <div class="col-lg-6 mb-3">
+                                    <label class="form-label">Email</label>
+                                    {{ form.email }}
+                                </div>
+                                    <div class="col-lg-6 mb-3">
+                                    <label class="form-label">Téléphone</label>
+                                    {{ form.contact_number }}
+                                </div>
+                                </div>
+                                <!-- Password -->
+                                <div class="row">
+                                <div class="col-lg-6 mb-3 position-relative">
+                                    <label class="form-label">Mot de passe</label>
+                                    {{ form.password1 }}
+
+                                </div>
+                                <!-- Confirm Password -->
+                                <div class="col-lg-6 mb-3 position-relative">
+                                    <label class="form-label">Confirmer Mot de passe</label>
+                                    {{ form.password2 }}
+                                </div>
+                                    </div>
+                                <div>
+                                    <button type="submit" class="btn btn-primary w-100 mb-0">Register</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- =======================
+    Main Content END -->
+
+</main>
+<!-- **************** MAIN CONTENT END **************** -->
+
+{% endblock %}

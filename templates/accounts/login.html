@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<!-- =======================
+Main Content START -->
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row justify-content-center align-items-center m-auto">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header mb-0">
+                        <h2 class="mb-0">Connexion</h2>
+                    </div>
+                    <div class="card-body mt-0">
+                        <!-- Form START -->
+                        <form class="mt-4 text-start" method="POST">
+                            {% csrf_token %}
+                            <!-- Email -->
+                            <div class="mb-3">
+                               <label class="form-label">Enter email id</label>
+										<input type="email" class="form-control" name="email">
+                            </div>
+                            <!-- Password -->
+                            <div class="mb-3 position-relative">
+                                <label class="form-label">Mot de passe</label>
+                                <input type="password" class="form-control" name="password">
+                            </div>
+                            <!-- Remember me -->
+                            <div class="mb-3 d-sm-flex justify-content-between">
+                                <a href="forgot-password.html">Mot de passe oublié ?</a>
+                            </div>
+                            <!-- Button -->
+                            <div>
+                                <button type="submit" class="btn btn-primary mb-0 w-100">Register</button>
+                            </div>
+                        </form>
+                        <!-- Form END -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- =======================
+Main Content END -->
+
+{% endblock %}
