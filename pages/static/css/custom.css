@@ -1,0 +1,24 @@
+ul#profile,  ul#trip, ul#sexe {
+    list-style-type: none;
+}
+ul#profile li, ul#trip li, ul#sexe li {
+    display: inline;
+    padding: 0 1em;
+    margin-left: -1.5em;
+}
+
+input#price, input#seats, input#luggage {
+    border: none;
+    text-align: center;
+    background: none;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number]:focus{
+    outline: none;
+}
