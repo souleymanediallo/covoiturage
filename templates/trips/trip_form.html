@@ -1,0 +1,167 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<main>
+
+    <!-- =======================
+    Page Banner START -->
+    <section class="pt-4 pt-md-5 pb-0 py-3">
+        <div class="container pt-5">
+            <div class="row">
+                <div class="col-12 mx-auto text-center">
+                    <h1 class="fs-2 mb-2">Publier votre trajet</h1>
+                    <p class="mb-0">En tant que conducteur ou passager</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- =======================
+    Page Banner END -->
+
+    <!-- =======================
+    Main content START -->
+    <section>
+        <div class="container pb-5">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <form class="vstack gap-2" method="POST" enctype="multipart/form-data">
+						{% csrf_token %}
+                        <!-- Owner Detail START -->
+                        <div class="card border rounded-2 mb-0 border-radius-0 bg-light">
+                            <!-- Card body -->
+                            <div class="card-body">
+                                <div class="row g-3">
+                                    <!-- car type -->
+                                     <div class="col-md-6 mb-3">
+                                        <label class="form-label">Je suis : <span class="text-danger">*</span></label>
+                                            {% for sexe in form.user_type %}
+                                            <div class="d-flex gap-4">
+                                                <div class="form-check radio-bg-light">
+                                                    {{ sexe }}
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                    </div>
+                                    <!-- car type -->
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Type de trajet : <span class="text-danger">*</span></label>
+                                            {% for trip in form.trip_type %}
+                                            <div class="d-flex gap-4">
+                                                <div class="form-check radio-bg-light">
+                                                    {{ trip }}
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Owner Detail END -->
+                          <!-- Owner Detail START -->
+                        <div class="card border border-radius-0 bg-light rounded-2">
+                            <!-- Card body -->
+                            <div class="card-body">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Départ</label>
+                                        {{ form.start_city }}
+                                    </div>
+                                    <!-- State -->
+                                    <div class="col-md-6">
+                                        <label class="form-label">Arrivée</label>
+                                        {{ form.end_city }}
+                                    </div>
+                                    <!-- Contact number -->
+                                    <div class="col-md-6">
+                                        <label class="form-label">Date Départ</label>
+                                        {{ form.start_date }}
+                                    </div>
+                                    <!-- Email -->
+                                    <div class="col-md-6">
+                                        <label class="form-label">Heure</label>
+                                        {{ form.start_time }}
+                                    </div>
+                                    <!-- Contact number -->
+                                    <div class="col-md-6">
+                                        <label class="form-label">Date Retour</label>
+                                        {{ form.end_date }}
+                                    </div>
+                                    <!-- Email -->
+                                    <div class="col-md-6">
+                                        <label class="form-label">Heure</label>
+                                        {{ form.end_time }}
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Owner Detail END -->
+                        <!-- Owner Detail START -->
+                        <div class="card border rounded-2 border-radius-0 bg-light">
+                            <!-- Card body -->
+                            <div class="card-body">
+                                        <div class="d-block d-sm-flex justify-content-between text-sm-center">
+                                           <!-- Item start -->
+                                            <div class="item">
+                                                 <label class="form-label">Nombre de Place</label>
+                                                     <div class="hstack gap-1 align-items-center text-center">
+                                                    <button type="button" class="btn btn-link adult-remove p-0 mb-0" id="decrease-seat_go"><i class="bi bi-dash-circle fs-5 fa-fw"></i></button>
+                                                    <h5 class="guest-selector-count mb-0 adults">{{ form.seat_go }}</h5>
+                                                    <button type="button" class="btn btn-link adult-add p-0 mb-0" id="increase-seat_go"><i class="bi bi-plus-circle fs-5 fa-fw"></i></button>
+                                                </div>
+                                            </div>
+                                            <!-- end Item -->
+                                            <!-- Item start -->
+                                            <div class="item">
+                                                 <label class="form-label">Nombre de Bagage</label>
+                                                     <div class="hstack gap-1 align-items-center text-center">
+                                                    <button type="button" class="btn btn-link adult-remove p-0 mb-0" id="decrease-luggage"><i class="bi bi-dash-circle fs-5 fa-fw"></i></button>
+                                                    <h5 class="guest-selector-count mb-0 adults px-3">{{ form.luggage }}</h5>
+                                                    <button type="button" class="btn btn-link adult-add p-0 mb-0" id="increase-luggage"><i class="bi bi-plus-circle fs-5 fa-fw"></i></button>
+                                                </div>
+                                            </div>
+                                            <!-- end Item -->
+                                            <!-- Item start -->
+                                            <div class="item">
+                                                 <label class="form-label">Prix par place</label>
+                                                     <div class="hstack gap-1 align-items-center text-center">
+                                                    <button type="button" class="btn btn-link adult-remove p-0 mb-0" id="decrease-price"><i class="bi bi-dash-circle fs-5 fa-fw"></i></button>
+                                                    <h5 class="guest-selector-count mb-0 adults">{{ form.price }} FCFA</h5>
+                                                    <button type="button" class="btn btn-link adult-add p-0 mb-0" id="increase-price"><i class="bi bi-plus-circle fs-5 fa-fw"></i></button>
+                                                </div>
+                                            </div>
+                                            <!-- end Item -->
+                                        </div>
+                                    </div>
+                                    <!-- Address -->
+                        </div>
+                        <!-- Owner Detail END -->
+                         <!-- Owner Detail START -->
+                        <div class="card border rounded-2 bg-light">
+                            <!-- Card body -->
+                            <div class="card-body">
+                                <div class="row g-3">
+                                    <!-- Address -->
+                                    <div class="col-12">
+                                        <label class="form-label">Information concernant votre trajet</label>
+                                        {{ form.description }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Owner Detail END -->
+
+                        <!-- Button -->
+                        <div class="text-end">
+                            <button class="btn btn-primary mb-0 me-2" type="submit">Publier mon trajet</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- =======================
+    Main content END -->
+
+</main>
+{% endblock %}

@@ -1,14 +1,5 @@
-flatpickr(".flatpickr-input", {
-    dateFormat: "d/m/Y",  // Utilisez "F" pour afficher le nom complet du mois
-    minDate: "today",
-    altInput: true,
-    altFormat: "d/m/Y",
-    locale: "fr",
-    defaultDate: "today",
-});
 
 $(document).ready(function () {
-
     $("#increase-price").click(function () {
         var currentPrice = parseInt($("#price").val());
         currentPrice += 500;
@@ -24,17 +15,16 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-
-    $("#increase-seats").click(function () {
-        var currentSeats = parseInt($("#seats").val());
-        currentSeats = Math.min(9, currentSeats + 1);
-        $("#seats").val(currentSeats);
+    $("#increase-seat_go").click(function () {
+        var currentSeat_go = parseInt($("#seat_go").val());
+        currentSeat_go = Math.min(9, currentSeat_go + 1);
+        $("#seat_go").val(currentSeat_go);
     });
 
-    $("#decrease-seats").click(function () {
-        var currentSeats = parseInt($("#seats").val());
-        currentSeats = Math.max(1, currentSeats - 1);
-        $("#seats").val(currentSeats);
+    $("#decrease-seat_go").click(function () {
+        var currentSeat_go = parseInt($("#seat_go").val());
+        currentSeat_go = Math.max(1, currentSeat_go - 1);
+        $("#seat_go").val(currentSeat_go);
     });
 });
 

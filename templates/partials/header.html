@@ -44,7 +44,7 @@
                         <a class="nav-link" href="#">Tous les trajets</a>
                     </li>
                     <li class="nav-item fw-bold">
-                        <a class="nav-link" href="#">Publier un trajet</a>
+                        <a class="nav-link" href="{% url 'trip-create' %}">Publier un trajet</a>
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item fw-bold">
