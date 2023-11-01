@@ -48,7 +48,7 @@
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item fw-bold">
-                        <a class="nav-link" href="#">Dashboard</a>
+                        <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
                     </li>
                     <li class="nav-item fw-bold">
                         <a class="nav-link" href="{% url 'logout' %}">Déconnexion</a>

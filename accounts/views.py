@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 from .forms import CustomUserCreationForm
+from trips.models import Trip
 
 
 # Create your views here.
@@ -41,3 +42,9 @@ def login_user(request):
             messages.error(request, "Erreur email ou mot de passe")
 
     return render(request, "accounts/login.html")
+
+
+def dashboard(request):
+    trips = Trip.objects.filter(author=request.user)
+    context = {"trips": trips}
+    return render(request, 'accounts/dashboard.html', context)

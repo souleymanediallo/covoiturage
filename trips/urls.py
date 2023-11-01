@@ -5,7 +5,8 @@ from . import views
 urlpatterns = [
     path('create', views.TripCreateView.as_view(), name='trip-create'),
     path('', views.TripListView.as_view(), name='trip-list'),
-    #path('<str:pk>', views.TripDetailView.as_view(), name='trip-detail'),
+    path('<str:pk>', views.TripDetailView.as_view(), name='trip-detail'),
+    path('my-trip-list', views.my_trip, name='my-trips'),
     #path('<str:pk>/update', views.TripUpdateView.as_view(), name='trip-update'),
     #path('<str:pk>/delete', views.TripDeleteView.as_view(), name='trip-delete'),
     # Booking

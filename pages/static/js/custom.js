@@ -29,7 +29,6 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    $("#luggage").prop("disabled", true);
     $("#increase-luggage").click(function () {
         var currentLuggage = parseInt($("#luggage").val());
         currentLuggage = Math.min(20, currentLuggage + 1);

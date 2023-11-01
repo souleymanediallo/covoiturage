@@ -1,0 +1,107 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<!-- **************** MAIN CONTENT START **************** -->
+<main>
+    <section class="pt-5">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card border rounded-2">
+                        <!-- Card header -->
+
+                        <!-- Card body START -->
+                        <div class="card-body">
+                            <!-- Title -->
+                            <div class="p-3 bg-light rounded-2 d-sm-flex justify-content-sm-between align-items-center mb-4">
+                                <!-- Airline Name -->
+                                <h6 class="mb-0">{{ trip.start_city }} <i class="bi bi-arrow-right mx-2"></i></span> {{ trip.end_city }}</h6>
+                                <h6 class="fw-normal mb-0">{{ trip.start_date }}<span class="text-body"> à </span> {{ trip.start_time }}</h6>
+                            </div>
+
+                            <!-- Ticket item START -->
+                            <div class="row g-4">
+                                <!-- Air line name -->
+                                <div class="col-md-3">
+                                    <h5>{{ trip.seat_go }} Places</h5>
+                                </div>
+                                <!-- Airport detail -->
+                                <div class="col-4 col-md-3 text-end">
+                                    <!-- Title -->
+
+                                </div>
+                                <!-- Airport detail -->
+                                <div class="col-4 col-md-6 text-end">
+                                    <!-- Title -->
+                                    <h5>{{ trip.price }}F</h5>
+                                </div>
+                            </div>
+                            <!-- Ticket item END -->
+
+                            <!-- Title -->
+                            <div class="p-3 bg-light rounded-2 d-sm-flex justify-content-sm-between align-items-center text-center my-4">
+                                <!-- Airline Name -->
+                                <h6 class="mb-1 mb-sm-0">{{ trip.end_city }} <i class="bi bi-arrow-right mx-2"></i></span> {{ trip.end_city }}</h6>
+                                <h6 class="fw-normal mb-0">{{ trip.end_date }}<span class="text-body"> à </span> {{ trip.end_time }}</h6>
+                            </div>
+                            <!-- Ticket item START -->
+                            <div class="row g-4">
+                                <!-- Air line name -->
+                                <div class="col-md-3">
+                                    <h5>{{ trip.seat_back }} Places</h5>
+                                </div>
+                                <!-- Airport detail -->
+                                <div class="col-4 col-md-3">
+                                    <!-- Title -->
+                                </div>
+                                <!-- Time -->
+                                <!-- Airport detail -->
+                                <div class="col-4 col-md-6 text-end">
+                                    <!-- Title -->
+                                    <h5>9.000F</h5>
+                                </div>
+                                 <div class="col-12">
+                                    <!-- Title -->
+                                    <h5>Informations pour ce trajet</h5>
+                                     <div class="card border rounded-2">
+                                         <div class="card-body">
+                                             <p>Informations pour ce trajet</p>
+                                         </div>
+                                     </div>
+                                </div>
+                            </div>
+                            <!-- Ticket item END -->
+
+                        </div>
+                        <!-- Card body END -->
+                        <div class="card-footer border-top">
+                            <div class="row justify-content-between">
+                                <div class="col-6">
+                                    <div class="d-flex align-items-center justify-content-start mb-2">
+                                    <div class="icon-lg bg-light rounded-circle flex-shrink-0"><i
+                                            class="fa-solid fa-car"></i></div>
+                                    <!-- Title -->
+                                    <div class="ms-2">
+                                        <h6 class="card-title mb-0">Ahmed</h6>
+                                        <span>Conducteur</span>
+                                    </div>
+                                </div>
+                                </div>
+                                 <div class="col-6 text-end">
+                                    <button type="button" class="btn btn-primary btn-lg btn-block">Réserver</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- =======================
+Steps END -->
+
+</main>
+<!-- **************** MAIN CONTENT END **************** -->
+
+
+{% endblock %}

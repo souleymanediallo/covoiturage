@@ -7,10 +7,12 @@ ul#profile li, ul#trip li, ul#sexe li {
     margin-left: -1.5em;
 }
 
-input#price, input#seats, input#luggage {
+input#price, input#seat_go, input#luggage {
     border: none;
     text-align: center;
     background: none;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 input[type=number]::-webkit-inner-spin-button,

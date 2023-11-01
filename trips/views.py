@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import View
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -17,7 +17,7 @@ class TripListView(ListView):
     model = Trip
     template_name = 'trips/trip_list.html'
     context_object_name = 'trips'
-    ordering = ['-start_date', '-start_time']
+    ordering = ['start_date', 'start_time']
     paginate_by = 5
 
     def get_queryset(self):
@@ -40,3 +40,46 @@ class TripCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+
+class TripDetailView(DetailView):
+    model = Trip
+    template_name = 'trips/trip_detail.html'
+    context_object_name = 'trip'
+
+
+class TripUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Trip
+    form_class = TripForm
+    context_object_name = "form"
+    success_url = reverse_lazy('home')
+    template_name = 'trips/trip_form.html'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        trip = self.get_object()
+        if self.request.user == trip.author:
+            return True
+        return False
+
+
+class TripDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Trip
+    success_url = reverse_lazy('home')
+    template_name = 'trips/trip_confirm_delete.html'
+
+    def test_func(self):
+        trip = self.get_object()
+        if self.request.user == trip.author:
+            return True
+        return False
+
+
+@login_required
+def my_trip(request):
+    trips = Trip.objects.all()
+    context = {"trips": trips}
+    return render(request, "trips/my-trip-list.html", context)
