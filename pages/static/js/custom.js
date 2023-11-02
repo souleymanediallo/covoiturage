@@ -42,22 +42,20 @@ $(document).ready(function () {
     });
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-    const tripTypeField = document.getElementById("trip_type");
-    const dateRetourField = document.getElementById("date_retour_field");
-
-    // Function to toggle the visibility of the "Date de retour" field
-    function toggleDateRetourField() {
-        if (tripTypeField.value === "Aller Retour") {
-            dateRetourField.style.display = "block";
+$(document).ready(function () {
+    $('input[type="radio"][name="trip_type"]').change(function() {
+        if ($(this).val() === 'Aller Retour') {
+            $('#returnDateSection').show();
+            $('#returnTimeSection').show();
         } else {
-            dateRetourField.style.display = "none";
+            $('#returnDateSection').hide();
+            $('#returnTimeSection').hide();
         }
+    });
+
+    // Initialisez l'état si "Aller Retour" est déjà sélectionné
+    if ($('input[type="radio"][name="trip_type"]:checked').val() === 'Aller Retour') {
+        $('#returnDateSection').show();
+        $('#returnTimeSection').show();
     }
-
-    // Initial toggle based on default value
-    toggleDateRetourField();
-
-    // Add event listener to the "Type de trajet" field
-    tripTypeField.addEventListener("change", toggleDateRetourField);
 });

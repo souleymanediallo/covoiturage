@@ -43,7 +43,7 @@ class Trip(models.Model):
         ordering = ['start_city', 'end_city']
 
     def __str__(self):
-        return f"{self.start_date} - {self.start_city}"
+        return f"{self.start_city} - {self.end_city}"
 
     def get_absolute_url(self):
         return reverse("trip-detail", kwargs={"pk": self.pk})
@@ -53,3 +53,57 @@ class Trip(models.Model):
 
     def get_absolute_url_delete(self):
         return reverse("trip-delete", kwargs={"pk": self.pk})
+
+    def available_seats(self, trip_type):
+        reservations = Reservation.objects.filter(trip=self)
+
+        if trip_type == 'Aller Simple':
+            reserved_seats_go = reservations.aggregate(Sum('seats_reserved_go'))['seats_reserved_go__sum'] or 0
+            return self.seat_go - reserved_seats_go
+
+        elif trip_type == 'Aller Retour':
+            reserved_seats_go = reservations.aggregate(Sum('seats_reserved_go'))['seats_reserved_go__sum'] or 0
+            reserved_seats_back = reservations.aggregate(Sum('seats_reserved_back'))['seats_reserved_back__sum'] or 0
+
+            available_seats_go = self.seat_go - reserved_seats_go
+            available_seats_back = self.seat_back - reserved_seats_back if self.seat_back is not None else 0
+
+            return min(available_seats_go, available_seats_back)
+
+
+class Reservation(models.Model):
+    PENDING = 'En attente'
+    ACCEPTED = 'Acceptée'
+    REFUSED = 'Refusée'
+    CANCELLED = 'Annulée'
+
+    STATUS_CHOICES = [
+        (PENDING, 'En attente'),
+        (ACCEPTED, 'Acceptée'),
+        (REFUSED, 'Refusée'),
+        (CANCELLED, 'Annulée'),
+    ]
+
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=PENDING)
+    trip = models.ForeignKey(Trip, on_delete=models.CASCADE, related_name='reservations')
+    passenger = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    seats_reserved_go = models.PositiveIntegerField()
+    seats_reserved_back = models.PositiveIntegerField(blank=True, null=True)
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Réservation par {self.passenger} pour {self.seats_reserved_go} places"
+
+    def accept(self):
+        self.status = self.ACCEPTED
+        self.save()
+
+    def refuse(self):
+        self.status = self.REFUSED
+        self.save()
+
+    def cancel(self):
+        self.status = self.CANCELLED
+        self.save()

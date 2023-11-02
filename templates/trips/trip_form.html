@@ -47,7 +47,7 @@
                                         <label class="form-label">Type de trajet : <span class="text-danger">*</span></label>
                                             {% for trip in form.trip_type %}
                                             <div class="d-flex gap-4">
-                                                <div class="form-check radio-bg-light">
+                                                <div class="form-check radio-bg-light" id="tripTypeSection">
                                                     {{ trip }}
                                                 </div>
                                             </div>
@@ -82,12 +82,12 @@
                                         {{ form.start_time }}
                                     </div>
                                     <!-- Contact number -->
-                                    <div class="col-md-6">
+                                    <div class="col-md-6" id="returnDateSection">
                                         <label class="form-label">Date Retour</label>
                                         {{ form.end_date }}
                                     </div>
                                     <!-- Email -->
-                                    <div class="col-md-6">
+                                    <div class="col-md-6" id="returnTimeSection">
                                         <label class="form-label">Heure</label>
                                         {{ form.end_time }}
                                     </div>

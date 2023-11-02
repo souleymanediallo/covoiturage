@@ -6,7 +6,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from .forms import TripForm
-from .models import Trip
+from .models import Trip, Reservation
 # Create your views here.
 from datetime import datetime
 today_current = datetime.today().strftime('%Y-%m-%d')
@@ -74,3 +74,45 @@ def my_trip(request):
     trips = Trip.objects.all()
     context = {"trips": trips}
     return render(request, "trips/my-trip-list.html", context)
+
+
+@login_required
+def trip_reservation(request, trip_id):
+    trip = get_object_or_404(Trip, pk=trip_id)
+
+    if request.method == 'POST':
+        seats_reserved_go = int(request.POST.get('seats_reserved_go', 0))
+        seats_reserved_back = int(request.POST.get('seats_reserved_back', 0))
+
+        # Vérifier les places disponibles pour l'aller
+        if seats_reserved_go > trip.available_seats('Aller Simple'):
+            messages.error(request, "Le nombre de places demandées pour l'aller est supérieur au nombre de places disponibles.")
+            return redirect('trip-detail', trip_id)
+
+        # Vérifier les places disponibles pour le retour
+        if seats_reserved_back > trip.available_seats('Aller Retour'):
+            messages.error(request, "Le nombre de places demandées pour le retour est supérieur au nombre de places disponibles.")
+            return redirect('trip-detail', trip_id)
+
+        # Créer la réservation pour l'aller
+        if seats_reserved_go > 0:
+            Reservation.objects.create(
+                trip=trip,
+                passenger=request.user,
+                seats_reserved_go=seats_reserved_go
+            )
+
+        # Créer la réservation pour le retour
+        if seats_reserved_back > 0:
+            Reservation.objects.create(
+                trip=trip,
+                passenger=request.user,
+                seats_reserved_back=seats_reserved_back
+            )
+
+        messages.success(request, "Votre réservation a été enregistrée avec succès.")
+        return redirect('trip-detail', trip_id)
+
+    else:
+        context = {'trip': trip}
+        return render(request, 'trips/trip_reservation.html', context)
