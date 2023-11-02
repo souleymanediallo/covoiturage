@@ -20,15 +20,6 @@ class TripListView(ListView):
     ordering = ['start_date', 'start_time']
     paginate_by = 5
 
-    def get_queryset(self):
-        return Trip.objects.filter(start_date__gte=today_current, start_time__gte=time_expired)
-
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        context['today_current'] = today_current
-        context['time_expired'] = time_expired
-        return context
-
 
 class TripCreateView(LoginRequiredMixin, CreateView):
     model = Trip
@@ -52,7 +43,7 @@ class TripUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Trip
     form_class = TripForm
     context_object_name = "form"
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('dashboard')
     template_name = 'trips/trip_form.html'
 
     def form_valid(self, form):
@@ -68,7 +59,7 @@ class TripUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class TripDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Trip
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('dashboard')
     template_name = 'trips/trip_confirm_delete.html'
 
     def test_func(self):

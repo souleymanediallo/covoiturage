@@ -68,9 +68,9 @@ Content START -->
 
 										<!-- Button -->
 										<div class="mt-2 mt-md-0">
-											<a href="#" class="btn btn-success-soft mb-0">Voir</a>
-											<a href="#"  class="btn btn-primary-soft mb-0">Modifier</a>
-											<a href="#" class="btn btn-danger-soft mb-0">Supprimer</a>
+											<a href="{{ trip.get_absolute_url }}" class="btn btn-success-soft mb-0">Voir</a>
+											<a href="{{ trip.get_absolute_url_update }}"  class="btn btn-primary-soft mb-0">Modifier</a>
+											<a href="{{ trip.get_absolute_url_delete }}" class="btn btn-danger-soft mb-0">Supprimer</a>
 										</div>
 									</div>
 

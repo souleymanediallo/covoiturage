@@ -8,27 +8,22 @@ Content START -->
 <section class="pt-5">
 	<div class="container py-5">
 		<div class="row">
-
 			<!-- Sidebar START -->
             {% include "partials/sidebar-admin.html" %}
 			<!-- Sidebar END -->
-
 			<!-- Main content START -->
 			<div class="col-lg-8 col-xl-9">
                 <div class="card border mb-0 border-radius-0 bg-light">
                     <!-- Card body -->
                     <div class="card-body">
-                        <h6>Confirmer la suppression de l'annonce</h6>
-                            <p>Êtes-vous sûr de vouloir supprimer cette annonce ?</p>
+                        <h6>Supprimer mon compte</h6>
+                            <p>Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.</p>
                             <form method="POST">
                                 {% csrf_token %}
                                 <div class="form-group">
-                                <h6>Êtes-vous sûr de vouloir supprimer cet Article ?</h6>
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-outline-danger" type="submit">Oui, Supprimer</button>
-                                <a class="btn btn-outline-dark" href="{% url 'dashboard' %}">Annuler</a>
-                            </div>
+                                    <button class="btn btn-outline-danger" type="submit">Oui, Supprimer</button>
+                                    <a class="btn btn-outline-dark" href="{% url 'dashboard' %}">Annuler</a>
+                                </div>
                             </form>
                     </div>
                 </div>

@@ -11,19 +11,19 @@
                     <div class="text-center mb-3">
                         <div class="avatar avatar-xl mb-2">
                             <img class="avatar-img rounded-circle border border-2 border-white"
-                                 src="assets/images/avatar/01.jpg" alt="">
+                                 src="{{ user.profile.image.url }}" alt="">
                         </div>
-                        <h6 class="mb-0">Jacqueline Miller</h6>
+                        <h6 class="mb-0">{{ user.first_name }}</h6>
                         <hr>
                     </div>
                     <ul class="nav nav-pills-primary-soft flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{% url 'dashboard' %}">
                                 <i class="bi bi-ticket-perforated fa-fw me-2"></i>Mes Trajets
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{% url 'profile-update' %}">
                                 <i class="bi bi-person fa-fw me-2"></i>Mon Profil
                             </a>
                         </li>
@@ -58,7 +58,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-danger bg-danger-soft-hover" href="#">
+                            <a class="nav-link text-danger bg-danger-soft-hover" href="{% url 'logout' %}">
                                 <i class="fas fa-sign-out-alt fa-fw me-2"></i>Déconnexion
                             </a>
                         </li>

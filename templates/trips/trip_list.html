@@ -1,0 +1,540 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<main>
+
+<!-- =======================
+Search START -->
+<section class="pt-5">
+	<div class="container pt-5">
+		<div class="row">
+			<div class="col-12">
+				<!-- Booking from START -->
+				<form class="bg-mode border rounded position-relative px-4 pt-4 mb-4 mb-sm-0">
+					<div class="row g-4">
+						<!-- Nav tabs START -->
+						<div class="col-lg-6">
+							<ul class="nav nav-pills nav-pills-dark" id="pills-tab" role="tablist">
+								<li class="nav-item" role="presentation">
+									<button class="nav-link rounded-start rounded-0 mb-0 active" id="pills-one-way-tab" data-bs-toggle="pill" data-bs-target="#pills-one-way" type="button" role="tab" aria-selected="true">Aller Simple</button>
+								</li>
+								<li class="nav-item" role="presentation">
+									<button class="nav-link rounded-end rounded-0 mb-0" id="pills-round-trip-tab" data-bs-toggle="pill" data-bs-target="#pills-round-trip" type="button" role="tab" aria-selected="false">Aller Retour</button>
+								</li>
+							</ul>
+						</div>
+						<!-- Nav tabs END -->
+
+						<!-- Ticket class -->
+						<div class="col-lg-3 ms-auto">
+							<div class="form-control-bg-light form-fs-md">
+								<select class="form-select js-choice">
+									<option value="">Select Class</option>
+									<option>Conducteur</option>
+									<option selected>Passager</option>
+								</select>
+							</div>
+						</div>
+
+						<!-- Ticket Passenger -->
+
+					</div>
+
+					<!-- Tab content START -->
+					<div class="tab-content mt-4" id="pills-tabContent">
+						<!-- One way tab START -->
+						<div class="tab-pane fade show active" id="pills-one-way" role="tabpanel" aria-labelledby="pills-one-way-tab">
+							<div class="row g-4">
+								<!-- Leaving From -->
+								<div class="col-md-6 col-lg-4 position-relative">
+									<div class="form-border-transparent form-fs-lg bg-light rounded-3 h-100 p-3">
+										<!-- Input field -->
+										<label class="mb-1"><i class="bi bi-geo-alt me-2"></i>Départ</label>
+										<select class="form-select js-choice" data-search-enabled="true">
+											<option value="">Select location</option>
+											<option selected>San Jacinto, USA</option>
+											<option>North Dakota, Canada</option>
+											<option>West Virginia, Paris</option>
+										</select>
+									</div>
+
+									<!-- Auto fill button -->
+									<div class="btn-flip-icon mt-3 mt-md-0">
+										<button class="btn btn-white shadow btn-round mb-0"><i class="fa-solid fa-right-left"></i></button>
+								 </div>
+								</div>
+
+								<!-- Going To -->
+								<div class="col-md-6 col-lg-4">
+									<div class="form-border-transparent form-fs-lg bg-light rounded-3 h-100 p-3">
+										<!-- Input field -->
+										<label class="mb-1"><i class="bi bi-send me-2"></i>Arrivée</label>
+										<select class="form-select js-choice" data-search-enabled="true">
+											<option value="">Select location</option>
+											<option>San Jacinto, USA</option>
+											<option selected>North Dakota, Canada</option>
+											<option>West Virginia, Paris</option>
+										</select>
+									</div>
+								</div>
+
+								<!-- Departure -->
+								<div class="col-lg-4">
+									<div class="form-border-transparent form-fs-lg bg-light rounded-3 h-100 p-3">
+										<label class="mb-1"><i class="bi bi-calendar me-2"></i>Date Départ</label>
+										<input type="text" class="form-control flatpickr" placeholder="Select date" data-date-format="d M Y" value="19 Nov 2022">
+									</div>
+								</div>
+
+								<div class="col-12 text-end pt-0">
+									<a  class="btn btn-primary mb-n4" href="#">Rechercher <i class="bi bi-arrow-right ps-3"></i></a>
+								</div>
+							</div>
+						</div>
+						<!-- One way tab END -->
+
+						<!-- Round way tab END -->
+						<div class="tab-pane fade" id="pills-round-trip" role="tabpanel" aria-labelledby="pills-round-trip-tab">
+							<div class="row g-4">
+								<!-- Leaving From -->
+								<div class="col-md-6 col-xl-3 position-relative">
+									<div class="form-border-transparent form-fs-lg bg-light rounded-3 h-100 p-3">
+										<!-- Input field -->
+										<label class="mb-1"><i class="bi bi-geo-alt me-2"></i>Départ</label>
+										<select class="form-select js-choice" data-search-enabled="true">
+											<option value="">Select location</option>
+											<option>San Jacinto, USA</option>
+											<option>North Dakota, Canada</option>
+											<option>West Virginia, Paris</option>
+										</select>
+									</div>
+
+									<!-- Auto fill button -->
+									<div class="btn-flip-icon mt-3 mt-md-0">
+										 <button class="btn btn-white shadow btn-round mb-0"><i class="fa-solid fa-right-left"></i></button>
+									</div>
+								</div>
+
+								<!-- Going To -->
+								<div class="col-md-6 col-xl-3">
+									<div class="form-border-transparent form-fs-lg bg-light rounded-3 h-100 p-3">
+										<!-- Input field -->
+										<label class="mb-1"><i class="bi bi-send me-2"></i>Arrivée</label>
+										<select class="form-select js-choice" data-search-enabled="true">
+											<option value="">Select location</option>
+											<option>San Jacinto, USA</option>
+											<option>North Dakota, Canada</option>
+											<option>West Virginia, Paris</option>
+										</select>
+									</div>
+								</div>
+
+								<!-- Departure -->
+								<div class="col-md-6 col-xl-3">
+									<div class="form-border-transparent form-fs-lg bg-light rounded-3 h-100 p-3">
+										<label class="mb-1"><i class="bi bi-calendar me-2"></i>Date Départ</label>
+										<input type="text" class="form-control flatpickr" data-date-format="d M Y" placeholder="Select date">
+									</div>
+								</div>
+
+								<!-- Return -->
+								<div class="col-md-6 col-xl-3">
+									<div class="form-border-transparent form-fs-lg bg-light rounded-3 h-100 p-3">
+										<label class="mb-1"><i class="bi bi-calendar me-2"></i>Date Retour</label>
+										<input type="text" class="form-control flatpickr" data-date-format="d M Y" placeholder="Select date">
+									</div>
+								</div>
+
+								<div class="col-12 text-end pt-0">
+									<a  class="btn btn-primary mb-n4" href="#">Find ticket <i class="bi bi-arrow-right ps-3"></i></a>
+								</div>
+							</div>
+						</div>
+						<!-- Round way tab END -->
+					</div>
+					<!-- Tab content END -->
+				</form>
+				<!-- Booking from END -->
+			</div>
+		</div>
+	</div>
+</section>
+<!-- =======================
+Search START -->
+
+<!-- =======================
+Flight list START -->
+<section class="pt-0">
+	<div class="container">
+		<div class="row">
+
+			<!-- Left sidebar START -->
+			<aside class="col-xl-4 col-xxl-3">
+				<!-- Responsive offcanvas body START -->
+					<div class="offcanvas-xl offcanvas-end" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
+						<!-- Offcanvas header -->
+						<div class="offcanvas-header">
+							<h5 class="offcanvas-title" id="offcanvasSidebarLabel">Advance Filters</h5>
+							<button  type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasSidebar" aria-label="Close"></button>
+						</div>
+
+						<!-- Offcanvas body -->
+						<div class="offcanvas-body flex-column p-3 p-xl-0">
+							<form class="rounded-3 shadow">
+								<!-- Popular filters START -->
+								<div class="card card-body rounded-0 rounded-top p-4">
+									<!-- Title -->
+									<h6 class="mb-2">Popular Filters</h6>
+									<!-- Popular filters group -->
+									<div class="col-12">
+										<!-- Checkbox -->
+										<div class="d-flex justify-content-between align-items-center">
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" id="popolarType1">
+												<label class="form-check-label" for="popolarType1">Refundable Fare</label>
+											</div>
+											<span class="small">(41)</span>
+										</div>
+										<!-- Checkbox -->
+										<div class="d-flex justify-content-between align-items-center">
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" id="popolarType2">
+												<label class="form-check-label" for="popolarType2">1 Stop</label>
+											</div>
+											<span class="small">(20)</span>
+										</div>
+										<!-- Checkbox -->
+										<div class="d-flex justify-content-between align-items-center">
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" id="popolarType3">
+												<label class="form-check-label" for="popolarType3">Late Departure</label>
+											</div>
+											<span class="small">(4)</span>
+										</div>
+										<!-- Checkbox -->
+										<div class="d-flex justify-content-between align-items-center">
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" id="popolarType4">
+												<label class="form-check-label" for="popolarType4">Non-Stop</label>
+											</div>
+											<span class="small">(2)</span>
+										</div>
+									</div>
+								</div>
+								<!-- Popular filters END -->
+
+								<hr class="my-0"> <!-- Divider -->
+
+								<!-- Price START -->
+								<div class="card card-body rounded-0 p-4">
+									<!-- Title -->
+									<h6 class="mb-2">Price</h6>
+									<!-- Price group -->
+									<div class="position-relative">
+										<div class="noui-wrapper">
+											<div class="d-flex justify-content-between">
+												<input type="text" class="text-body input-with-range-min">
+												<input type="text" class="text-body input-with-range-max">
+											</div>
+											<div class="noui-slider-range mt-2" data-range-min='500' data-range-max='2000' data-range-selected-min='700' data-range-selected-max='1500'></div>
+										</div>
+									</div>
+								</div>
+								<!-- Price END -->
+
+								<hr class="my-0"> <!-- Divider -->
+
+								<!-- Onward stops START -->
+								<div class="card card-body rounded-0 p-4">
+									<!-- Title -->
+									<h6 class="mb-2">Onward Stops</h6>
+									<!-- Onward stops group -->
+									<ul class="list-inline mb-0 g-3">
+										<!-- Item -->
+										<li class="list-inline-item mb-0">
+											<input type="checkbox" class="btn-check" id="btn-check-c1">
+											<label class="btn btn-sm btn-light btn-primary-soft-check" for="btn-check-c1">Direct</label>
+										</li>
+										<!-- Item -->
+										<li class="list-inline-item mb-0">
+											<input type="checkbox" class="btn-check" id="btn-check-c2">
+											<label class="btn btn-sm btn-light btn-primary-soft-check" for="btn-check-c2">1 Stop</label>
+										</li>
+										<!-- Item -->
+										<li class="list-inline-item mb-0">
+											<input type="checkbox" class="btn-check" id="btn-check-c3">
+											<label class="btn btn-sm btn-light btn-primary-soft-check" for="btn-check-c3">2+ Stops</label>
+										</li>
+									</ul>
+								</div>
+								<!-- Onward stops END -->
+
+								<hr class="my-0"> <!-- Divider -->
+
+								<!-- Return Stops START -->
+								<div class="card card-body rounded-0 p-4">
+									<!-- Title -->
+									<h6 class="mb-2">Return Stops</h6>
+									<!-- Return Stops group -->
+									<ul class="list-inline mb-0 g-3">
+										<!-- Item -->
+										<li class="list-inline-item mb-0">
+											<input type="checkbox" class="btn-check" id="btn-check-6">
+											<label class="btn btn-sm btn-light btn-primary-soft-check" for="btn-check-6">Direct</label>
+										</li>
+										<!-- Item -->
+										<li class="list-inline-item mb-0">
+											<input type="checkbox" class="btn-check" id="btn-check-7">
+											<label class="btn btn-sm btn-light btn-primary-soft-check" for="btn-check-7">1 Stop</label>
+										</li>
+										<!-- Item -->
+										<li class="list-inline-item mb-0">
+											<input type="checkbox" class="btn-check" id="btn-check-8">
+											<label class="btn btn-sm btn-light btn-primary-soft-check" for="btn-check-8">2+ Stops</label>
+										</li>
+									</ul>
+								</div>
+								<!-- Return Stops END -->
+
+								<hr class="my-0"> <!-- Divider -->
+
+								<!-- Preferred Airline START -->
+								<div class="card card-body rounded-0 p-4">
+									<!-- Title -->
+									<h6 class="mb-2">Preferred Airline</h6>
+									<!-- Preferred Airline group -->
+									<div class="col-12">
+										<!-- Checkbox -->
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" value="" id="airlineType1">
+											<label class="form-check-label" for="airlineType1">
+												<img src="assets/images/element/12.svg" class="h-15px fa-fw me-2" alt="">Blogzine
+											</label>
+										</div>
+										<!-- Checkbox -->
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" value="" id="airlineType2">
+											<label class="form-check-label" for="airlineType2">
+												<img src="assets/images/element/13.svg" class="h-15px fa-fw me-2" alt="">Wizixo
+											</label>
+										</div>
+										<!-- Checkbox -->
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" value="" id="airlineType3">
+											<label class="form-check-label" for="airlineType3">
+												<img src="assets/images/element/14.svg" class="h-15px fa-fw me-2" alt="">Folio airline
+											</label>
+										</div>
+										<!-- Checkbox -->
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" value="" id="airlineType4">
+											<label class="form-check-label" for="airlineType4">
+												<img src="assets/images/element/15.svg" class="h-15px fa-fw me-2" alt="">Booking
+											</label>
+										</div>
+
+										<!-- Collapse body -->
+										<div class="multi-collapse collapse" id="airlineCollapes">
+											<!-- Checkbox -->
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" value="" id="airlineType7">
+												<label class="form-check-label" for="airlineType7">
+													<img src="assets/images/element/15.svg" class="h-15px fa-fw me-2" alt="">Formex
+												</label>
+											</div>
+											<!-- Checkbox -->
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" value="" id="airlineType8">
+												<label class="form-check-label" for="airlineType8">
+													<img src="assets/images/element/13.svg" class="h-15px fa-fw me-2" alt="">Realty
+												</label>
+											</div>
+											<!-- Checkbox -->
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" value="" id="airlineType9">
+												<label class="form-check-label" for="airlineType9">
+													<img src="assets/images/element/12.svg" class="h-15px fa-fw me-2" alt="">rocyon
+												</label>
+											</div>
+										</div>
+										<!-- Collapse button -->
+										<a class="p-0 mb-0 mt-2 btn-more d-flex align-items-center collapsed" data-bs-toggle="collapse" href="#airlineCollapes" role="button" aria-expanded="false" aria-controls="airlineCollapes">
+											See <span class="see-more ms-1">more</span><span class="see-less ms-1">less</span><i class="fa-solid fa-angle-down ms-2"></i>
+										</a>
+									</div>
+								</div>
+								<!-- Preferred Airline END -->
+
+								<hr class="my-0"> <!-- Divider -->
+
+								<!-- Layover Airport START -->
+								<div class="card card-body rounded-0 rounded-bottom p-4">
+									<!-- Title -->
+									<h6 class="mb-2">Layover Airport</h6>
+									<!-- Layover Airport group -->
+									<div class="col-12">
+										<!-- Checkbox -->
+										<div class="d-flex justify-content-between align-items-center">
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" value="" id="lauoverType1">
+												<label class="form-check-label" for="lauoverType1">Abu Dhabi</label>
+											</div>
+											<span class="small">(01)</span>
+										</div>
+										<!-- Checkbox -->
+										<div class="d-flex justify-content-between align-items-center">
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" value="" id="lauoverType2">
+												<label class="form-check-label" for="lauoverType2">Amsterdam</label>
+											</div>
+											<span class="small">(02)</span>
+										</div>
+										<!-- Checkbox -->
+										<div class="d-flex justify-content-between align-items-center">
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" value="" id="lauoverType3">
+												<label class="form-check-label" for="lauoverType3">Chicago</label>
+											</div>
+											<span class="small">(02)</span>
+										</div>
+										<!-- Checkbox -->
+										<div class="d-flex justify-content-between align-items-center">
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" value="" id="lauoverType4">
+												<label class="form-check-label" for="lauoverType4">Doha</label>
+											</div>
+											<span class="small">(03)</span>
+										</div>
+
+										<!-- Collapse body -->
+										<div class="multi-collapse collapse" id="lauoverCollapes">
+											<!-- Checkbox -->
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" value="" id="lauoverType7">
+													<label class="form-check-label" for="lauoverType7">Dubai</label>
+												</div>
+												<span class="small">(04)</span>
+											</div>
+											<!-- Checkbox -->
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" value="" id="lauoverType8">
+													<label class="form-check-label" for="lauoverType8">New Delhi</label>
+												</div>
+												<span class="small">(15)</span>
+											</div>
+											<!-- Checkbox -->
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" value="" id="lauoverType9">
+													<label class="form-check-label" for="lauoverType9">Paris</label>
+												</div>
+												<span class="small">(04)</span>
+											</div>
+										</div>
+										<!-- Collapse button -->
+										<a class="btn-more d-flex align-items-center collapsed p-0 mb-0 mt-2" data-bs-toggle="collapse" href="#lauoverCollapes" role="button" aria-expanded="false" aria-controls="lauoverCollapes">
+											See <span class="see-more ms-1">more</span><span class="see-less ms-1">less</span><i class="fa-solid fa-angle-down ms-2"></i>
+										</a>
+									</div>
+								</div>
+								<!-- Layover Airport END -->
+							</form><!-- Form End -->
+						</div>
+
+						<!-- Buttons -->
+						<div class="d-flex justify-content-between p-2 p-xl-0 mt-xl-4">
+							<button class="btn btn-link p-0 mb-0">Clear all</button>
+							<button class="btn btn-primary mb-0">Filter Result</button>
+						</div>
+
+					</div>
+				<!-- Responsive offcanvas body END -->
+			</aside>
+			<!-- Left sidebar END -->
+
+			<!-- Main content START -->
+			<div class="col-xl-8 col-xxl-9">
+				<div class="vstack">
+
+                    <!-- simple -->
+                    {% for trip in trips %}
+                <!-- Card item START -->
+                <a href="{{ trip.get_absolute_url }}" class="text-success">
+                <div class="card border rounded-2 mb-3 shadow">
+                    <!-- Card header -->
+                    <div class="bg-light py-3 rounded-top card-header border-bottom d-md-flex justify-content-md-between align-items-center">
+                        <!-- Icon and Title -->
+                        <div class="text-center">
+                            <!-- Title -->
+                            <div class="ms-2-">
+                                <h6 class="card-title mb-0">Samedi 12 février à 13h00</h6>
+                            </div>
+                        </div>
+
+                        <!-- Button -->
+                        <div class="text-center">
+                            <h6 class="card-title mb-0">9.000F</h6>
+
+                        </div>
+                    </div>
+                    <!-- Card body -->
+                    <div class="card-body">
+                        <!-- Card header -->
+                        <div class="d-md-flex justify-content-sm-center justify-content-md-between align-items-center">
+                        <!-- Icon and Title -->
+                        <div class="d-flex align-items-center justify-content-center mb-2">
+                                    <div class="icon-lg bg-light rounded-circle flex-shrink-0"><i
+                                            class="fa-solid fa-car"></i></div>
+                                    <!-- Title -->
+                                    <div class="ms-2">
+                                        <h6 class="card-title mb-0">{{ trip.user.display_name }}</h6>
+                                        <span>{{ trip.profile }}</span>
+                                    </div>
+                                </div>
+
+                         <div class="text-center">
+                            <h6 class="card-title mb-0">Dakar <i class="bi bi-arrow-right"></i> Thies</h6>
+                            <span>Aller Simple</span>
+                        </div>
+
+                        <!-- Button -->
+                        <div class="text-center">
+                            <h6 class="card-title mb-0">5 Places</h6>
+                            <span>Voir le détail <i class="bi bi-arrow-right me-2"></i></span>
+                        </div>
+                    </div>
+                    <!-- Card body -->
+                    </div>
+                </div>
+                </a>
+                <!-- Card item END -->
+            {% endfor %}
+                    <!-- end simple -->
+
+					<!-- Pagination START -->
+					<nav class="d-flex justify-content-center" aria-label="navigation">
+						<ul class="pagination pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
+							<li class="page-item mb-0"><a class="page-link" href="#" tabindex="-1"><i class="fa-solid fa-angle-left"></i></a></li>
+							<li class="page-item mb-0"><a class="page-link" href="#">1</a></li>
+							<li class="page-item mb-0 active"><a class="page-link" href="#">2</a></li>
+							<li class="page-item mb-0"><a class="page-link" href="#">..</a></li>
+							<li class="page-item mb-0"><a class="page-link" href="#">6</a></li>
+							<li class="page-item mb-0"><a class="page-link" href="#"><i class="fa-solid fa-angle-right"></i></a></li>
+						</ul>
+					</nav>
+					<!-- Pagination END -->
+
+				</div>
+			</div>
+			<!-- Main content END -->
+		</div> <!-- Row END -->
+	</div>
+</section>
+<!-- =======================
+Flight list END -->
+
+</main>
+
+{% endblock %}

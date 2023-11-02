@@ -1,0 +1,108 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<main>
+<section class="pt-5">
+	<div class="container py-5">
+		<div class="row">
+
+			<!-- Sidebar START -->
+            {% include "partials/sidebar-admin.html" %}
+			<!-- Sidebar END -->
+
+			<!-- Main content START -->
+			<div class="col-lg-8 col-xl-9">
+
+				<!-- Offcanvas menu button -->
+				<div class="d-grid mb-0 d-lg-none w-100">
+					<button class="btn btn-primary mb-4" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+						<i class="fas fa-sliders-h"></i> Menu
+					</button>
+				</div>
+				<div class="vstack gap-4">
+					<!-- Personal info START -->
+					<div class="card border">
+						<!-- Card header -->
+						<div class="card-header border-bottom bg-light">
+							<h4 class="card-header-title">Profil et paramètres</h4>
+						</div>
+						<!-- Card body START -->
+						<div class="card-body">
+							<!-- Form START -->
+							<form class="row g-3" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+								<!-- Profile photo -->
+								<div class="col-12">
+									<label class="form-label">Ma photo de profil</label>
+									<div class="d-flex align-items-center">
+										<label class="position-relative me-4" for="uploadfile-1" title="Replace this pic">
+											<!-- Avatar place holder -->
+											<span class="avatar avatar-xl">
+												<img id="uploadfile-1-preview" class="avatar-img rounded-circle border border-white border-3 shadow" src="{{ p_form.instance.image.url }}" alt="">
+											</span>
+										</label>
+										<!-- Upload button -->
+										<label class="btn btn-sm btn-primary-soft mb-0" for="uploadfile-1"> Modifier </label>
+										<input id="uploadfile-1" class="form-control d-none" type="file">
+									</div>
+								</div>
+
+								<!-- Name -->
+								<div class="col-md-6">
+									<label class="form-label">Prénom<span class="text-danger">*</span></label>
+									{{ u_form.first_name }}
+								</div>
+
+								<!-- Email -->
+								<div class="col-md-6">
+									<label class="form-label">Nom</label>
+									{{ u_form.last_name }}
+								</div>
+
+								<!-- Mobile -->
+								<div class="col-md-6">
+									<label class="form-label">Numéro de téléphone<span class="text-danger">*</span></label>
+									{{ u_form.phone_number }}
+								</div>
+
+								<!-- Gender -->
+								<div class="col-md-6">
+									<label class="form-label">Vous êtes ?</label>
+									<div class="d-flex gap-4">
+										{% for sexe in u_form.user_type %}
+										<div class="form-check radio-bg-light">
+											<label class="form-check-label">
+												{{ sexe }}
+											</label>
+										</div>
+										{% endfor %}
+									</div>
+								</div>
+
+								<!-- Address -->
+								<div class="col-12">
+									<label class="form-label">Présentation</label>
+									{{ p_form.description }}
+								</div>
+
+								<!-- Button -->
+								<div class="col-12 text-end">
+                                    <button type="submit" class="btn btn-primary mb-0">Mettre à jour</button>
+								</div>
+							</form>
+							<!-- Form END -->
+						</div>
+						<!-- Card body END -->
+					</div>
+					<!-- Personal info END -->
+				</div>
+			</div>
+			<!-- Main content END -->
+		</div>
+	</div>
+</section>
+<!-- =======================
+Content END -->
+
+</main>
+{% endblock %}

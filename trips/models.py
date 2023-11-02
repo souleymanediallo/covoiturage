@@ -47,3 +47,9 @@ class Trip(models.Model):
 
     def get_absolute_url(self):
         return reverse("trip-detail", kwargs={"pk": self.pk})
+
+    def get_absolute_url_update(self):
+        return reverse("trip-update", kwargs={"pk": self.pk})
+
+    def get_absolute_url_delete(self):
+        return reverse("trip-delete", kwargs={"pk": self.pk})
