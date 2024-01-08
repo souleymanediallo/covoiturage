@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from trips.models import Trip
 from datetime import datetime
+from trips.city import CITY_SENEGAL
 
 
 today_current = datetime.today().strftime('%Y-%m-%d')
@@ -16,4 +17,5 @@ class HomePageView(TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context['trips'] = Trip.objects.filter(start_date__gte=today_current)
+        context['city_senegal'] = CITY_SENEGAL
         return context

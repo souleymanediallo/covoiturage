@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from .forms import TripForm
 from .models import Trip, Reservation
+from trips.city import CITY_SENEGAL
 # Create your views here.
 from datetime import datetime
 today_current = datetime.today().strftime('%Y-%m-%d')
@@ -19,6 +20,11 @@ class TripListView(ListView):
     context_object_name = 'trips'
     ordering = ['start_date', 'start_time']
     paginate_by = 5
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['city_senegal'] = CITY_SENEGAL
+        return context
 
 
 class TripCreateView(LoginRequiredMixin, CreateView):
