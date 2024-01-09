@@ -19,3 +19,23 @@ class HomePageView(TemplateView):
         context['trips'] = Trip.objects.filter(start_date__gte=today_current)
         context['city_senegal'] = CITY_SENEGAL
         return context
+
+
+def search(request):
+    queryset_list = Trip.objects.order_by('-start_date', 'start_time')
+    if 'start_city' in request.GET:
+        start_city = request.GET['start_city']
+        if start_city:
+            queryset_list = queryset_list.filter(start_city__iexact=start_city)
+    if 'end_city' in request.GET:
+        end_city = request.GET['end_city']
+        if end_city:
+            queryset_list = queryset_list.filter(end_city__iexact=end_city)
+
+    context = {
+        'city_senegal': CITY_SENEGAL,
+        'trips': queryset_list,
+        'values': request.GET
+    }
+    
+    return render(request, 'pages/search.html', context)

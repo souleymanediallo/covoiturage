@@ -3,47 +3,15 @@
 		<div class="row">
 			<div class="col-12">
 				<!-- Booking from START -->
-				<form class="bg-mode border rounded position-relative px-4 pt-4 mb-4 mb-sm-0">
+				<form class="bg-mode border rounded position-relative px-4 pt-4 mb-4 mb-sm-0" action="{% url 'search' %}" method="GET">
+
 					<div class="row g-4">
-						<!-- Nav tabs START -->
-						<div class="col-lg-6">
-							<ul class="nav nav-pills nav-pills-dark" id="pills-tab" role="tablist">
-								<li class="nav-item" role="presentation">
-									<button class="nav-link rounded-start rounded-0 mb-0 active" id="pills-one-way-tab" data-bs-toggle="pill" data-bs-target="#pills-one-way" type="button" role="tab" aria-selected="true">Aller Simple</button>
-								</li>
-								<li class="nav-item" role="presentation">
-									<button class="nav-link rounded-end rounded-0 mb-0" id="pills-round-trip-tab" data-bs-toggle="pill" data-bs-target="#pills-round-trip" type="button" role="tab" aria-selected="false">Aller Retour</button>
-								</li>
-							</ul>
-						</div>
-						<!-- Nav tabs END -->
-
-						<!-- Ticket class -->
-						<div class="col-lg-3 ms-auto">
-							<div class="form-control-bg-light form-fs-md">
-								<select class="form-select js-choice">
-									<option value="">Select Class</option>
-									<option>Conducteur</option>
-									<option selected>Passager</option>
-								</select>
-							</div>
-						</div>
-
-						<!-- Ticket Passenger -->
-
-					</div>
-
-					<!-- Tab content START -->
-					<div class="tab-content mt-4" id="pills-tabContent">
-						<!-- One way tab START -->
-						<div class="tab-pane fade show active" id="pills-one-way" role="tabpanel" aria-labelledby="pills-one-way-tab">
-							<div class="row g-4">
 								<!-- Leaving From -->
-								<div class="col-md-6 col-lg-4 position-relative">
+								<div class="col-md-6 col-lg-6 position-relative">
 									<div class="form-border-transparent form-fs-lg bg-light rounded-3 h-100 p-3">
 										<!-- Input field -->
 										<label class="mb-1"><i class="bi bi-geo-alt me-2"></i>Départ</label>
-										<select class="form-select js-choice" data-search-enabled="true">
+										<select class="form-select js-choice" data-search-enabled="true" name="start_city">
 											{% for key, value in city_senegal %}
 											<option value="{{ key }}">{{ value }}</option>
 											{% endfor %}
@@ -51,17 +19,15 @@
 									</div>
 
 									<!-- Auto fill button -->
-									<div class="btn-flip-icon mt-3 mt-md-0">
-										<button class="btn btn-white shadow btn-round mb-0"><i class="fa-solid fa-right-left"></i></button>
-								 </div>
+
 								</div>
 
 								<!-- Going To -->
-								<div class="col-md-6 col-lg-4">
+								<div class="col-md-6 col-lg-6">
 									<div class="form-border-transparent form-fs-lg bg-light rounded-3 h-100 p-3">
 										<!-- Input field -->
-										<label class="mb-1"><i class="bi bi-send me-2"></i>Arrivée</label>
-										<select class="form-select js-choice" data-search-enabled="true">
+										<label class="mb-1"><i class="bi bi-geo-alt me-2"></i>Arrivée</label>
+										<select class="form-select js-choice" data-search-enabled="true" name="end_city">
 											{% for key, value in city_senegal %}
 											<option value="{{ key }}">{{ value }}</option>
 											{% endfor %}
@@ -69,79 +35,13 @@
 									</div>
 								</div>
 
-								<!-- Departure -->
-								<div class="col-lg-4">
-									<div class="form-border-transparent form-fs-lg bg-light rounded-3 h-100 p-3">
-										<label class="mb-1"><i class="bi bi-calendar me-2"></i>Date Départ</label>
-										<input type="text" class="form-control flatpickr" placeholder="Select date" data-date-format="d M Y" value="19 Nov 2022">
-									</div>
-								</div>
+								<!-- Date -->
 
 								<div class="col-12 text-end pt-0">
-									<a  class="btn btn-primary mb-n4" href="#">Rechercher <i class="bi bi-arrow-right ps-3"></i></a>
+									<button  type="submit" class="btn btn-primary mb-n4">Rechercher <i class="bi bi-arrow-right ps-3"></i></button>
 								</div>
 							</div>
-						</div>
-						<!-- One way tab END -->
 
-						<!-- Round way tab END -->
-						<div class="tab-pane fade" id="pills-round-trip" role="tabpanel" aria-labelledby="pills-round-trip-tab">
-							<div class="row g-4">
-								<!-- Leaving From -->
-								<div class="col-md-6 col-xl-3 position-relative">
-									<div class="form-border-transparent form-fs-lg bg-light rounded-3 h-100 p-3">
-										<!-- Input field -->
-										<label class="mb-1"><i class="bi bi-geo-alt me-2"></i>Départ</label>
-										<select class="form-select js-choice" data-search-enabled="true">
-											{% for key, value in city_senegal %}
-											<option value="{{ key }}">{{ value }}</option>
-											{% endfor %}
-										</select>
-									</div>
-
-									<!-- Auto fill button -->
-									<div class="btn-flip-icon mt-3 mt-md-0">
-										 <button class="btn btn-white shadow btn-round mb-0"><i class="fa-solid fa-right-left"></i></button>
-									</div>
-								</div>
-
-								<!-- Going To -->
-								<div class="col-md-6 col-xl-3">
-									<div class="form-border-transparent form-fs-lg bg-light rounded-3 h-100 p-3">
-										<!-- Input field -->
-										<label class="mb-1"><i class="bi bi-send me-2"></i>Arrivée</label>
-										<select class="form-select js-choice" data-search-enabled="true">
-											{% for key, value in city_senegal %}
-											<option value="{{ key }}">{{ value }}</option>
-											{% endfor %}
-										</select>
-									</div>
-								</div>
-
-								<!-- Departure -->
-								<div class="col-md-6 col-xl-3">
-									<div class="form-border-transparent form-fs-lg bg-light rounded-3 h-100 p-3">
-										<label class="mb-1"><i class="bi bi-calendar me-2"></i>Date Départ</label>
-										<input type="text" class="form-control flatpickr" data-date-format="d M Y" placeholder="Select date">
-									</div>
-								</div>
-
-								<!-- Return -->
-								<div class="col-md-6 col-xl-3">
-									<div class="form-border-transparent form-fs-lg bg-light rounded-3 h-100 p-3">
-										<label class="mb-1"><i class="bi bi-calendar me-2"></i>Date Retour</label>
-										<input type="text" class="form-control flatpickr" data-date-format="d M Y" placeholder="Select date">
-									</div>
-								</div>
-
-								<div class="col-12 text-end pt-0">
-									<a  class="btn btn-primary mb-n4" href="#">Find ticket <i class="bi bi-arrow-right ps-3"></i></a>
-								</div>
-							</div>
-						</div>
-						<!-- Round way tab END -->
-					</div>
-					<!-- Tab content END -->
 				</form>
 				<!-- Booking from END -->
 			</div>

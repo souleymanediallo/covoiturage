@@ -1,3 +1,7 @@
+flatpickr(".flatpickr", {
+    dateFormat: "Y-d-m",
+    minDate: "today"
+});
 
 $(document).ready(function () {
     $("#increase-price").click(function () {
