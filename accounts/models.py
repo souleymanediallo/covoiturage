@@ -89,3 +89,5 @@ def post_save_receiver(sender, instance, created, **kwargs):
 
 
 post_save.connect(post_save_receiver, sender=CustomUser)
+
+

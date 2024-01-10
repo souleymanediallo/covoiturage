@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <section class="my-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div class="card">
+                        <div class="card-body">
+                            <!-- start -->
+                            <div class="content-box">
+                                <h3 class="inbox__title">New Messages(<span>{{unread_count}}</span>)</h3>
+
+                                <ul class="messages">
+                                    {% for convers in conversation_requests %}
+                                        {% if message.is_read == False %}
+                                            <li class="message message--unread">
+                                                {% else %}
+                                            <li class="message">
+                                        {% endif %}
+
+                                    <a href="{% url "conversation" convers.id %}">
+                                        <span class="message__date">{{convers.created}}</span>
+                                    </a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <!-- end start -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

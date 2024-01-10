@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'trips.apps.TripsConfig',
     'phonenumber_field',
+    'conversations.apps.ConversationsConfig',
 ]
 
 MIDDLEWARE = [

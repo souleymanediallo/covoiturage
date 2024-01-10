@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <section class="my-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="message">
+                                <a class="backButton" href="{% url 'inbox' %}"><i class="im im-angle-left"></i></a>
+                                <h2 class="message__subject">{{ conversation.subject }}</h2>
+                                    {% if conversation.sender %}
+                                        <a href="#" class="message__author">{{conversation.name}}</a>
+                                    {% else %}
+                                        <p class="message__author">{{conversation.name}}</p>
+                                    {% endif %}
+                                    <p class="message__date">{{conversation.created}}</p>
+                                    <div class="message__body">{{conversation.body|linebreaksbr}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
