@@ -88,7 +88,7 @@
                                 </div>
                                 </div>
                                  <div class="col-6 text-end">
-                                    <a href="{% url 'trip-reservation' trip_id=trip.id %}" class="btn btn-primary btn-lg btn-block">Demande de réservation</a>
+                                    <a href="{% url 'conversation-create' trip.author.profile.pk %}" class="btn btn-primary btn-lg btn-block">Demande de réservation</a>
                                 </div>
                             </div>
                         </div>
