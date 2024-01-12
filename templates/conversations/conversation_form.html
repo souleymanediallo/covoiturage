@@ -9,30 +9,13 @@
                         <div class="card-body">
                             <form class="form-validate" method="POST" action="{% url "conversation-create" recipient.id %}">
                                 {% csrf_token %}
-                                {% if request.user.is_authenticated == False %}
-                                    <div class="form__field">
-                                        <label for="formInput#text">{{form.name.label}}</label>
-                                        {{form.name}}
-                                    </div>
 
-                                    <div class="form__field">
-                                        <label for="formInput#text">{{form.email.label}}</label>
-                                        {{form.email}}
-                                    </div>
-                                {% endif %}
-
-                                <div class="form__field">
-                                    <label for="formInput#text">{{form.subject.label}}</label>
-                                    {{form.subject}}
-                                </div>
 
                                 <div class="form__field">
                                     <label for="formInput#text">{{form.body.label}}</label>
                                     {{form.body}}
                                 </div>
-                                <button class="btn btn-lg btn-block btn-dark" type="submit">Inscription</button>
-                                <hr class="my-4">
-                                <p class="text-center"><small class="text-muted text-center">Vous avez déjà un compte ? <a href="login.html" class="text-dark">Connexion</a></small></p>
+                                <button class="btn btn-lg btn-block btn-dark" type="submit">Envoyer</button>
                             </form>
                         </div>
                     </div>
