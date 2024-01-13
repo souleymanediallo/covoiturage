@@ -9,13 +9,13 @@
                         <div class="card-body">
                             <div class="message">
                                 <a class="backButton" href="{% url 'inbox' %}"><i class="im im-angle-left"></i></a>
-                                <h2 class="message__subject">{{ conversation.subject }}</h2>
                                     {% if conversation.sender %}
-                                        <a href="#" class="message__author">{{conversation.name}}</a>
+                                        <a href="#" class="message__author">{{ conversation.sender.first_name }} {{ conversation.sender.last_name }}</a>
                                     {% else %}
-                                        <p class="message__author">{{conversation.name}}</p>
+                                        <p class="message__author">{{conversation.recipient.email}}</p>
                                     {% endif %}
                                     <p class="message__date">{{conversation.created}}</p>
+                                    <p>Message</p>
                                     <div class="message__body">{{conversation.body|linebreaksbr}}</div>
                             </div>
                         </div>

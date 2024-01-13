@@ -1,26 +1,111 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <section class="my-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-7">
-                    <div class="card">
-                        <div class="card-body">
-                            <form class="form-validate" method="POST" action="{% url "conversation-create" recipient.id %}">
-                                {% csrf_token %}
+<!-- **************** MAIN CONTENT START **************** -->
+<main class="py-5">
+
+	<!-- =======================
+Main Content START -->
+<section class="pt-4 pt-lg-5">
+	<div class="container">
+
+		<div class="row g-4 g-xl-5">
+			<!-- Left Content START -->
+			<div class="col-xl-8">
+				<div class="card bg-transparent p-0">
+					<!-- Card header START -->
+					<div class="card-header bg-transparent p-0">
+						<h1 class="card-title fs-2 mb-0">Ecrire votre message</h1>
+					</div>
+					<!-- Card header END -->
+
+					<!-- Card body START -->
+					<div class="card-body p-0 mt-3">
+						<!-- Alert box -->
+						<div class="alert alert-primary" role="alert">
+							Votre demande doit concerner uniquement ce trajet en particulier.
+						</div>
+
+						<form class="bg-light rounded-1 p-4" method="POST" action="{% url 'conversation-create' recipient.id %}">
+							{% csrf_token %}
+							<!-- Form START -->
+							<div class="row g-3">
+
+								<!-- Card name -->
+								<div class="col-12">
+									<label class="form-label"><span class="h6 fw-normal">Message</span></label>
+									{{form.body}}
+								</div>
+
+								<!-- Buttons -->
+								<div class="col-12">
+									<button class="btn btn-primary w-100 mb-0">Envoyer votre demande</button>
+								</div>
+							</div>
+							<!-- Form END -->
+						</form>
+					</div>
+					<!-- Card body END -->
+				</div>
+			</div>
+			<!-- Left Content END -->
+
+			<!-- Right content START -->
+			<aside class="col-xl-4">
+				<div class="row g-4">
 
 
-                                <div class="form__field">
-                                    <label for="formInput#text">{{form.body.label}}</label>
-                                    {{form.body}}
-                                </div>
-                                <button class="btn btn-lg btn-block btn-dark" type="submit">Envoyer</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+					<!-- Booking START -->
+					<div class="col-md-6 col-xl-12">
+						<div class="card border rounded-1">
+							<!-- Card header -->
+							<div class="card-header border-bottom">
+								<h5 class="mb-0 cardt-title">Trajet</h5>
+							</div>
+
+							<!-- Card body -->
+							<div class="card-body">
+								<!-- Flight detail -->
+								<small><i class="bi bi-ticket me-2"></i>Flight Ticket</small>
+								<div class="d-flex mt-2">
+									<img src="assets/images/element/09.svg" class="w-40px me-2" alt="">
+									<h6 class="fw-normal mb-0">Mumbai <i class="bi bi-arrow-right"></i> New York</h6>
+								</div>
+								<ul class="nav nav-divider small text-body mt-1 mb-0">
+									<li class="nav-item">25 Jan</li>
+									<li class="nav-item">1 Stop</li>
+									<li class="nav-item">05h 25m</li>
+								</ul>
+
+								<hr> <!-- Divider -->
+
+								<!-- Traveler detail -->
+								<small><i class="bi bi-person me-1"></i>Traveler detail</small>
+								<h6 class="mb-0 fw-normal mt-2">Carolyn Ortiz</h6>
+								<ul class="nav nav-divider small text-body mt-1 mb-0">
+									<li class="nav-item">Adult</li>
+									<li class="nav-item">Female</li>
+									<li class="nav-item">Dec-2-1990</li>
+								</ul>
+							</div>
+
+							<!-- Card footer -->
+							<div class="card-footer border-top text-center p-3">
+								<a href="#" class="btn btn-link mb-0 p-0">Review booking</a>
+							</div>
+						</div>
+					</div>
+					<!-- Booking END -->
+				</div>
+			</aside>
+			<!-- Right content END -->
+		</div>
+	</div>
+</section>
+<!-- =======================
+Main Content END -->
+
+</main>
+<!-- **************** MAIN CONTENT END **************** -->
+
 {% endblock %}
