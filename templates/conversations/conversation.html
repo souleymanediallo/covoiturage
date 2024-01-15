@@ -98,7 +98,8 @@
 						<!-- Review item END -->
 
 						<hr> <!-- Divider -->
-
+						{% for message in conversation_messages %}
+						<div class="{% if message.sender == user %}message-sent{% else %}message-received{% endif %}">
 						<!-- Review item START -->
 						<div class="bg-light rounded p-3">
 							<!-- Review item START -->
@@ -108,32 +109,23 @@
 									<img class="avatar avatar-md rounded-circle float-start me-3" src="assets/images/avatar/06.jpg" alt="avatar">
 									<!-- Title -->
 									<div>
-										<h6 class="m-0">Carolyn Ortiz</h6>
+										<h6 class="m-0">{{ message.sender.get_full_name }}</h6>
 										<span class="me-3 small">Nov 22, 2022 at 2:00 pm</span>
 									</div>
 								</div>
 								<!-- Review star -->
-								<ul class="list-inline mb-2 mb-sm-0">
-									<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
-									<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
-									<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
-									<li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>
-									<li class="list-inline-item me-0"><i class="far fa-star text-warning"></i></li>
-								</ul>
+
 							</div>
 
 							<!-- Content -->
 							<h6 class="fw-normal"><span class="text-body">Review on:</span> Pride moon Village Resort &amp; Spa</h6>
-							<p>Offered chiefly farther Satisfied conveying a dependent contented he gentleman agreeable do be. Warrant private blushes removed an in equally totally if. Delivered dejection necessary objection do Mr prevailed. Mr feeling does chiefly cordial in do.</p>
-							<!-- Buttons -->
-							<div class="d-flex justify-content-between align-items-center">
-								<a class="btn btn-sm btn-primary-soft mb-0"> <i class="bi bi-reply me-1"></i>Reply </a>
-								<a href="#" class="text-primary-hover text-reset small mb-0"><i class="bi bi-info-circle me-1"></i>Report</a>
-							</div>
+							<p>{{ message.body }}</p>
+
 							<!-- Review item END -->
 						</div>
+						</div>
 						<!-- Review item END -->
-
+						{% endfor %}
 					</div>
 					<!-- Card body END -->
 

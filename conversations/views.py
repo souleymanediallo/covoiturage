@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ConversationForm
 from accounts.models import Profile
@@ -55,4 +56,21 @@ def conversation_create(request, profile_id):
 def reply_to_conversation(request, conversation_id):
     conversation = get_object_or_404(Conversation, pk=conversation_id)
     form = ConversationForm()
+    if request.method == "POST":
+        form = ConversationForm(request.POST)
+        if form.is_valid():
+            new_message = form.save(commit=False)
+            new_message.sender = request.user
+            # Supposons que recipient est l'autre utilisateur dans la conversation
+            new_message.recipient = conversation.get_other_participant(request.user)
+            new_message.save()
+            return redirect(conversation.get_absolute_url())  # Redirige vers la page de conversation
+
+        # Récupérer tous les messages de la conversation pour l'utilisateur connecté
+    conversation_messages = Conversation.objects.filter(
+        Q(sender=request.user, recipient=conversation.get_other_participant(request.user)) |
+        Q(sender=conversation.get_other_participant(request.user), recipient=request.user)
+    ).order_by('created')
+    context = {"conversation_messages": conversation_messages, "form": form, "conversation": conversation}
+    return render(request, 'conversations/conversation.html', context)
     

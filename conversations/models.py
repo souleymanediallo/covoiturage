@@ -23,5 +23,12 @@ class Conversation(models.Model):
     def get_conversation_url(self):
         return reverse("conversation", kwargs={"pk": self.pk})
 
+    def get_other_participant(self, user):
+        """Retourne l'autre utilisateur participant à la conversation."""
+        if user == self.sender:
+            return self.recipient
+        else:
+            return self.sender
+
     class Meta:
         ordering = ["is_read", "-created"]
