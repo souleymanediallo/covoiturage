@@ -10,7 +10,6 @@
                             <!-- start -->
                             <div class="content-box">
                                 <h3 class="inbox__title">New Messages(<span>{{unread_count}}</span>)</h3>
-
                                 <ul class="messages">
                                     {% for convers in conversation_requests %}
                                         {% if message.is_read == False %}
@@ -19,7 +18,7 @@
                                             <li class="message">
                                         {% endif %}
 
-                                    <a href="{% url "conversation" convers.id %}">
+                                    <a href="{% url 'conversation' convers.id %}">
                                         <span class="message__date">{{convers.created}}</span>
                                     </a>
                                     </li>
