@@ -39,3 +39,27 @@ def search(request):
     }
     
     return render(request, 'pages/search.html', context)
+
+
+def mentions(request):
+    return render(request, 'pages/mentions.html')
+
+
+def conditons(request):
+    return render(request, 'pages/conditions.html')
+
+
+def conducteur(request):
+    return render(request, 'pages/conducteur.html')
+
+
+def passager(request):
+    return render(request, 'pages/passager.html')
+
+
+def contact(request):
+    return render(request, 'pages/contact.html')
+
+
+def aide(request):
+    return render(request, 'pages/aide.html')
