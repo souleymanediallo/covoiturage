@@ -42,11 +42,11 @@ def search(request):
 
 
 def mentions(request):
-    return render(request, 'pages/mentions.html')
+    return render(request, 'pages/mentions-legales.html')
 
 
 def conditons(request):
-    return render(request, 'pages/conditions.html')
+    return render(request, 'pages/conditions-generales.html')
 
 
 def conducteur(request):
@@ -61,5 +61,5 @@ def contact(request):
     return render(request, 'pages/contact.html')
 
 
-def aide(request):
+def faq(request):
     return render(request, 'pages/aide.html')
