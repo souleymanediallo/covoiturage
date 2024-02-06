@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import View
 from django.urls import reverse_lazy
@@ -8,8 +9,9 @@ from django.contrib import messages
 from .forms import TripForm
 from .models import Trip, Reservation
 from trips.city import CITY_SENEGAL
+from django.utils import timezone
 # Create your views here.
-from datetime import datetime
+from datetime import datetime, timedelta
 today_current = datetime.today().strftime('%Y-%m-%d')
 time_expired = datetime.now().strftime('%H:%M')
 
@@ -21,9 +23,30 @@ class TripListView(ListView):
     ordering = ['start_date', 'start_time']
     paginate_by = 5
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        # filter by city
+        city = self.request.GET.get('city')
+        if city:
+            queryset = queryset.filter(Q(start_city=city) | Q(end_city=city))
+        user_type = self.request.GET.get('user_type')
+        # filter by user type
+        if user_type:
+            queryset = queryset.filter(user_type=user_type)
+        # Filter by date
+        start_date = self.request.GET.get('start_date')
+        if start_date:
+            queryset = queryset.filter(start_date=start_date)
+        return queryset
+
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context['city_senegal'] = CITY_SENEGAL
+        context['popular_cities'] = Trip.get_popular_cities()
+        today = timezone.now().date()
+        tomorrow = today + timedelta(days=1)
+        context['today'] = today.isoformat()
+        context['tomorrow'] = tomorrow.isoformat()
         return context
 
 

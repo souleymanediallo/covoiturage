@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 import uuid
-
+from django.db.models import Count
 from django.db.models import Sum
 
 from django.urls import reverse
@@ -44,6 +44,10 @@ class Trip(models.Model):
 
     def __str__(self):
         return f"{self.start_city} - {self.end_city}"
+
+    @classmethod
+    def get_popular_cities(cls):
+        return cls.objects.values('start_city').annotate(count=Count('start_city')).order_by('-count')[:5]
 
     def get_absolute_url(self):
         return reverse("trip-detail", kwargs={"pk": self.pk})

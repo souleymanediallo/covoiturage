@@ -1,0 +1,126 @@
+<aside class="col-xl-4 col-xxl-3">
+				<!-- Responsive offcanvas body START -->
+					<div class="offcanvas-xl offcanvas-end" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
+						<!-- Offcanvas header -->
+						<div class="offcanvas-header">
+							<h5 class="offcanvas-title" id="offcanvasSidebarLabel">Advance Filters</h5>
+							<button  type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasSidebar" aria-label="Close"></button>
+						</div>
+
+						<!-- Offcanvas body -->
+						<div class="offcanvas-body flex-column p-3 p-xl-0">
+							<form class="rounded-3 shadow">
+								<!-- Popular filters START -->
+								<div class="card card-body rounded-0 rounded-top p-4">
+									<!-- Title -->
+									<h6 class="mb-2">Trajets Populaires</h6>
+									<!-- Popular filters group -->
+									<div class="col-12">
+										<!-- Checkbox -->
+										{% for city in popular_cities %}
+										<div class="d-flex justify-content-between align-items-center">
+											<div class="form-check">
+												<a href="{% url 'trip-list' %}?city={{ city.start_city }}" class="form-check-label">
+                							{{ city.start_city }}
+           									 </a>
+											</div>
+											<span class="small">({{ city.count }})</span>
+										</div>
+										{% endfor %}
+										<!-- Checkbox -->
+									</div>
+								</div>
+								<!-- Popular filters END -->
+
+								<hr class="my-0"> <!-- Divider -->
+
+								<!-- Price START -->
+								<div class="card card-body rounded-0 p-4">
+									<!-- Title -->
+									<h6 class="mb-2">Tarifs</h6>
+									<!-- Price group -->
+									<div class="col-12">
+										<!-- Checkbox -->
+
+										<div class="d-flex-">
+											<div class="form-check mb-2">
+												<a href="{% url 'trip-list' %}?price_below=0" class="text-decoration-none">Moins de 2 000F</a>
+											</div>
+											<div class="form-check mb-2">
+												<a href="{% url 'trip-list' %}?price_below=0" class="text-decoration-none">De 2000F à 6 000F</a>
+											</div>
+											<div class="form-check mb-2">
+												<a href="{% url 'trip-list' %}?price_below=0" class="text-decoration-none">De 6000F à 10 000F</a>
+											</div>
+											<div class="form-check mb-2">
+												<a href="{% url 'trip-list' %}?price_below=0" class="text-decoration-none">De 10 000F à 15 000F</a>
+											</div>
+											<div class="form-check mb-2">
+												<a href="{% url 'trip-list' %}?price_below=0" class="text-decoration-none">Plus de 15 000F</a>
+											</div>
+
+										</div>
+
+										<!-- Checkbox -->
+									</div>
+								</div>
+								<!-- Price END -->
+
+								<hr class="my-0"> <!-- Divider -->
+
+								<!-- Onward stops START -->
+								<div class="card card-body rounded-0 p-4">
+									<!-- Title -->
+									<h6 class="mb-2">Utilisateurs</h6>
+									<!-- Onward stops group -->
+									<ul class="list-inline mb-0 g-3">
+										<!-- Item -->
+										<li class="list-inline-item mb-0">
+											<a href="{% url 'trip-list' %}?user_type=Conducteur" class="btn btn-sm btn-light btn-primary-soft-check">Conducteur</a>
+
+										</li>
+										<!-- Item -->
+										<li class="list-inline-item mb-0">
+											<a href="{% url 'trip-list' %}?user_type=Passager" class="btn btn-sm btn-light btn-primary-soft-check">Passager</a>
+										</li>
+
+									</ul>
+								</div>
+								<!-- Onward stops END -->
+
+
+								<hr class="my-0"> <!-- Divider -->
+
+								<!-- Price START -->
+								<div class="card card-body rounded-0 p-4">
+									<!-- Title -->
+									<h6 class="mb-2">Date</h6>
+									<!-- Price group -->
+									<div class="col-12">
+										<!-- Checkbox -->
+
+										<div class="d-flex-">
+											<div class="form-check mb-2">
+												<a href="{% url 'trip-list' %}?start_date={{ today }}" class="text-decoration-none">Départ Aujourd'hui</a>
+											</div>
+											<div class="form-check mb-2">
+												<a href="{% url 'trip-list' %}?start_date={{ tomorrow }}" class="text-decoration-none">Départ Demain</a>
+											</div>
+										</div>
+
+										<!-- Checkbox -->
+									</div>
+								</div>
+								<!-- Price END -->
+
+
+
+
+
+
+							</form><!-- Form End -->
+						</div>
+
+					</div>
+				<!-- Responsive offcanvas body END -->
+			</aside>
