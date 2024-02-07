@@ -5,6 +5,7 @@ from django.views.generic import View
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.core.paginator import Paginator
 from django.contrib import messages
 from .forms import TripForm
 from .models import Trip, Reservation
@@ -21,7 +22,7 @@ class TripListView(ListView):
     template_name = 'trips/trip_list.html'
     context_object_name = 'trips'
     ordering = ['start_date', 'start_time']
-    paginate_by = 5
+    paginate_by = 3
 
     def get_queryset(self):
         queryset = super().get_queryset()

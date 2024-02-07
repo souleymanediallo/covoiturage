@@ -24,3 +24,9 @@ input[type=number]::-webkit-outer-spin-button {
 input[type=number]:focus{
     outline: none;
 }
+
+.page-item.disabled .page-link {
+    cursor: not-allowed;
+    opacity: 0.5;
+    color: #ccc;
+}
