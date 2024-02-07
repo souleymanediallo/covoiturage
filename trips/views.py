@@ -22,7 +22,7 @@ class TripListView(ListView):
     template_name = 'trips/trip_list.html'
     context_object_name = 'trips'
     ordering = ['start_date', 'start_time']
-    paginate_by = 3
+    paginate_by = 5
 
     def get_queryset(self):
         queryset = super().get_queryset()

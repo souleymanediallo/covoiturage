@@ -32,13 +32,17 @@ Flight list START -->
                         <div class="text-center">
                             <!-- Title -->
                             <div class="ms-2-">
-                                <h6 class="card-title mb-0">Samedi 12 février à 13h00</h6>
+                                <h6 class="card-title mb-0">{{ trip.start_date }} à {{ trip.start_time }}</h6>
                             </div>
                         </div>
 
                         <!-- Button -->
                         <div class="text-center">
-                            <h6 class="card-title mb-0">9.000F</h6>
+                            {% if trip.price > 0 %}
+                            <h6 class="card-title mb-0">{{ trip.price }}F</h6>
+                            {% else %}
+                            <h6 class="card-title mb-0 text-success">Gratuit</h6>
+                            {% endif %}
 
                         </div>
                     </div>
@@ -52,19 +56,19 @@ Flight list START -->
                                             class="fa-solid fa-car"></i></div>
                                     <!-- Title -->
                                     <div class="ms-2">
-                                        <h6 class="card-title mb-0">{{ trip.user.display_name }}</h6>
-                                        <span>{{ trip.profile }}</span>
+                                        <h6 class="card-title mb-0">{{ trip.author.first_name }}</h6>
+                                        <span>{{ trip.user_type }}</span>
                                     </div>
                                 </div>
 
                          <div class="text-center">
                             <h6 class="card-title mb-0">{{ trip.start_city }} <i class="bi bi-arrow-right"></i> {{ trip.end_city }}</h6>
-                            <span>Aller Simple</span>
+                            <span>{{ trip.trip_type }}</span>
                         </div>
 
                         <!-- Button -->
                         <div class="text-center">
-                            <h6 class="card-title mb-0">5 Places</h6>
+                            <h6 class="card-title mb-0">{{ trip.seat_go }} Places</h6>
                             <span>Voir le détail <i class="bi bi-arrow-right me-2"></i></span>
                         </div>
                     </div>
