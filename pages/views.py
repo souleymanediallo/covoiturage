@@ -41,7 +41,7 @@ def search(request):
     return render(request, 'pages/search.html', context)
 
 
-def mentions(request):
+def mentions_cgu(request):
     return render(request, 'pages/mentions-legales.html')
 
 
