@@ -58,17 +58,19 @@
                                 <!-- Airport detail -->
                                 <div class="col-4 col-md-6 text-end">
                                     <!-- Title -->
-                                    <h5>9.000F</h5>
+                                    <h5>{{ trip.price }}</h5>
                                 </div>
+                                {% if trip.description %}
                                  <div class="col-12">
                                     <!-- Title -->
                                     <h5>Informations pour ce trajet</h5>
-                                     <div class="card border rounded-2">
+                                     <div class="card  rounded-2">
                                          <div class="card-body">
                                              <p>Informations pour ce trajet</p>
                                          </div>
                                      </div>
                                 </div>
+                                {% endif %}
                             </div>
                             <!-- Ticket item END -->
 

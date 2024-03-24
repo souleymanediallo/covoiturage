@@ -3,63 +3,54 @@ flatpickr(".flatpickr", {
     minDate: "today"
 });
 
-$(document).ready(function () {
-    $("#increase-price").click(function () {
-        var currentPrice = parseInt($("#price").val());
-        currentPrice += 500;
-        $("#price").val(currentPrice);
-    });
+// masquer ou afficher les champs de date et d'heure de retour en fonction de l'état
+document.addEventListener('DOMContentLoaded', function () {
+    const statusField = document.querySelector('input[name="status"]:checked');
+    const endDateField = document.getElementById('id_end_date');
+    const endTimeField = document.getElementById('id_end_time');
 
-    $("#decrease-price").click(function () {
-        var currentPrice = parseInt($("#price").val());
-        currentPrice = Math.max(0, currentPrice - 500);
-        $("#price").val(currentPrice);
-    });
-});
-
-
-$(document).ready(function () {
-    $("#increase-seat_go").click(function () {
-        var currentSeat_go = parseInt($("#seat_go").val());
-        currentSeat_go = Math.min(9, currentSeat_go + 1);
-        $("#seat_go").val(currentSeat_go);
-    });
-
-    $("#decrease-seat_go").click(function () {
-        var currentSeat_go = parseInt($("#seat_go").val());
-        currentSeat_go = Math.max(1, currentSeat_go - 1);
-        $("#seat_go").val(currentSeat_go);
-    });
-});
-
-$(document).ready(function () {
-    $("#increase-luggage").click(function () {
-        var currentLuggage = parseInt($("#luggage").val());
-        currentLuggage = Math.min(20, currentLuggage + 1);
-        $("#luggage").val(currentLuggage);
-    });
-
-    $("#decrease-luggage").click(function () {
-        var currentLuggage = parseInt($("#luggage").val());
-        currentLuggage = Math.max(0, currentLuggage - 1);
-        $("#luggage").val(currentLuggage);
-    });
-});
-
-$(document).ready(function () {
-    $('input[type="radio"][name="trip_type"]').change(function() {
-        if ($(this).val() === 'Aller Retour') {
-            $('#returnDateSection').show();
-            $('#returnTimeSection').show();
-        } else {
-            $('#returnDateSection').hide();
-            $('#returnTimeSection').hide();
+    // Fonction pour masquer/afficher les champs de retour
+    function toggleReturnFields() {
+        const isRoundTrip = document.querySelector('input[name="status"]:checked').value === 'Aller-Retour';
+        if (endDateField && endTimeField) {
+            endDateField.closest('div').style.display = isRoundTrip ? 'block' : 'none';
+            endTimeField.closest('div').style.display = isRoundTrip ? 'block' : 'none';
         }
+    }
+
+    // Écouter les changements sur le champ de statut
+    document.querySelectorAll('input[name="status"]').forEach(function (input) {
+        input.addEventListener('change', function () {
+            toggleReturnFields();
+        });
     });
 
-    // Initialisez l'état si "Aller Retour" est déjà sélectionné
-    if ($('input[type="radio"][name="trip_type"]:checked').val() === 'Aller Retour') {
-        $('#returnDateSection').show();
-        $('#returnTimeSection').show();
-    }
+    // Initialiser les champs lors du chargement de la page
+    toggleReturnFields();
 });
+
+
+// Masque le prix si le status est passager
+document.addEventListener('DOMContentLoaded', function () {
+    const roleFields = document.querySelectorAll('input[name="role"]');
+    const priceFieldWrapper = document.getElementById('id_price').closest('div');
+
+    // Fonction pour masquer/afficher le champ prix
+    function togglePriceField() {
+        const isDriverSelected = document.querySelector('input[name="role"]:checked').value === 'Conducteur';
+        priceFieldWrapper.style.display = isDriverSelected ? 'block' : 'none';
+    }
+
+    // Écouter les changements sur les champs de rôle
+    roleFields.forEach(function (input) {
+        input.addEventListener('change', function () {
+            togglePriceField();
+        });
+    });
+
+    // Initialiser le champ prix lors du chargement de la page
+    togglePriceField();
+});
+
+//
+

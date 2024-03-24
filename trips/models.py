@@ -10,17 +10,17 @@ from .city import CITY_SENEGAL
 
 # Create your models here.
 class Trip(models.Model):
-    TRIP_TYPE = (
-        ('Aller Simple', 'Aller Simple'),
-        ('Aller Retour', 'Aller Retour')
+    STATUS = (
+        ("Aller-Simple", "Aller-Simple"),
+        ("Aller-Retour", "Aller-Retour")
     )
-    USER_TYPE = (
+    ROLE_TRAVEL = (
         ('Conducteur', 'Conducteur'),
         ('Passager', 'Passager')
     )
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    user_type = models.CharField(max_length=20, choices=USER_TYPE, default='Conducteur')
-    trip_type = models.CharField(max_length=20, choices=TRIP_TYPE, default='Aller Simple')
+    role = models.CharField(max_length=20, choices=ROLE_TRAVEL, default='Conducteur')
+    status = models.CharField(max_length=20, choices=STATUS, default="Aller-Simple")
     start_city = models.CharField(max_length=100, choices=CITY_SENEGAL)
     end_city = models.CharField(max_length=100, choices=CITY_SENEGAL)
     start_date = models.DateField()

@@ -21,8 +21,8 @@ Search START -->
             </div>
         </div>
         <div class="row justify-content-center">
-            {% for trip in trips %}
-            <div class="col-lg-12">
+            <div class="col-md-9">
+                {% for trip in trips %}
                 <!-- Card item START -->
                 <a href="{{ trip.get_absolute_url }}" class="text-success">
                 <div class="card border rounded-2 mb-3 shadow">
@@ -38,11 +38,14 @@ Search START -->
 
                         <!-- Button -->
                         <div class="text-center">
-                            {% if trip.price > 0 %}
+                            {% if trip.user_type == "Passager" %}
+                            <span> </span>
+                            {% elif trip.price > 0 %}
                             <h6 class="card-title mb-0">{{ trip.price }}F</h6>
                             {% else %}
                             <h6 class="card-title mb-0 text-success">Gratuit</h6>
                             {% endif %}
+
                         </div>
                     </div>
                     <!-- Card body -->
@@ -76,8 +79,8 @@ Search START -->
                 </div>
                 </a>
                 <!-- Card item END -->
-            </div>
             {% endfor %}
+            </div>
         </div>
     </div>
 </section>

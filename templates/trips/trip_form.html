@@ -34,7 +34,7 @@
                                     <!-- car type -->
                                      <div class="col-md-6 mb-3">
                                         <label class="form-label">Je suis : <span class="text-danger">*</span></label>
-                                            {% for sexe in form.user_type %}
+                                            {% for sexe in form.role %}
                                             <div class="d-flex gap-4">
                                                 <div class="form-check radio-bg-light">
                                                     {{ sexe }}
@@ -45,7 +45,7 @@
                                     <!-- car type -->
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Type de trajet : <span class="text-danger">*</span></label>
-                                            {% for trip in form.trip_type %}
+                                            {% for trip in form.status %}
                                             <div class="d-flex gap-4">
                                                 <div class="form-check radio-bg-light" id="tripTypeSection">
                                                     {{ trip }}
@@ -82,12 +82,12 @@
                                         {{ form.start_time }}
                                     </div>
                                     <!-- Contact number -->
-                                    <div class="col-md-6" id="returnDateSection">
+                                    <div class="col-md-6 div" id="id_end_date">
                                         <label class="form-label">Date Retour</label>
                                         {{ form.end_date }}
                                     </div>
                                     <!-- Email -->
-                                    <div class="col-md-6" id="returnTimeSection">
+                                    <div class="col-md-6 div" id="id_end_time">
                                         <label class="form-label">Heure</label>
                                         {{ form.end_time }}
                                     </div>
@@ -100,35 +100,24 @@
                         <div class="card border rounded-2 border-radius-0 bg-light">
                             <!-- Card body -->
                             <div class="card-body">
-                                        <div class="d-block d-sm-flex justify-content-between text-sm-center">
+                                        <div class="row justify-content-between text-sm-center">
                                            <!-- Item start -->
-                                            <div class="item">
+                                            <div class="col-md-4 item">
                                                  <label class="form-label">Nombre de Place</label>
-                                                     <div class="hstack gap-1 align-items-center text-center">
-                                                    <button type="button" class="btn btn-link adult-remove p-0 mb-0" id="decrease-seat_go"><i class="bi bi-dash-circle fs-5 fa-fw"></i></button>
                                                     <h5 class="guest-selector-count mb-0 adults">{{ form.seat_go }}</h5>
-                                                    <button type="button" class="btn btn-link adult-add p-0 mb-0" id="increase-seat_go"><i class="bi bi-plus-circle fs-5 fa-fw"></i></button>
-                                                </div>
                                             </div>
                                             <!-- end Item -->
                                             <!-- Item start -->
-                                            <div class="item">
+                                            <div class="col-md-4 item">
                                                  <label class="form-label">Nombre de Bagage</label>
-                                                     <div class="hstack gap-1 align-items-center text-center">
-                                                    <button type="button" class="btn btn-link adult-remove p-0 mb-0" id="decrease-luggage"><i class="bi bi-dash-circle fs-5 fa-fw"></i></button>
                                                     <h5 class="guest-selector-count mb-0 adults px-3">{{ form.luggage }}</h5>
-                                                    <button type="button" class="btn btn-link adult-add p-0 mb-0" id="increase-luggage"><i class="bi bi-plus-circle fs-5 fa-fw"></i></button>
-                                                </div>
+
                                             </div>
                                             <!-- end Item -->
                                             <!-- Item start -->
-                                            <div class="item">
-                                                 <label class="form-label">Prix par place</label>
-                                                     <div class="hstack gap-1 align-items-center text-center">
-                                                    <button type="button" class="btn btn-link adult-remove p-0 mb-0" id="decrease-price"><i class="bi bi-dash-circle fs-5 fa-fw"></i></button>
-                                                    <h5 class="guest-selector-count mb-0 adults">{{ form.price }} FCFA</h5>
-                                                    <button type="button" class="btn btn-link adult-add p-0 mb-0" id="increase-price"><i class="bi bi-plus-circle fs-5 fa-fw"></i></button>
-                                                </div>
+                                            <div class="col-md-4 item div" id="id_price">
+                                                 <label class="form-label">Prix par place en FCA</label>
+                                                    <h5 class="guest-selector-count mb-0 adults">{{ form.price }}</h5>
                                             </div>
                                             <!-- end Item -->
                                         </div>
