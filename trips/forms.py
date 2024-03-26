@@ -91,6 +91,7 @@ class TripForm(forms.ModelForm):
             'class': 'form-select js-choice',
             'data-search-enabled': 'true',
             'value': 0,
+            'default': 0,
         })
 
         self.fields['end_time'].widget.attrs.update({

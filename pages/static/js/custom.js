@@ -33,23 +33,31 @@ document.addEventListener('DOMContentLoaded', function () {
 // Masque le prix si le status est passager
 document.addEventListener('DOMContentLoaded', function () {
     const roleFields = document.querySelectorAll('input[name="role"]');
-    const priceFieldWrapper = document.getElementById('id_price').closest('div');
+    const priceField = document.getElementById('id_price');
+    const priceFieldWrapper = priceField.closest('div');
 
-    // Fonction pour masquer/afficher le champ prix
-    function togglePriceField() {
+    // Fonction pour ajuster le champ prix en fonction du rôle sélectionné
+    function adjustPriceField() {
         const isDriverSelected = document.querySelector('input[name="role"]:checked').value === 'Conducteur';
-        priceFieldWrapper.style.display = isDriverSelected ? 'block' : 'none';
+        if (isDriverSelected) {
+            // Afficher le champ prix et ne pas modifier sa valeur (laisser l'utilisateur saisir)
+            priceFieldWrapper.style.display = 'block';
+        } else {
+            // Masquer le champ prix et le définir à 0
+            priceFieldWrapper.style.display = 'none';
+            priceField.value = 0;
+        }
     }
 
     // Écouter les changements sur les champs de rôle
     roleFields.forEach(function (input) {
         input.addEventListener('change', function () {
-            togglePriceField();
+            adjustPriceField();
         });
     });
 
     // Initialiser le champ prix lors du chargement de la page
-    togglePriceField();
+    adjustPriceField();
 });
 
 //

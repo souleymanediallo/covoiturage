@@ -59,8 +59,14 @@ class TripCreateView(LoginRequiredMixin, CreateView):
     template_name = 'trips/trip_form.html'
 
     def form_valid(self, form):
+        messages.success(self.request, 'Annonce créée avec succès.')
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request,
+                       "Erreur lors de la création de l'annonce. Veuillez vérifier les données soumises.")
+        return super().form_invalid(form)
 
 
 class TripDetailView(DetailView):

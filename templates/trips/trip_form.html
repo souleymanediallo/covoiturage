@@ -26,6 +26,12 @@
                 <div class="col-lg-10 mx-auto">
                     <form class="vstack gap-2" method="POST" enctype="multipart/form-data">
 						{% csrf_token %}
+                        <!-- errors -->
+                        {% if form.errors %}
+                            <div class="alert alert-danger" role="alert">
+                                <strong>Oops!</strong> Il y a des erreurs dans le formulaire.
+                            </div>
+                        {% endif %}
                         <!-- Owner Detail START -->
                         <div class="card border rounded-2 mb-0 border-radius-0 bg-light">
                             <!-- Card body -->
