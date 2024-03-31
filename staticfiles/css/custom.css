@@ -1,0 +1,32 @@
+ul#profile,  ul#trip, ul#sexe {
+    list-style-type: none;
+}
+ul#profile li, ul#trip li, ul#sexe li {
+    display: inline;
+    padding: 0 1em;
+    margin-left: -1.5em;
+}
+
+input#price, input#seat_go, input#luggage {
+    border: none;
+    text-align: center;
+    background: none;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number]:focus{
+    outline: none;
+}
+
+.page-item.disabled .page-link {
+    cursor: not-allowed;
+    opacity: 0.5;
+    color: #ccc;
+}
