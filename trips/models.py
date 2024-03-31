@@ -42,8 +42,9 @@ class Trip(models.Model):
     def save(self, *args, **kwargs):
         if self.status == "Aller-Retour":
             self.seat_back = self.seat_go
+        if self.role == "Passager":
+            self.price = 0
         super(Trip, self).save(*args, **kwargs)
-
 
     class Meta:
         ordering = ['start_city', 'end_city']

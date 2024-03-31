@@ -36,10 +36,15 @@
                                 <!-- Airport detail -->
 
                                 <!-- Airport detail -->
+
                                 <div class="col-4 col-md-6 text-end">
-                                    <!-- Title -->
+                                    {% if trip.role == 'Conducteur' and trip.price > 0 %}
                                     <h5>{{ trip.price }}F</h5>
+                                    {% elif trip.role == 'Conducteur' and trip.price == 0 %}
+                                    <h5>Gratuit</h5>
+                                    {% endif %}
                                 </div>
+
                             </div>
                             <!-- Ticket item END -->
                             {% if trip.status == 'Aller-Retour' %}
@@ -49,16 +54,22 @@
                                 <h6 class="mb-1 mb-sm-0">{{ trip.end_city }} <i class="bi bi-arrow-right mx-2"></i></span> {{ trip.end_city }}</h6>
                                 <h6 class="fw-normal mb-0">{{ trip.end_date }}<span class="text-body"> à </span> {{ trip.end_time }}</h6>
                             </div>
+                            {% endif %}
                             <!-- Ticket item START -->
                             <div class="row g-4">
                                 <!-- Air line name -->
+                                {% if trip.status == 'Aller-Retour' %}
                                 <div class="col-md-3">
                                     <h5>{{ trip.seat_back }} Places</h5>
                                 </div>
                                 <!-- Airport detail -->
                                 <div class="col-4 col-md-6 text-end">
                                     <!-- Title -->
+                                    {% if trip.role == 'Conducteur' and trip.price > 0 %}
                                     <h5>{{ trip.price }}F</h5>
+                                    {% elif trip.role == 'Conducteur' and trip.price == 0 %}
+                                    <h5>Gratuit</h5>
+                                    {% endif %}
                                 </div>
                                 {% endif %}
 
@@ -73,7 +84,6 @@
                                      </div>
                                 </div>
                                 {% endif %}
-
                             </div>
                             <!-- Ticket item END -->
 
@@ -87,8 +97,8 @@
                                             class="fa-solid fa-car"></i></div>
                                     <!-- Title -->
                                     <div class="ms-2">
-                                        <h6 class="card-title mb-0">Ahmed</h6>
-                                        <span>Conducteur</span>
+                                        <h6 class="card-title mb-0">{{ trip.author.first_name }}</h6>
+                                        <span>{{ trip.role }}</span>
                                     </div>
                                 </div>
                                 </div>
