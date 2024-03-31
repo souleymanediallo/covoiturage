@@ -10,6 +10,14 @@
                     <div class="card border rounded-2">
                         <!-- Card header -->
 
+                        <div class="card-header bg-light rounded-0">
+                            {% if trip.status == 'Aller-Simple' %}
+                            <h4>Trajet Aller simple</h4>
+                            {% else %}
+                            <h4>Trajet Aller Retour</h4>
+                            {% endif %}
+                        </div>
+
                         <!-- Card body START -->
                         <div class="card-body">
                             <!-- Title -->
@@ -26,10 +34,7 @@
                                     <h5>{{ trip.seat_go }} Places</h5>
                                 </div>
                                 <!-- Airport detail -->
-                                <div class="col-4 col-md-3 text-end">
-                                    <!-- Title -->
 
-                                </div>
                                 <!-- Airport detail -->
                                 <div class="col-4 col-md-6 text-end">
                                     <!-- Title -->
@@ -37,7 +42,7 @@
                                 </div>
                             </div>
                             <!-- Ticket item END -->
-
+                            {% if trip.status == 'Aller-Retour' %}
                             <!-- Title -->
                             <div class="p-3 bg-light rounded-2 d-sm-flex justify-content-sm-between align-items-center text-center my-4">
                                 <!-- Airline Name -->
@@ -51,15 +56,12 @@
                                     <h5>{{ trip.seat_back }} Places</h5>
                                 </div>
                                 <!-- Airport detail -->
-                                <div class="col-4 col-md-3">
-                                    <!-- Title -->
-                                </div>
-                                <!-- Time -->
-                                <!-- Airport detail -->
                                 <div class="col-4 col-md-6 text-end">
                                     <!-- Title -->
-                                    <h5>{{ trip.price }}</h5>
+                                    <h5>{{ trip.price }}F</h5>
                                 </div>
+                                {% endif %}
+
                                 {% if trip.description %}
                                  <div class="col-12">
                                     <!-- Title -->
@@ -71,6 +73,7 @@
                                      </div>
                                 </div>
                                 {% endif %}
+
                             </div>
                             <!-- Ticket item END -->
 
@@ -101,7 +104,6 @@
     </section>
 <!-- =======================
 Steps END -->
-
 </main>
 <!-- **************** MAIN CONTENT END **************** -->
 

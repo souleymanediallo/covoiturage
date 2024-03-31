@@ -17,7 +17,7 @@ class TripForm(forms.ModelForm):
     class Meta:
         model = Trip
         fields = ['role', 'status', 'start_city', 'end_city', 'end_time', 'start_date', 'end_date',
-                  'start_time', 'seat_go', 'price', 'description', 'luggage']
+                  'start_time', 'seat_go', 'seat_back', 'price', 'description', 'luggage']
         labels = {
             'start_city': 'Ville de départ',
             'end_city': "Ville d'arrivée",

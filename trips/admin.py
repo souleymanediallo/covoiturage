@@ -5,7 +5,7 @@ from .models import Trip, Reservation
 
 @admin.register(Trip)
 class TripAdmin(admin.ModelAdmin):
-    list_display = ['start_city', 'end_city', 'price', 'start_date', 'end_date', 'created_at']
+    list_display = ['start_city', 'end_city', 'price', 'start_date', 'seat_go', 'seat_back', 'end_date', 'created_at']
     search_fields = ["start_city", "end_city", "price", "start_date", "end_date"]
 
 

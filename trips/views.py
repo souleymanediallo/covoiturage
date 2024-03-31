@@ -30,10 +30,10 @@ class TripListView(ListView):
         city = self.request.GET.get('city')
         if city:
             queryset = queryset.filter(Q(start_city=city) | Q(end_city=city))
-        user_type = self.request.GET.get('user_type')
+        role = self.request.GET.get('role')
         # filter by user type
-        if user_type:
-            queryset = queryset.filter(user_type=user_type)
+        if role:
+            queryset = queryset.filter(user_type=role)
         # Filter by date
         start_date = self.request.GET.get('start_date')
         if start_date:
@@ -59,13 +59,13 @@ class TripCreateView(LoginRequiredMixin, CreateView):
     template_name = 'trips/trip_form.html'
 
     def form_valid(self, form):
-        messages.success(self.request, 'Annonce créée avec succès.')
+        messages.success(self.request, 'Votre trajet a été avec avec succès.')
         form.instance.author = self.request.user
         return super().form_valid(form)
 
     def form_invalid(self, form):
         messages.error(self.request,
-                       "Erreur lors de la création de l'annonce. Veuillez vérifier les données soumises.")
+                       "Erreur lors de la création de votre trajet. Veuillez vérifier les données soumises.")
         return super().form_invalid(form)
 
 
