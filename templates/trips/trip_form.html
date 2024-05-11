@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-12 mx-auto text-center">
                     <h1 class="fs-2 mb-2">Publier votre trajet</h1>
-                    <p class="mb-0">En tant que conducteur ou passager</p>
+                    <p class="mb-0">En tant que conducteur</p>
                 </div>
             </div>
         </div>
@@ -27,11 +27,13 @@
                     <form class="vstack gap-2" method="POST" enctype="multipart/form-data">
 						{% csrf_token %}
                         <!-- errors -->
-                        {% if form.errors %}
-                            <div class="alert alert-danger" role="alert">
-                                <strong>Oops!</strong> Il y a des erreurs dans le formulaire.
+                        {% for field in form %}
+                          {% if field.errors %}
+                            <div class="alert alert-danger">
+                              {{ field.errors }}
                             </div>
-                        {% endif %}
+                          {% endif %}
+                        {% endfor %}
                         <!-- Owner Detail START -->
                         <div class="card border rounded-2 mb-0 border-radius-0 bg-light">
                             <!-- Card body -->

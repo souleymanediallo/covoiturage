@@ -64,8 +64,10 @@ class TripCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        messages.error(self.request,
-                       "Erreur lors de la création de votre trajet. Veuillez vérifier les données soumises.")
+        # Log all form errors
+        for field in form.errors:
+            messages.error(self.request, f"{field}: {form.errors[field]}")
+        messages.error(self.request, "Erreur lors de la création de votre trajet. Veuillez vérifier les données soumises.")
         return super().form_invalid(form)
 
 

@@ -57,15 +57,14 @@ class TripForm(forms.ModelForm):
         self.fields['start_date'].widget.attrs.update({
             'class': 'form-control flatpickr flatpickr-input',
             'type': 'date',
-            'data-date-format': 'd/m/Y',
-            'data-min-date': 'today',
+            'data-date-format': "d/m/Y",
+            'data-default-date': 'today',
         })
 
         self.fields['end_date'].widget.attrs.update({
             'class': 'form-control flatpickr flatpickr-input',
             'type': 'date',
-            'data-date-format': 'd/m/Y',
-            'data-min-date': 'today',
+            'data-date-format': "d/m/Y",
         })
 
         self.fields['role'].widget.attrs.update({
