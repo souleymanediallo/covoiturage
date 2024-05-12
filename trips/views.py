@@ -107,6 +107,7 @@ class TripDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
 
+
 @login_required
 def my_trip(request):
     trips = Trip.objects.all()

@@ -103,3 +103,5 @@ class TripForm(forms.ModelForm):
             'class': 'form-select js-choice',
             'data-search-enabled': 'true',
         })
+
+

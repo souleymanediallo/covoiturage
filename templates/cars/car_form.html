@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<main>
+<section class="pt-5">
+	<div class="container py-5">
+		<div class="row">
+
+			<!-- Sidebar START -->
+            {% include "partials/sidebar-admin.html" %}
+			<!-- Sidebar END -->
+
+			<!-- Main content START -->
+			<div class="col-lg-8 col-xl-9">
+
+				<!-- Offcanvas menu button -->
+				<div class="d-grid mb-0 d-lg-none w-100">
+					<button class="btn btn-primary mb-4" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+						<i class="fas fa-sliders-h"></i> Menu
+					</button>
+				</div>
+				<div class="vstack gap-4">
+					<!-- Personal info START -->
+					<div class="card border">
+						<!-- Card header -->
+						<div class="card-header border-bottom bg-light">
+							<h4 class="card-header-title">Ajouter une voiture</h4>
+						</div>
+						<!-- Card body START -->
+						<div class="card-body">
+							<!-- Form START -->
+							<form class="row g-3" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+								<!-- Profile photo -->
+
+
+								<!-- Name -->
+								<div class="col-md-6">
+									<label class="form-label">Marque<span class="text-danger">*</span></label>
+									{{ form.brand }}
+								</div>
+
+								<!-- Email -->
+								<div class="col-md-6">
+									<label class="form-label">Modèle</label>
+									{{ form.model }}
+								</div>
+
+								<!-- Mobile -->
+								<div class="col-md-6">
+									<label class="form-label">Anné de mise en circulation<span class="text-danger">*</span></label>
+									{{ form.year }}
+								</div>
+
+								<!-- Gender -->
+								<div class="col-md-6">
+									<label class="form-label">Couleur<span class="text-danger">*</span></label>
+									{{ form.color }}
+								</div>
+
+								<!-- Button -->
+								<div class="col-12 text-end">
+                                    <button type="submit" class="btn btn-primary mb-0">Mettre à jour</button>
+								</div>
+							</form>
+							<!-- Form END -->
+						</div>
+						<!-- Card body END -->
+					</div>
+					<!-- Personal info END -->
+				</div>
+			</div>
+			<!-- Main content END -->
+		</div>
+	</div>
+</section>
+<!-- =======================
+Content END -->
+
+</main>
+{% endblock %}

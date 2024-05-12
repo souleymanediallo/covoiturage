@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'trips.apps.TripsConfig',
     'phonenumber_field',
     'conversations.apps.ConversationsConfig',
+    'cars.apps.CarsConfig',
 ]
 
 MIDDLEWARE = [

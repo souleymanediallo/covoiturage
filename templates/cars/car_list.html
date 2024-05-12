@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<main>
+<section class="pt-5">
+	<div class="container py-5">
+		<div class="row">
+
+			<!-- Sidebar START -->
+            {% include "partials/sidebar-admin.html" %}
+			<!-- Sidebar END -->
+
+			<!-- Main content START -->
+			<div class="col-lg-8 col-xl-9">
+
+				<!-- Offcanvas menu button -->
+				<div class="d-grid mb-0 d-lg-none w-100">
+					<button class="btn btn-primary mb-4" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+						<i class="fas fa-sliders-h"></i> Menu
+					</button>
+				</div>
+				<div class="vstack gap-4">
+					<!-- Personal info START -->
+					<div class="card border">
+						<!-- Card header -->
+						<div class="card-header border-bottom bg-light">
+							<h4 class="card-header-title">Gérer ma voiture</h4>
+						</div>
+						<!-- Card body START -->
+						<div class="card-body">
+							<!-- Form START -->
+                            {% for car in cars %}
+                				<!-- Card item START -->
+								<div class="card border rounded-2 mb-2">
+									<!-- Card header -->
+									<div class="card-header border-bottom d-md-flex justify-content-md-between align-items-center">
+										<!-- Icon and Title -->
+										<div class="d-flex align-items-center"><!-- Title -->
+											<div class="ms-2">
+												<h6 class="card-title mb-0">{{ car.brand }} <i class="bi bi-arrow-right mx-2"></i></span> {{ car.model }}</h6>
+												<ul class="nav nav-divider small">
+													<li class="nav-item">{{ car.year }}</li>
+													<li class="nav-item">{{ car.color }}</li>
+												</ul>
+											</div>
+										</div>
+
+										<!-- Button -->
+										<div class="mt-2 mt-md-0">
+											<a href="{{ trip.get_absolute_url_update }}"  class="btn btn-primary-soft mb-0">Modifier</a>
+											<a href="{{ trip.get_absolute_url_delete }}" class="btn btn-danger-soft mb-0">Supprimer</a>
+										</div>
+									</div>
+
+									<!-- Card body -->
+
+								</div>
+								<!-- Card item END -->
+                            {% endfor %}
+							<!-- Form END -->
+						</div>
+						<!-- Card body END -->
+					</div>
+					<!-- Personal info END -->
+				</div>
+			</div>
+			<!-- Main content END -->
+		</div>
+	</div>
+</section>
+<!-- =======================
+Content END -->
+
+</main>
+{% endblock %}
