@@ -6,6 +6,19 @@ from django.db.models import Sum
 
 from django.urls import reverse
 from .city import CITY_SENEGAL
+from .brand import CAR_BRAND, COLOR_CHOICES
+
+
+class Car(models.Model):
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='cars')
+    brand = models.CharField(max_length=100, choices=CAR_BRAND)
+    model = models.CharField(max_length=200)
+    year = models.DateField()
+    color = models.CharField(max_length=20, choices=COLOR_CHOICES)
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+
+    def __str__(self):
+        return f"{self.brand} {self.model} {self.year}"
 
 
 # Create your models here.
@@ -14,13 +27,10 @@ class Trip(models.Model):
         ("Aller-Simple", "Aller-Simple"),
         ("Aller-Retour", "Aller-Retour")
     )
-    ROLE_TRAVEL = (
-        ('Conducteur', 'Conducteur'),
-        ('Passager', 'Passager')
-    )
+
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    role = models.CharField(max_length=20, choices=ROLE_TRAVEL, default='Conducteur')
     status = models.CharField(max_length=20, choices=STATUS, default="Aller-Simple")
+    car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='trips', null=True)
     start_city = models.CharField(max_length=100, choices=CITY_SENEGAL)
     end_city = models.CharField(max_length=100, choices=CITY_SENEGAL)
     start_date = models.DateField()
@@ -42,8 +52,6 @@ class Trip(models.Model):
     def save(self, *args, **kwargs):
         if self.status == "Aller-Retour":
             self.seat_back = self.seat_go
-        if self.role == "Passager":
-            self.price = 0
         super(Trip, self).save(*args, **kwargs)
 
     class Meta:

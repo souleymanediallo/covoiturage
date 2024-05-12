@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Trip, Reservation
+from .models import Trip, Reservation, Car
 # Register your models here.
 
 
@@ -12,3 +12,9 @@ class TripAdmin(admin.ModelAdmin):
 @admin.register(Reservation)
 class ReservationAdmin(admin.ModelAdmin):
     list_display = ['status', 'seats_reserved_go', 'seats_reserved_back', 'created_at']
+
+
+@admin.register(Car)
+class CarAdmin(admin.ModelAdmin):
+    list_display = ['brand', 'model', 'year', 'color']
+    search_fields = ["brand", "model", "year", "color" ]

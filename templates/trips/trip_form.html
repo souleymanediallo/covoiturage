@@ -40,15 +40,9 @@
                             <div class="card-body">
                                 <div class="row g-3">
                                     <!-- car type -->
-                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Je suis : <span class="text-danger">*</span></label>
-                                            {% for sexe in form.role %}
-                                            <div class="d-flex gap-4">
-                                                <div class="form-check radio-bg-light">
-                                                    {{ sexe }}
-                                                </div>
-                                            </div>
-                                            {% endfor %}
+                                     <div class="col-md-6">
+                                        <label class="form-label">Voiture</label>
+                                        {{ form.car }}
                                     </div>
                                     <!-- car type -->
                                     <div class="col-md-6 mb-3">

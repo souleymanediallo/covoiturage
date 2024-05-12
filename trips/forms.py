@@ -16,9 +16,10 @@ class TripForm(forms.ModelForm):
 
     class Meta:
         model = Trip
-        fields = ['role', 'status', 'start_city', 'end_city', 'end_time', 'start_date', 'end_date',
+        fields = ['status', 'car', 'start_city', 'end_city', 'end_time', 'start_date', 'end_date',
                   'start_time', 'seat_go', 'seat_back', 'price', 'description', 'luggage']
         labels = {
+            'car': 'Voiture',
             'start_city': 'Ville de départ',
             'end_city': "Ville d'arrivée",
             'start_date': 'Date de départ',
@@ -28,7 +29,6 @@ class TripForm(forms.ModelForm):
             'description': "Information supplémentaire",
         }
         widgets = {
-            "role": forms.RadioSelect(),
             "status": forms.RadioSelect(),
             "start_time": forms.TimeInput(attrs={'class': 'form-control'}),
             "end_time": forms.TimeInput(attrs={'class': 'form-control'}),
@@ -41,6 +41,11 @@ class TripForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for name, field in self.fields.items():
             field.widget.attrs.update({'class': 'form-control'})
+
+        self.fields['car'].widget.attrs.update({
+            'class': 'form-select js-choice',
+            'value': '',
+        })
 
         self.fields['start_city'].widget.attrs.update({
             'class': 'form-select js-choice',
@@ -65,10 +70,6 @@ class TripForm(forms.ModelForm):
             'class': 'form-control flatpickr flatpickr-input',
             'type': 'date',
             'data-date-format': "d/m/Y",
-        })
-
-        self.fields['role'].widget.attrs.update({
-            'class': 'form-check-input'
         })
 
         self.fields['status'].widget.attrs.update({

@@ -1,5 +1,6 @@
 flatpickr(".flatpickr", {
     dateFormat: "d/m/Y",
+    minDate: "today",
 });
 
 // masquer ou afficher les champs de date et d'heure de retour en fonction de l'état
