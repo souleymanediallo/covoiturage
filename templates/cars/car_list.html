@@ -29,6 +29,7 @@
 						<!-- Card body START -->
 						<div class="card-body">
 							<!-- Form START -->
+						{% if cars %}
                             {% for car in cars %}
                 				<!-- Card item START -->
 								<div class="card border rounded-2 mb-2">
@@ -58,6 +59,13 @@
 								<!-- Card item END -->
                             {% endfor %}
 							<!-- Form END -->
+						{% else %}
+
+							<div class="col-md-9">
+								<h6>Vous n'avez pas encore ajouté de voiture</h6>
+								<a href="{% url 'car_create' %}" class="btn btn-primary-soft mb-0">Ajouter une voiture</a>
+							</div>
+						{% endif %}
 						</div>
 						<!-- Card body END -->
 					</div>
