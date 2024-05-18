@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-
+{% load static %}
 {% block content %}
 <!-- **************** MAIN CONTENT START **************** -->
 <main class="py-5">
@@ -12,21 +12,19 @@ Main Content START -->
 		<div class="row g-4 g-xl-5">
 			<!-- Left Content START -->
 			<div class="col-xl-8">
-				<div class="card bg-transparent p-0">
+				<div class="card p-0 border rounded-1">
 					<!-- Card header START -->
-					<div class="card-header bg-transparent p-0">
-						<h1 class="card-title fs-2 mb-0">Ecrire votre message</h1>
-					</div>
+					<div class="card-header border-bottom bg-light">
+							<h4 class="card-header-title">Ecrire votre message</h4>
+						</div>
 					<!-- Card header END -->
 
 					<!-- Card body START -->
-					<div class="card-body p-0 mt-3">
+					<div class="card-body p-0">
 						<!-- Alert box -->
-						<div class="alert alert-primary" role="alert">
-							Votre demande doit concerner uniquement ce trajet en particulier.
-						</div>
 
-						<form class="bg-light rounded-1 p-4" method="POST" action="{% url 'conversation-create' recipient.id %}">
+
+						<form class="bg-light rounded-1 p-4" method="POST" action="{% url 'conversation-create' recipient.id trip.pk %}">
 							{% csrf_token %}
 							<!-- Form START -->
 							<div class="row g-3">
@@ -47,6 +45,7 @@ Main Content START -->
 					</div>
 					<!-- Card body END -->
 				</div>
+
 			</div>
 			<!-- Left Content END -->
 
@@ -59,8 +58,15 @@ Main Content START -->
 					<div class="col-md-6 col-xl-12">
 						<div class="card border rounded-1">
 							<!-- Card header -->
-							<div class="card-header border-bottom">
-								<h5 class="mb-0 cardt-title">Trajet</h5>
+							<div class="card-header border-bottom bg-light">
+								<h5 class="mb-0 cardt-title text-center">
+									{% if recipient.user.profile.image %}
+										<img src="{{ recipient.user.profile.image.url }}" alt="Profile image">
+									{% else %}
+										<img src="{% static 'images/user.png' %}" alt="Default profile image" width="60" height="60">
+									{% endif %}
+
+									{{ recipient.user.first_name }}</h5>
 							</div>
 
 							<!-- Card body -->
@@ -69,12 +75,12 @@ Main Content START -->
 								<small><i class="bi bi-ticket me-2"></i>{{ recipient.user.first_name }}</small>
 								<div class="d-flex mt-2">
 									<img src="assets/images/element/09.svg" class="w-40px me-2" alt="">
-									<h6 class="fw-normal mb-0">{{ conversation.trip.start_city }} <i class="bi bi-arrow-right"></i> New York</h6>
+									<h6 class="fw-normal mb-0">{{ trip.start_city }} <i class="bi bi-arrow-right"></i> {{ trip.end_city }}</h6>
 								</div>
 								<ul class="nav nav-divider small text-body mt-1 mb-0">
-									<li class="nav-item">25 Jan</li>
-									<li class="nav-item">1 Stop</li>
-									<li class="nav-item">05h 25m</li>
+									<li class="nav-item">{{ trip.start_date }} </li>
+									<li class="nav-item">à </li>
+									<li class="nav-item">{{ trip.start_time|date:"H:i" }}</li>
 								</ul>
 
 								<hr> <!-- Divider -->

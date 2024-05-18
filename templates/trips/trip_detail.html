@@ -103,7 +103,7 @@
                                 </div>
                                 </div>
                                  <div class="col-6 text-end">
-                                    <a href="{% url 'conversation-create' trip.author.profile.pk %}" class="btn btn-primary btn-lg btn-block">Envoyer un message</a>
+                                    <a href="{% url 'conversation-create' trip.author.profile.pk trip.pk %}" class="btn btn-primary btn-lg btn-block">Envoyer un message</a>
                                 </div>
                             </div>
                         </div>

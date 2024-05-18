@@ -5,6 +5,7 @@ from .forms import ConversationForm
 from accounts.models import Profile
 from .models import Conversation
 from django.contrib import messages
+from trips.models import Trip
 
 
 @login_required
@@ -29,8 +30,10 @@ def conversation_list(request, pk):
 
 
 @login_required
-def conversation_create(request, profile_id):
+def conversation_create(request, profile_id, trip_id):
     recipient = get_object_or_404(Profile, pk=profile_id)
+    trip = get_object_or_404(Trip, pk=trip_id)
+
     form = ConversationForm()
     try:
         sender = request.user
@@ -48,7 +51,7 @@ def conversation_create(request, profile_id):
             messages.success(request, "Votre message été envoyé !")
             return redirect("home")
 
-    context = {"recipient": recipient, "form": form}
+    context = {"recipient": recipient, "form": form, 'trip': trip}
     return render(request, "conversations/conversation_form.html", context)
 
 
