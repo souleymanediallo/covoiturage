@@ -15,6 +15,7 @@ from django.utils import timezone
 from datetime import datetime, timedelta
 today_current = datetime.today().strftime('%Y-%m-%d')
 time_expired = datetime.now().strftime('%H:%M')
+from cars.models import Car
 
 
 class TripListView(ListView):
@@ -57,6 +58,12 @@ class TripCreateView(LoginRequiredMixin, CreateView):
     context_object_name = "form"
     success_url = reverse_lazy('home')
     template_name = 'trips/trip_form.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if not Car.objects.filter(owner=request.user).exists():
+            messages.error(request, "Veuillez d'abord ajouter une voiture avant de pouvoir publier un trajet.")
+            return redirect('car_create')
+        return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         messages.success(self.request, 'Votre trajet a été avec avec succès.')

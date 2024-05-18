@@ -66,10 +66,10 @@ Main Content START -->
 							<!-- Card body -->
 							<div class="card-body">
 								<!-- Flight detail -->
-								<small><i class="bi bi-ticket me-2"></i>Flight Ticket</small>
+								<small><i class="bi bi-ticket me-2"></i>{{ recipient.user.first_name }}</small>
 								<div class="d-flex mt-2">
 									<img src="assets/images/element/09.svg" class="w-40px me-2" alt="">
-									<h6 class="fw-normal mb-0">Mumbai <i class="bi bi-arrow-right"></i> New York</h6>
+									<h6 class="fw-normal mb-0">{{ conversation.trip.start_city }} <i class="bi bi-arrow-right"></i> New York</h6>
 								</div>
 								<ul class="nav nav-divider small text-body mt-1 mb-0">
 									<li class="nav-item">25 Jan</li>
