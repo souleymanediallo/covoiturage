@@ -66,9 +66,14 @@ class TripCreateView(LoginRequiredMixin, CreateView):
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
-        messages.success(self.request, 'Votre trajet a été avec avec succès.')
-        form.instance.author = self.request.user
-        return super().form_valid(form)
+        # Vérifier si l'utilisateur est authentifié
+        if self.request.user.is_authenticated:
+            messages.success(self.request, 'Votre trajet a été créé avec succès.')
+            form.instance.author = self.request.user
+            return super().form_valid(form)
+        else:
+            messages.error(self.request, 'Vous devez être connecté pour créer un trajet.')
+            return redirect('login')
 
     def form_invalid(self, form):
         # Log all form errors

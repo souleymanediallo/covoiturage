@@ -15,7 +15,12 @@ Main Content START -->
 				<div class="card p-0 border rounded-1">
 					<!-- Card header START -->
 					<div class="card-header border-bottom bg-light">
-							<h4 class="card-header-title">Ecrire votre message</h4>
+						<h5>{% if sender.profile.image %}
+								<img src="{{ sender.profile.image.url }}" alt="Profile image" width="60" height="60">
+							{% else %}
+								<img src="{% static 'images/user.png' %}" alt="Default profile image" width="60" height="60">
+							{% endif %}
+						{{ sender.first_name }}</h5>
 						</div>
 					<!-- Card header END -->
 
@@ -59,40 +64,38 @@ Main Content START -->
 						<div class="card border rounded-1">
 							<!-- Card header -->
 							<div class="card-header border-bottom bg-light">
-								<h5 class="mb-0 cardt-title text-center">
+								<h5 class="mb-0 card-title text-center">
 									{% if recipient.user.profile.image %}
-										<img src="{{ recipient.user.profile.image.url }}" alt="Profile image">
+										<img src="{{ recipient.user.profile.image.url }}" alt="Profile image" width="60"
+											 height="60">
 									{% else %}
-										<img src="{% static 'images/user.png' %}" alt="Default profile image" width="60" height="60">
+										<img src="{% static 'images/user.png' %}" alt="Default profile image"
+											 width="60"
+											 height="60">
 									{% endif %}
+									{{ recipient.user.first_name }}
+								</h5>
 
-									{{ recipient.user.first_name }}</h5>
 							</div>
 
 							<!-- Card body -->
 							<div class="card-body">
+
+								<p class="title-text">Trajet Aller</p>
 								<!-- Flight detail -->
-								<small><i class="bi bi-ticket me-2"></i>{{ recipient.user.first_name }}</small>
-								<div class="d-flex mt-2">
-									<img src="assets/images/element/09.svg" class="w-40px me-2" alt="">
+								<div class=" text-center">
 									<h6 class="fw-normal mb-0">{{ trip.start_city }} <i class="bi bi-arrow-right"></i> {{ trip.end_city }}</h6>
+									<p>{{ trip.start_date }} à {{ trip.start_time|date:"H:i" }}</p>
+									<p>{{ trip.seat_go }} Places disponibles</p>
 								</div>
-								<ul class="nav nav-divider small text-body mt-1 mb-0">
-									<li class="nav-item">{{ trip.start_date }} </li>
-									<li class="nav-item">à </li>
-									<li class="nav-item">{{ trip.start_time|date:"H:i" }}</li>
-								</ul>
-
 								<hr> <!-- Divider -->
+								<p class="title-text">Trajet Retour</p>
+								<div class=" text-center">
+									<h6 class="fw-normal mb-0">{{ trip.start_city }} <i class="bi bi-arrow-right"></i> {{ trip.end_city }}</h6>
+									<p>{{ trip.start_date }} à {{ trip.start_time|date:"H:i" }}</p>
+									<p>{{ trip.seat_back }} Places disponibles</p>
+								</div>
 
-								<!-- Traveler detail -->
-								<small><i class="bi bi-person me-1"></i>Traveler detail</small>
-								<h6 class="mb-0 fw-normal mt-2">Carolyn Ortiz</h6>
-								<ul class="nav nav-divider small text-body mt-1 mb-0">
-									<li class="nav-item">Adult</li>
-									<li class="nav-item">Female</li>
-									<li class="nav-item">Dec-2-1990</li>
-								</ul>
 							</div>
 
 							<!-- Card footer -->

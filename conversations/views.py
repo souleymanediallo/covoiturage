@@ -51,7 +51,7 @@ def conversation_create(request, profile_id, trip_id):
             messages.success(request, "Votre message été envoyé !")
             return redirect("home")
 
-    context = {"recipient": recipient, "form": form, 'trip': trip}
+    context = {"recipient": recipient, "form": form, 'trip': trip, 'sender': sender}
     return render(request, "conversations/conversation_form.html", context)
 
 

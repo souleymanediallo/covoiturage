@@ -30,3 +30,8 @@ input[type=number]:focus{
     opacity: 0.5;
     color: #ccc;
 }
+
+img.my-profile-image {
+    width: 60px !important;
+    height: 60px !important;
+}
