@@ -3,8 +3,8 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import View
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.core.paginator import Paginator
 from django.contrib import messages
 from .forms import TripForm
@@ -58,22 +58,26 @@ class TripCreateView(LoginRequiredMixin, CreateView):
     context_object_name = "form"
     success_url = reverse_lazy('home')
     template_name = 'trips/trip_form.html'
+    login_url = reverse_lazy('login')
 
     def dispatch(self, request, *args, **kwargs):
+        # Premier contrôle pour l'authentification
+        if not request.user.is_authenticated:
+            messages.error(request, "Vous devez être connecté pour accéder à cette page.")
+            return redirect('login')
+
+        # Vérifications supplémentaires une fois que l'utilisateur est confirmé comme étant authentifié
         if not Car.objects.filter(owner=request.user).exists():
             messages.error(request, "Veuillez d'abord ajouter une voiture avant de pouvoir publier un trajet.")
             return redirect('car_create')
+
+        # Appel de la méthode parent si toutes les vérifications sont passées
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
-        # Vérifier si l'utilisateur est authentifié
-        if self.request.user.is_authenticated:
-            messages.success(self.request, 'Votre trajet a été créé avec succès.')
-            form.instance.author = self.request.user
-            return super().form_valid(form)
-        else:
-            messages.error(self.request, 'Vous devez être connecté pour créer un trajet.')
-            return redirect('login')
+        messages.success(self.request, 'Votre trajet a été créé avec succès.')
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
     def form_invalid(self, form):
         # Log all form errors
