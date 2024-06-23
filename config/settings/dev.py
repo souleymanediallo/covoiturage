@@ -124,17 +124,15 @@ else:
     AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
     AWS_S3_REGION_NAME = 'eu-west-3'
-    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
     AWS_DEFAULT_ACL = None
-    AWS_S3__DOMAIN = AWS_S3_CUSTOM_DOMAIN or f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
 
     # Static files (CSS, JavaScript, Images)
-    STATICFILES_STORAGE = 'utils.storage.StaticRootS3Boto3Storage'
+    STATICFILES_STORAGE = 'utils.storages.StaticRootS3Boto3Storage'
     STATIC_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/static/"
 
     # Media files
-    DEFAULT_FILE_STORAGE = "utils.storage.MediaRootS3Boto3Storage"
-    MEDIA_URL = f'https://{AWS_S3__DOMAIN}/media/'
+    DEFAULT_FILE_STORAGE = 'utils.storages.MediaRootS3Boto3Storage'
+    MEDIA_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/media/"
 
 
 LOGIN_REDIRECT_URL = "home"
