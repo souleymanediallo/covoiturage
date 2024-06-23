@@ -124,6 +124,7 @@ else:
     AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
     AWS_S3_REGION_NAME = 'eu-west-3'
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com'
     AWS_DEFAULT_ACL = None
 
     # Static files (CSS, JavaScript, Images)
@@ -132,7 +133,7 @@ else:
 
     # Media files
     DEFAULT_FILE_STORAGE = 'utils.storages.MediaRootS3Boto3Storage'
-    MEDIA_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/media/"
+    MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/media/"
 
 
 LOGIN_REDIRECT_URL = "home"
