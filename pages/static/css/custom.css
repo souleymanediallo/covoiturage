@@ -35,3 +35,21 @@ img.my-profile-image {
     width: 60px !important;
     height: 60px !important;
 }
+
+/* Home trajet */
+
+.circle {
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    border: 1px solid #27ae60;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #27ae60;
+}
+/* Home trajet */

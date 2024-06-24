@@ -10,9 +10,9 @@
                     <div class="card border rounded-2">
                         <!-- Card header -->
 
-                        <div class="card-header bg-light rounded-0">
+                        <div class="card-header bg-light rounded-0 text-center">
                             {% if trip.status == 'Aller-Simple' %}
-                            <h4>Trajet Aller simple</h4>
+                            <h5>{{ trip.start_date }} à {{ trip.start_time }} </h5>
                             {% else %}
                             <h4>Trajet Aller Retour</h4>
                             {% endif %}
@@ -24,15 +24,12 @@
                             <div class="p-3 bg-light rounded-2 d-sm-flex justify-content-sm-between align-items-center mb-4">
                                 <!-- Airline Name -->
                                 <h6 class="mb-0">{{ trip.start_city }} <i class="bi bi-arrow-right mx-2"></i></span> {{ trip.end_city }}</h6>
-                                <h6 class="fw-normal mb-0">{{ trip.start_date }}<span class="text-body"> à </span> {{ trip.start_time }}</h6>
+                                <h6 class="fw-normal mb-0">{{ trip.seat_go }} Places</h6>
                             </div>
 
                             <!-- Ticket item START -->
                             <div class="row g-4">
                                 <!-- Air line name -->
-                                <div class="col-md-3">
-                                    <h5>{{ trip.seat_go }} Places</h5>
-                                </div>
                                 <!-- Airport detail -->
 
                                 <!-- Airport detail -->
@@ -89,8 +86,14 @@
 
                         </div>
                         <!-- Card body END -->
-                        <div class="card-footer border-top">
-                            <div class="row justify-content-between">
+                        <div class="card-footer bg-light text-center">
+                            <h5>Prix total pour 1 passager : {{ trip.price }}F</h5>
+                        </div>
+
+                    </div>
+
+                    <div class="card border rounded-2 mt-2 p-4">
+                        <div class="row justify-content-between">
                                 <div class="col-6">
                                     <div class="d-flex align-items-center justify-content-start mb-2">
                                     <div class="icon-lg bg-light rounded-circle flex-shrink-0"><i
@@ -106,7 +109,6 @@
                                     <a href="{% url 'conversation-create' trip.author.profile.pk trip.pk %}" class="btn btn-primary btn-lg btn-block">Envoyer un message</a>
                                 </div>
                             </div>
-                        </div>
                     </div>
                 </div>
             </div>
