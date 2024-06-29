@@ -105,9 +105,20 @@
                                     </div>
                                 </div>
                                 </div>
-                                 <div class="col-6 text-end">
-                                    <a href="{% url 'conversation-create' trip.author.profile.pk trip.pk %}" class="btn btn-primary btn-lg btn-block">Envoyer un message</a>
+
+                            <!-- number phone -->
+                                <div class="col-6 text-end">
+                                    <button class="btn btn-primary btn-lg btn-block" id="afficherNumero" data-phone="{{ trip.author.phone_number }}">
+                                        +221*********
+                                      </button>
                                 </div>
+                            <!-- number phone -->
+                               <div class="col-6 mt-3">
+                                   <p class="h5-">Voiture : {{ trip.car }}</p>
+                                   {% if trip.description %}
+                                   <p>{{ trip.description }}</p>
+                                   {% endif %}
+                               </div>
                             </div>
                     </div>
                 </div>
@@ -121,3 +132,16 @@ Steps END -->
 
 
 {% endblock %}
+
+<script>
+  // Code JavaScript pour afficher le numéro
+  $(document).ready(function() {
+    $('#afficherNumero').click(function() {
+      // Exemple de numéro masqué (à remplacer par votre numéro réel)
+      var numeroMasque = '**********';
+
+      // Afficher le numéro dans l'élément prévu
+      $('#numeroAffiche').removeClass('d-none').text(numeroMasque);
+    });
+  });
+</script>

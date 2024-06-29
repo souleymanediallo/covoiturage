@@ -16,8 +16,8 @@ class TripForm(forms.ModelForm):
 
     class Meta:
         model = Trip
-        fields = ['status', 'car', 'start_city', 'end_city', 'end_time', 'start_date', 'end_date',
-                  'start_time', 'seat_go', 'seat_back', 'price', 'description', 'luggage']
+        fields = ['car', 'start_city', 'end_city', 'start_date',
+                  'start_time', 'seat_go', 'price', 'description']
         labels = {
             'car': 'Voiture',
             'start_city': 'Ville de départ',
@@ -29,12 +29,9 @@ class TripForm(forms.ModelForm):
             'description': "Information supplémentaire",
         }
         widgets = {
-            "status": forms.RadioSelect(),
             "start_time": forms.TimeInput(attrs={'class': 'form-control'}),
-            "end_time": forms.TimeInput(attrs={'class': 'form-control'}),
             "seat_go": forms.Select(choices=[(i, i) for i in range(1, 6)], attrs={'class': 'form-control'}),
-            "luggage": forms.Select(choices=[(i, i) for i in range(0, 5)], attrs={'class': 'form-control'}),
-            "price": forms.Select(choices=[(i, i) for i in range(0, 40000, 500)], attrs={'class': 'form-control'}),
+            "price": forms.Select(choices=[(i, i) for i in range(500, 40000, 500)], attrs={'class': 'form-control'}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -66,37 +63,17 @@ class TripForm(forms.ModelForm):
             'data-default-date': 'today',
         })
 
-        self.fields['end_date'].widget.attrs.update({
-            'class': 'form-control flatpickr flatpickr-input',
-            'type': 'date',
-            'data-date-format': "d/m/Y",
-        })
-
-        self.fields['status'].widget.attrs.update({
-            'class': 'form-check-input',
-
-        })
-
-        self.fields['luggage'].widget.attrs.update({
-            'class': 'form-select js-choice',
-            'value': 0,
-        })
-
         self.fields['seat_go'].widget.attrs.update({
             'class': 'form-select js-choice',
             'value': 1,
+            'default': 1,
         })
 
         self.fields['price'].widget.attrs.update({
             'class': 'form-select js-choice',
             'data-search-enabled': 'true',
-            'value': 0,
-            'default': 0,
-        })
-
-        self.fields['end_time'].widget.attrs.update({
-            'class': 'form-select js-choice',
-            'data-search-enabled': 'true',
+            'value': 500,
+            'default': 500,
         })
 
         self.fields['start_time'].widget.attrs.update({

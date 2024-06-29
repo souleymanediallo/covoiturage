@@ -34,30 +34,6 @@
                             </div>
                           {% endif %}
                         {% endfor %}
-                        <!-- Owner Detail START -->
-                        <div class="card border rounded-2 mb-0 border-radius-0 bg-light">
-                            <!-- Card body -->
-                            <div class="card-body">
-                                <div class="row g-3">
-                                    <!-- car type -->
-                                     <div class="col-md-6">
-                                        <label class="form-label">Voiture</label>
-                                        {{ form.car }}
-                                    </div>
-                                    <!-- car type -->
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label">Type de trajet : <span class="text-danger">*</span></label>
-                                            {% for trip in form.status %}
-                                            <div class="d-flex gap-4">
-                                                <div class="form-check radio-bg-light" id="tripTypeSection">
-                                                    {{ trip }}
-                                                </div>
-                                            </div>
-                                            {% endfor %}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <!-- Owner Detail END -->
                           <!-- Owner Detail START -->
                         <div class="card border border-radius-0 bg-light rounded-2">
@@ -84,16 +60,6 @@
                                         {{ form.start_time }}
                                     </div>
                                     <!-- Contact number -->
-                                    <div class="col-md-6 div" id="id_end_date">
-                                        <label class="form-label">Date Retour</label>
-                                        {{ form.end_date }}
-                                    </div>
-                                    <!-- Email -->
-                                    <div class="col-md-6 div" id="id_end_time">
-                                        <label class="form-label">Heure</label>
-                                        {{ form.end_time }}
-                                    </div>
-
                                 </div>
                             </div>
                         </div>
@@ -103,6 +69,13 @@
                             <!-- Card body -->
                             <div class="card-body">
                                         <div class="row justify-content-between text-sm-center">
+                                             <div class="col-md-4 item">
+                                                 <!-- car type -->
+                                        <label class="form-label">Voiture</label>
+                                        {{ form.car }}
+
+
+                                            </div>
                                            <!-- Item start -->
                                             <div class="col-md-4 item">
                                                  <label class="form-label">Nombre de Place</label>
@@ -110,11 +83,7 @@
                                             </div>
                                             <!-- end Item -->
                                             <!-- Item start -->
-                                            <div class="col-md-4 item">
-                                                 <label class="form-label">Nombre de Bagage</label>
-                                                    <h5 class="guest-selector-count mb-0 adults px-3">{{ form.luggage }}</h5>
 
-                                            </div>
                                             <!-- end Item -->
                                             <!-- Item start -->
                                             <div class="col-md-4 item div" id="id_price">

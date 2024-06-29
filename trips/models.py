@@ -10,23 +10,13 @@ from .city import CITY_SENEGAL
 
 # Create your models here.
 class Trip(models.Model):
-    STATUS = (
-        ("Aller-Simple", "Aller-Simple"),
-        ("Aller-Retour", "Aller-Retour")
-    )
-
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    status = models.CharField(max_length=20, choices=STATUS, default="Aller-Simple")
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='trips', null=True)
     start_city = models.CharField(max_length=100, choices=CITY_SENEGAL)
     end_city = models.CharField(max_length=100, choices=CITY_SENEGAL)
     start_date = models.DateField()
     start_time = models.TimeField()
-    end_date = models.DateField(blank=True, null=True)
-    end_time = models.TimeField(blank=True, null=True)
     seat_go = models.PositiveIntegerField()
-    seat_back = models.PositiveIntegerField(blank=True, null=True)
-    luggage = models.PositiveIntegerField(default=0, blank=True, null=True)
     price = models.PositiveIntegerField()
     description = models.TextField(blank=True, null=True)
     ordering = models.IntegerField(default=0)
@@ -35,11 +25,6 @@ class Trip(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
-    def save(self, *args, **kwargs):
-        if self.status == "Aller-Retour":
-            self.seat_back = self.seat_go
-        super(Trip, self).save(*args, **kwargs)
 
     class Meta:
         ordering = ['start_city', 'end_city']
@@ -59,22 +44,6 @@ class Trip(models.Model):
 
     def get_absolute_url_delete(self):
         return reverse("trip-delete", kwargs={"pk": self.pk})
-
-    def available_seats(self, trip_type):
-        reservations = Reservation.objects.filter(trip=self)
-
-        if trip_type == 'Aller Simple':
-            reserved_seats_go = reservations.aggregate(Sum('seats_reserved_go'))['seats_reserved_go__sum'] or 0
-            return self.seat_go - reserved_seats_go
-
-        elif trip_type == 'Aller Retour':
-            reserved_seats_go = reservations.aggregate(Sum('seats_reserved_go'))['seats_reserved_go__sum'] or 0
-            reserved_seats_back = reservations.aggregate(Sum('seats_reserved_back'))['seats_reserved_back__sum'] or 0
-
-            available_seats_go = self.seat_go - reserved_seats_go
-            available_seats_back = self.seat_back - reserved_seats_back if self.seat_back is not None else 0
-
-            return min(available_seats_go, available_seats_back)
 
 
 class Reservation(models.Model):

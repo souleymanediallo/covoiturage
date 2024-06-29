@@ -62,3 +62,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //
 
+$(document).ready(function() {
+  $('#afficherNumero').click(function() {
+    // Récupérer le numéro de téléphone réel depuis l'attribut data-phone
+    var numeroReel = $(this).data('phone');
+
+    // Remplacer le contenu du bouton par le vrai numéro
+    $(this).text(numeroReel);
+  });
+});
