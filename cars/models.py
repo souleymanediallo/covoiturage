@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.urls import reverse
 import uuid
 from .brand import CAR_BRAND, COLOR_CHOICES
 
@@ -15,3 +16,12 @@ class Car(models.Model):
 
     def __str__(self):
         return f"{self.brand} {self.model} {self.year}"
+
+    def get_absolute_url(self):
+        return reverse("car_detail", kwargs={"pk": self.pk})
+
+    def get_absolute_url_update(self):
+        return reverse("car_update", kwargs={"pk": self.pk})
+
+    def get_absolute_url_delete(self):
+        return reverse("car_delete", kwargs={"pk": self.pk})

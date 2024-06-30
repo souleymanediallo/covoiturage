@@ -57,9 +57,6 @@ def passager(request):
     return render(request, 'pages/passager.html')
 
 
-def contact(request):
-    return render(request, 'pages/contact.html')
-
 
 def faq(request):
     return render(request, 'pages/aide.html')

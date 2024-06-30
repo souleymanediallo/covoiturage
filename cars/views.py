@@ -54,7 +54,3 @@ class CarDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         car = self.get_object()
         return self.request.user == car.owner
-
-
-
-
