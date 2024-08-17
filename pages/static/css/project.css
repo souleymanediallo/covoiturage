@@ -1,4 +1,8 @@
 /* These styles are generated from project.scss. */
+btn-primary, bg-primary {
+    background-color: #184736!important;
+    border-color: #039662!important;
+}
 
 .alert-debug {
   color: black;

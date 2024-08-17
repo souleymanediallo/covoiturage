@@ -30,35 +30,49 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-// Masque le prix si le status est passager
-document.addEventListener('DOMContentLoaded', function () {
-    const roleFields = document.querySelectorAll('input[name="role"]');
-    const priceField = document.getElementById('id_price');
-    const priceFieldWrapper = priceField.closest('div');
+// Masque les infos de retour si le voyage est simple
+document.addEventListener("DOMContentLoaded", function() {
+    const returnTripCheckbox = document.getElementById('id_return_trip');
+    const returnSection = document.getElementById('return_section');
 
-    // Fonction pour ajuster le champ prix en fonction du rôle sélectionné
-    function adjustPriceField() {
-        const isDriverSelected = document.querySelector('input[name="role"]:checked').value === 'Conducteur';
-        if (isDriverSelected) {
-            // Afficher le champ prix et ne pas modifier sa valeur (laisser l'utilisateur saisir)
-            priceFieldWrapper.style.display = 'block';
+    // Masquer la section de retour par défaut
+    returnSection.style.display = 'none';
+
+    // Ajouter un événement de changement au checkbox
+    returnTripCheckbox.addEventListener('change', function() {
+        if (this.checked) {
+            // Si coché, afficher la section de retour
+            returnSection.style.display = 'block';
         } else {
-            // Masquer le champ prix et le définir à 0
-            priceFieldWrapper.style.display = 'none';
-            priceField.value = 0;
+            // Si décoché, masquer la section de retour
+            returnSection.style.display = 'none';
         }
-    }
+    });
+});
 
-    // Écouter les changements sur les champs de rôle
-    roleFields.forEach(function (input) {
-        input.addEventListener('change', function () {
-            adjustPriceField();
-        });
+// Masquer les jours de la semaine
+document.addEventListener("DOMContentLoaded", function() {
+    const regularRadio = document.getElementById('id_trip_type_0'); // assuming 'Régulier' is the first radio button
+    const punctualRadio = document.getElementById('id_trip_type_1'); // assuming 'Ponctuel' is the second radio button
+    const weekdaysSection = document.getElementById('weekdays_section');
+
+    // Masquer la section des jours par défaut
+    weekdaysSection.style.display = 'none';
+
+    // Ajouter des écouteurs d'événements pour afficher/masquer la section des jours
+    regularRadio.addEventListener('change', function() {
+        if (this.checked) {
+            weekdaysSection.style.display = 'block';
+        }
     });
 
-    // Initialiser le champ prix lors du chargement de la page
-    adjustPriceField();
+    punctualRadio.addEventListener('change', function() {
+        if (this.checked) {
+            weekdaysSection.style.display = 'none';
+        }
+    });
 });
+
 
 //
 

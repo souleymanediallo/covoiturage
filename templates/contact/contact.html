@@ -14,11 +14,11 @@
                         <form class="form-validate g-4" method="POST">
                             {% csrf_token %}
                             <div class="form-group mb-3">
-                                <label class="form-label" for="name"> Prénom</label>
+                                <label class="form-label" for="name">Prénom*</label>
                                 <input class="form-control" name="name" id="name" type="text" placeholder="Prénom" autocomplete="off" required data-msg="Saisir votre prénom">
                             </div>
                             <div class="form-group mb-3">
-                                <label class="form-label" for="email"> Email</label>
+                                <label class="form-label" for="email">Email*</label>
                                 <input class="form-control" name="email" id="email" type="email" placeholder="Adresse email" autocomplete="off" required data-msg="Saisir votre email">
                             </div>
                             <div class="form-group mb-3">

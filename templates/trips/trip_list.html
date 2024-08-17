@@ -32,7 +32,7 @@ Flight list START -->
                         <div class="text-center">
                             <!-- Title -->
                             <div class="ms-2-">
-                                <h6 class="card-title mb-0">{{ trip.start_date }} à {{ trip.start_time }}</h6>
+                                <h6 class="card-title mb-0">{{ trip.start_date|date:"l d F Y"|capfirst }} à {{ trip.start_time }}</h6>
                             </div>
                         </div>
 

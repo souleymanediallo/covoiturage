@@ -11,21 +11,52 @@
                         <!-- Card header -->
 
                         <div class="card-header bg-light rounded-0 text-center">
-                            {% if trip.status == 'Aller-Simple' %}
-                            <h5>{{ trip.start_date }} à {{ trip.start_time }} </h5>
-                            {% else %}
-                            <h4>Trajet Aller Retour</h4>
-                            {% endif %}
+                            <h4>Covoiturage</h4>
                         </div>
 
                         <!-- Card body START -->
                         <div class="card-body">
-                            <!-- Title -->
+                            {% if trip.trip_type == 'one_time' %}
+                            <!-- one_time -->
                             <div class="p-3 bg-light rounded-2 d-sm-flex justify-content-sm-between align-items-center mb-4">
-                                <!-- Airline Name -->
                                 <h6 class="mb-0">{{ trip.start_city }} <i class="bi bi-arrow-right mx-2"></i></span> {{ trip.end_city }}</h6>
+                                <h6 class="fw-normal mb-0">{{ trip.start_date|date:"l d F Y"|capfirst }} à {{ trip.start_time }}</h6>
                                 <h6 class="fw-normal mb-0">{{ trip.seat_go }} Places</h6>
                             </div>
+                            {% if trip.return_trip %}
+                            <div class="p-3 bg-light rounded-2 d-sm-flex justify-content-sm-between align-items-center mb-4">
+                                <!-- Airline Name -->
+                                <h6 class="mb-0">{{ trip.end_city }} <i class="bi bi-arrow-right mx-2"></i></span> {{ trip.start_city  }}</h6>
+                                <h6 class="fw-normal mb-0">{{ trip.return_date|date:"l d F Y"|capfirst }} à {{ trip.return_time }}</h6>
+                                <h6 class="fw-normal mb-0">{{ trip.seat_go }} Places</h6>
+                            </div>
+                            {% endif %}
+                            <!-- one_time -->
+                            {% else %}
+                             <!-- regular -->
+                            <div class="p-3 bg-light rounded-2 d-sm-flex justify-content-sm-between align-items-center mb-4">
+                                <h6 class="mb-0">{{ trip.start_city }} <i class="bi bi-arrow-right mx-2"></i></span> {{ trip.end_city }}</h6>
+                                <h6 class="fw-normal mb-0">Départ à {{ trip.start_time }}</h6>
+                                <h6 class="fw-normal mb-0">{{ trip.seat_go }} Places</h6>
+                            </div>
+                            {% if trip.return_trip %}
+                            <div class="p-3 bg-light rounded-2 d-sm-flex justify-content-sm-between align-items-center mb-4">
+                                <!-- Airline Name -->
+                                <h6 class="mb-0">{{ trip.end_city }} <i class="bi bi-arrow-right mx-2"></i></span> {{ trip.start_city  }}</h6>
+                                <h6 class="fw-normal mb-0">Départ à {{ trip.return_time }}</h6>
+                                <h6 class="fw-normal mb-0">{{ trip.seat_go }} Places</h6>
+                            </div>
+                            {% endif %}
+                            <!-- weekdays  -->
+                            <div class="p-3 bg-light rounded-2 d-sm-flex justify-content-sm-between align-items-center mb-4">
+                                <h6 class="mb-0">Les jours de mon trajet </h6>
+                                <h6 class="fw-normal mb-0">{{ trip.weekdays|join:", "|capfirst }}</h6>
+                            </div>
+                            <!-- weekdays -->
+                            {% endif %}
+
+
+
 
                             <!-- Ticket item START -->
                             <div class="row g-4">

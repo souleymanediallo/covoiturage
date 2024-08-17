@@ -56,7 +56,7 @@
                                     </div>
                                     <!-- Email -->
                                     <div class="col-md-6">
-                                        <label class="form-label">Heure</label>
+                                        <label class="form-label">Heure Départ</label>
                                         {{ form.start_time }}
                                     </div>
                                     <!-- Contact number -->
@@ -64,6 +64,32 @@
                             </div>
                         </div>
                         <!-- Owner Detail END -->
+                        <div class="row mt-3 justify-content-center">
+                            <div class="col-md-4">
+                                <div class="form-check form-switch form-check-md d-flex justify-content-between mb-4">
+								<label class="form-check-label ps-0 pe-4" for="id_return_trip">Ajouter un retour ? </label>
+                                    {{ form.return_trip }}
+							</div>
+                            </div>
+                        </div>
+                         <!-- Owner Detail START -->
+                        <div id="return_section" style="display: none" class="card border border-radius-0 bg-light rounded-2">
+                            <!-- Card body -->
+                            <div class="card-body">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Date Retour</label>
+                                        {{ form.return_date }}
+                                    </div>
+                                    <!-- Email -->
+                                    <div class="col-md-6">
+                                        <label class="form-label">Heure Retour</label>
+                                        {{ form.return_time }}
+                                    </div>
+                                    <!-- Contact number -->
+                                </div>
+                            </div>
+                        </div>
                         <!-- Owner Detail START -->
                         <div class="card border rounded-2 border-radius-0 bg-light">
                             <!-- Card body -->
@@ -96,8 +122,44 @@
                                     <!-- Address -->
                         </div>
                         <!-- Owner Detail END -->
+                        <!-- Owner Detail END -->
+                        <div class="row mt-3 justify-content-center">
+                            <div class="col-md-8">
+                                <label class="form-label">Quel est votre type de trajet <span class="text-danger">*</span></label>
+                                        {% for trajet in form.trip_type %}
+									<div class="d-flex gap-4">
+										<div class="form-check radio-bg-light">
+                                            {{ trajet }}
+										</div>
+                                        {% endfor %}
+									</div>
+							</div>
+
+                        </div>
+
                          <!-- Owner Detail START -->
-                        <div class="card border rounded-2 bg-light">
+                        <div class="card border rounded-2 bg-light mb-3" id="weekdays_section">
+                            <!-- Card body -->
+                            <div class="card-body">
+                                <div class="row g-3">
+                                    <!-- Address -->
+                                    <div class="col-12">
+                                        {% for day in form.weekdays %}
+                                            {% if day.choice_label != '---------' %}
+                                                <div class="form-check form-check-inline">
+                                                    {{ day.tag }}
+                                                    <label class="form-check-label">{{ day.choice_label }}</label>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Owner Detail END -->
+
+                         <!-- Owner Detail START -->
+                        <div class="card border rounded-2 bg-light mt-3">
                             <!-- Card body -->
                             <div class="card-body">
                                 <div class="row g-3">

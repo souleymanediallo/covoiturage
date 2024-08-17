@@ -92,6 +92,10 @@ class TripDetailView(DetailView):
     template_name = 'trips/trip_detail.html'
     context_object_name = 'trip'
 
+    def get_object(self, queryset=None):
+        short_uuid = self.kwargs.get('short_uuid')
+        return get_object_or_404(Trip, id__startswith=short_uuid)
+
 
 class TripUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Trip
@@ -101,6 +105,7 @@ class TripUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     template_name = 'trips/trip_form.html'
 
     def form_valid(self, form):
+        print(form.cleaned_data)
         form.instance.author = self.request.user
         return super().form_valid(form)
 
@@ -109,6 +114,11 @@ class TripUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         if self.request.user == trip.author:
             return True
         return False
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['trip'] = self.get_object()  # Ajoutez l'objet trip au contexte
+        return context
 
 
 class TripDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
