@@ -61,9 +61,20 @@ class TripForm(forms.ModelForm):
 
         if self.instance and self.instance.pk:
             self.fields['start_date'].initial = self.instance.start_date
-            self.fields['start_time'].initial = self.instance.start_time
-            self.fields['return_date'].initial = self.instance.return_date
-            self.fields['return_time'].initial = self.instance.return_time
+
+            # Vérifiez si l'heure existe avant d'essayer de la formater
+            if self.instance.start_time:
+                self.fields['start_time'].initial = self.instance.start_time.strftime('%H:%M:%S')
+            else:
+                self.fields['start_time'].initial = ''  # ou une autre valeur par défaut
+
+            if self.instance.return_date:
+                self.fields['return_date'].initial = self.instance.return_date
+
+            if self.instance.return_time:
+                self.fields['return_time'].initial = self.instance.return_time.strftime('%H:%M:%S')
+            else:
+                self.fields['return_time'].initial = ''  # ou une autre valeur par défaut
 
         for name, field in self.fields.items():
             field.widget.attrs.update({'class': 'form-control'})
@@ -89,14 +100,12 @@ class TripForm(forms.ModelForm):
             'class': 'form-control flatpickr flatpickr-input',
             'type': 'date',
             'data-date-format': "d/m/Y",
-            'data-default-date': 'today',
         })
 
         self.fields['return_date'].widget.attrs.update({
             'class': 'form-control flatpickr flatpickr-input',
             'type': 'date',
             'data-date-format': "d/m/Y",
-            'data-default-date': 'today',
         })
 
         self.fields['seat_go'].widget.attrs.update({
