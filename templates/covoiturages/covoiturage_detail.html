@@ -16,27 +16,72 @@
 
                         <!-- Card body START -->
                         <div class="card-body">
-                            {% if trip.return_date  == None %}
+
                             <!-- Afficher uniquement l'aller -->
                             <div class="p-3 bg-light rounded-2 d-sm-flex justify-content-sm-between align-items-center mb-4">
-                                <h6 class="mb-0">{{ trip.start_city }} <i class="bi bi-arrow-right mx-2"></i> {{ trip.end_city }}</h6>
-                                <h6 class="fw-normal mb-0">{{ trip.start_date|date:"l d F Y"|capfirst }} à {{ trip.start_time|time:"H\h i\m" }}</h6>
-                                <h6 class="fw-normal mb-0">{{ trip.seat_go }} Places</h6>
+                                <h6 class="mb-0">{{ covoiturage.start_city }} <i class="bi bi-arrow-right mx-2"></i> {{ covoiturage.end_city }}</h6>
+                                <h6 class="fw-normal mb-0">{{ covoiturage.seat_go }} Places</h6>
                             </div>
-                        {% else %}
+                            {% if not covoiturage.seat_back == 0 %}
                             <!-- Afficher l'aller -->
                             <div class="p-3 bg-light rounded-2 d-sm-flex justify-content-sm-between align-items-center mb-4">
-                                <h6 class="mb-0">{{ trip.start_city }} <i class="bi bi-arrow-right mx-2"></i> {{ trip.end_city }}</h6>
-                                <h6 class="fw-normal mb-0">{{ trip.start_date|date:"l d F Y"|capfirst }} à {{ trip.start_time|time:"H\h i\m" }}</h6>
-                                <h6 class="fw-normal mb-0">{{ trip.seat_go }} Places</h6>
+                                <h6 class="mb-0">{{ covoiturage.end_city }} <i class="bi bi-arrow-right mx-2"></i> {{ covoiturage.start_city }}</h6>
+                                <h6 class="fw-normal mb-0">{{ covoiturage.seat_back }} Places</h6>
                             </div>
+                            {% endif %}
                             <!-- Afficher le retour -->
                             <div class="p-3 bg-light rounded-2 d-sm-flex justify-content-sm-between align-items-center mb-4">
-                                <h6 class="mb-0">{{ trip.end_city }} <i class="bi bi-arrow-right mx-2"></i> {{ trip.start_city }}</h6>
-                                <h6 class="fw-normal mb-0">{{ trip.return_date|date:"l d F Y"|capfirst }} à {{ trip.return_time|time:"H\h i\m" }}</h6>
-                                <h6 class="fw-normal mb-0">{{ trip.seat_back }} Places</h6>
+                                 <ul>
+                                    {% if covoiturage.monday_departure and covoiturage.monday_departure|time:"H:i:s" != "00:00:00" %}
+                                        <li>Lundi, Départ à {{ covoiturage.monday_departure|time:"H\h i\m" }}</li>
+                                    {% endif %}
+                                    {% if covoiturage.tuesday_departure and covoiturage.tuesday_departure|time:"H:i:s" != "00:00:00" %}
+                                        <li>Mardi, Départ à {{ covoiturage.tuesday_departure|time:"H\h i\m" }}</li>
+                                    {% endif %}
+                                    {% if covoiturage.wednesday_departure|time:"H:i:s" != "00:00:00" %}
+        <li>Mercredi, Départ à {{ covoiturage.wednesday_departure|time:"H\h i\m" }}</li>
+    {% endif %}
+                                    {% if covoiturage.thursday_departure and covoiturage.thursday_departure|time:"H:i:s" != "00:00:00" %}
+        <li>Jeudi, Départ à {{ covoiturage.thursday_departure|time:"H\h i\m" }}</li>
+    {% endif %}
+                                    {% if covoiturage.friday_departure and covoiturage.friday_departure|time:"H:i:s" != "00:00:00" %}
+        <li>Vendredi, Départ à {{ covoiturage.friday_departure|time:"H\h i\m" }}</li>
+    {% endif %}
+                                    {% if covoiturage.saturday_departure and covoiturage.saturday_departure|time:"H:i:s" != "00:00:00" %}
+        <li>Samedi, Départ à {{ covoiturage.saturday_departure|time:"H\h i\m" }}</li>
+    {% endif %}
+                                    {% if covoiturage.sunday_departure and covoiturage.sunday_departure|time:"H:i:s" != "00:00:00" %}
+        <li>Dimanche, Départ à {{ covoiturage.sunday_departure|time:"H\h i\m" }}</li>
+    {% endif %}
+
+                                </ul>
+                                {% if not covoiturage.seat_back == 0 %}
+                                 <ul>
+                                    {% if covoiturage.monday_return and covoiturage.monday_return|time:"H:i:s" != "00:00:00" %}
+                                        <li>Lundi, Retour à {{ covoiturage.monday_return|time:"H\h i\m" }}</li>
+                                    {% endif %}
+                                    {% if covoiturage.tuesday_return and covoiturage.tuesday_return|time:"H:i:s" != "00:00:00" %}
+        <li>Mardi, Retour à {{ covoiturage.tuesday_return|time:"H\h i\m" }}</li>
+    {% endif %}
+                                    {% if covoiturage.wednesday_return and covoiturage.wednesday_return|time:"H:i:s" != "00:00:00" %}
+        <li>Mercredi, Retour à {{ covoiturage.wednesday_return|time:"H\h i\m" }}</li>
+    {% endif %}
+                                    {% if covoiturage.thursday_return and covoiturage.thursday_return|time:"H:i:s" != "00:00:00" %}
+        <li>Jeudi, Retour à {{ covoiturage.thursday_return|time:"H\h i\m" }}</li>
+    {% endif %}
+                                    {% if covoiturage.friday_return and covoiturage.friday_return|time:"H:i:s" != "00:00:00" %}
+    <li>Vendredi, Retour à {{ covoiturage.friday_return|time:"H\h i\m" }}</li>
+{% endif %}
+                                    {% if covoiturage.saturday_return and covoiturage.saturday_return|time:"H:i:s" != "00:00:00" %}
+        <li>Samedi, Retour à {{ covoiturage.saturday_return|time:"H\h i\m" }}</li>
+    {% endif %}
+                                    {% if covoiturage.sunday_return and covoiturage.sunday_return|time:"H:i:s" != "00:00:00" %}
+        <li>Dimanche, Retour à {{ covoiturage.sunday_return|time:"H\h i\m" }}</li>
+    {% endif %}
+                                </ul>
+                                {% endif %}
                             </div>
-                        {% endif %}
+
                             <!-- one_time -->
 
 
@@ -102,7 +147,7 @@
                         </div>
                         <!-- Card body END -->
                         <div class="card-footer bg-light text-center">
-                            <h5>Prix total pour 1 passager : {{ trip.price }}F</h5>
+                            <h5>Prix total pour 1 passager : {{ covoiturage.price }}F</h5>
                         </div>
 
                     </div>
@@ -129,9 +174,9 @@
                                 </div>
                             <!-- number phone -->
                                <div class="col-6 mt-3">
-                                   <p class="h5-">Voiture : {{ trip.car }}</p>
-                                   {% if trip.description %}
-                                   <p>{{ trip.description }}</p>
+                                   <p class="h5-">Voiture : {{ covoiturage.car }}</p>
+                                   {% if covoiturage.description %}
+                                   <p>{{ covoiturage.description }}</p>
                                    {% endif %}
                                </div>
                             </div>

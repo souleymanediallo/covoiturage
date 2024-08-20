@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'conversations.apps.ConversationsConfig',
     'cars.apps.CarsConfig',
     'contact.apps.ContactConfig',
+    'covoiturages.apps.CovoituragesConfig',
     'storages',
 ]
 

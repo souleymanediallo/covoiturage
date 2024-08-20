@@ -1,0 +1,121 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<main>
+
+<!-- =======================
+Search START -->
+{% include 'partials/search.html' %}
+<!-- =======================
+Search START -->
+
+<!-- =======================
+Flight list START -->
+<section class="pt-0">
+	<div class="container">
+		<div class="row">
+			<!-- Left sidebar START -->
+			{% include 'partials/sidebar-filter.html' %}
+			<!-- Left sidebar END -->
+			<!-- Main content START -->
+			<div class="col-xl-8 col-xxl-9">
+				<div class="vstack">
+
+                    <!-- simple -->
+                    {% for trip in covoiturages %}
+                <!-- Card item START -->
+                <a href="{{ trip.get_absolute_url }}" class="text-success">
+                <div class="card border rounded-2 mb-3 shadow">
+                    <!-- Card header -->
+                    <div class="bg-light py-3 rounded-top card-header border-bottom d-md-flex justify-content-md-between align-items-center">
+                        <!-- Icon and Title -->
+                        <div class="text-center">
+                            <!-- Title -->
+                            <div class="ms-2-">
+                                <h6 class="card-title mb-0">Trajet régulier</h6>
+                            </div>
+                        </div>
+
+                        <!-- Button -->
+                        <div class="text-center">
+                            {% if trip.price > 0 %}
+                            <h6 class="card-title mb-0">{{ trip.price }}F</h6>
+                            {% else %}
+                            <h6 class="card-title mb-0 text-success">Gratuit</h6>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                    <!-- Card body -->
+                    <div class="card-body">
+                        <!-- Card header -->
+                        <div class="d-md-flex justify-content-sm-center justify-content-md-between align-items-center">
+                        <!-- Icon and Title -->
+                        <div class="d-flex align-items-center justify-content-center mb-2">
+                                    <div class="icon-lg bg-light rounded-circle flex-shrink-0"><i
+                                            class="fa-solid fa-car"></i></div>
+                                    <!-- Title -->
+                                    <div class="ms-2">
+                                        <h6 class="card-title mb-0">{{ trip.author.first_name }}</h6>
+                                        <span>{{ trip.user_type }}</span>
+                                    </div>
+                                </div>
+
+                         <div class="text-center">
+                            <h6 class="card-title mb-0">{{ trip.start_city }} <i class="bi bi-arrow-right"></i> {{ trip.end_city }}</h6>
+                            <span>{{ trip.trip_type }}</span>
+                        </div>
+
+                        <!-- Button -->
+                        <div class="text-center">
+                            <h6 class="card-title mb-0">{{ trip.seat_go }} Places</h6>
+                            <span>Voir le détail <i class="bi bi-arrow-right me-2"></i></span>
+                        </div>
+                    </div>
+                    <!-- Card body -->
+                    </div>
+                </div>
+                </a>
+                <!-- Card item END -->
+            {% endfor %}
+                    <!-- end simple -->
+                    {% if is_paginated %}
+					<!-- Pagination START -->
+					<nav class="d-flex justify-content-center" aria-label="navigation">
+						<ul class="pagination pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
+                            {% if page_obj.has_previous %}
+							<li class="page-item mb-0"><a class="page-link" href="?page={{ page_obj.previous_page_number }}"><i class="fa-solid fa-angle-left"></i></a></li>
+                            {% else %}
+                            <li class="page-item disabled mb-0"><span class="page-link"><i class="fa-solid fa-angle-left"></i></span></li>
+                            {% endif %}
+
+                            {% for num in page_obj.paginator.page_range %}
+                                {% if page_obj.number == num %}
+							<li class="page-item mb-0 active"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+							<li class="page-item mb-0"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                                 {% endif %}
+                            {% endfor %}
+
+                            {% if page_obj.has_next %}
+							<li class="page-item mb-0"><a class="page-link" href="?page={{ page_obj.next_page_number }}"><i class="fa-solid fa-angle-right"></i></a></li>
+                            {% else %}
+                            <li class="page-item disabled mb-0"><span class="page-link"><i class="fa-solid fa-angle-right"></i></span></li>
+                            {% endif %}
+						</ul>
+					</nav>
+					<!-- Pagination END -->
+                    {% endif %}
+				</div>
+			</div>
+			<!-- Main content END -->
+
+		</div> <!-- Row END -->
+	</div>
+</section>
+<!-- =======================
+Flight list END -->
+
+</main>
+
+{% endblock %}
