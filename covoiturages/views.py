@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -46,3 +47,10 @@ class CovoiturageDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_queryset(self):
         return self.model.objects.filter(author=self.request.user)
+
+
+@login_required
+def my_covoiturage(request):
+    covoiturages = Covoiturage.objects.filter(author=request.user)
+    context = {"covoiturages": covoiturages}
+    return render(request, "covoiturages/my-covoiturage.html", context)

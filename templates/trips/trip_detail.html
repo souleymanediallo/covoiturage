@@ -16,7 +16,7 @@
 
                         <!-- Card body START -->
                         <div class="card-body">
-                            {% if trip.return_date  == None %}
+                            {% if trip.return_date  is None or trip.seat_back == 0 %}
                             <!-- Afficher uniquement l'aller -->
                             <div class="p-3 bg-light rounded-2 d-sm-flex justify-content-sm-between align-items-center mb-4">
                                 <h6 class="mb-0">{{ trip.start_city }} <i class="bi bi-arrow-right mx-2"></i> {{ trip.end_city }}</h6>
@@ -129,7 +129,13 @@
                                 </div>
                             <!-- number phone -->
                                <div class="col-6 mt-3">
-                                   <p class="h5-">Voiture : {{ trip.car }}</p>
+                                        <ul>
+                                            {% for car in trip.author.cars.all|slice:":3" %}
+                                                <li>Voiture : {{ car.brand }}, Modèle : {{ car.model }}</li>
+                                                <li>Année : ({{ car.year }}), Couleur : {{ car.color }}</li>
+                                            {% endfor %}
+                                        </ul>
+
                                    {% if trip.description %}
                                    <p>{{ trip.description }}</p>
                                    {% endif %}
@@ -144,7 +150,6 @@
 Steps END -->
 </main>
 <!-- **************** MAIN CONTENT END **************** -->
-
 
 {% endblock %}
 

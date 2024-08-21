@@ -11,7 +11,6 @@ def generate_time_choices(interval=30):
 
 
 class TripForm(forms.ModelForm):
-    start_time = forms.ChoiceField(choices=generate_time_choices(), label='Heure de départ')
     return_time = forms.ChoiceField(choices=generate_time_choices(), label="Heure de retour", required=False)
     return_trip = forms.BooleanField(label='Trajet retour', required=False)
 
@@ -50,22 +49,19 @@ class TripForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        if self.instance and self.instance.pk:
-            self.fields['start_date'].initial = self.instance.start_date
+        # Vérifiez si l'heure existe avant d'essayer de la formater
+        if self.instance.start_time:
+            self.fields['start_time'].initial = self.instance.start_time.strftime('%H:%M:%S')
+        else:
+            self.fields['start_time'].initial = ''  # ou une autre valeur par défaut
 
-            # Vérifiez si l'heure existe avant d'essayer de la formater
-            if self.instance.start_time:
-                self.fields['start_time'].initial = self.instance.start_time.strftime('%H:%M:%S')
-            else:
-                self.fields['start_time'].initial = ''  # ou une autre valeur par défaut
+        if self.instance.return_date:
+            self.fields['return_date'].initial = self.instance.return_date
 
-            if self.instance.return_date:
-                self.fields['return_date'].initial = self.instance.return_date
-
-            if self.instance.return_time:
-                self.fields['return_time'].initial = self.instance.return_time.strftime('%H:%M:%S')
-            else:
-                self.fields['return_time'].initial = ''  # ou une autre valeur par défaut
+        if self.instance.return_time:
+            self.fields['return_time'].initial = self.instance.return_time.strftime('%H:%M:%S')
+        else:
+            self.fields['return_time'].initial = ''  # ou une autre valeur par défaut
 
         for name, field in self.fields.items():
             field.widget.attrs.update({'class': 'form-control'})
@@ -114,8 +110,11 @@ class TripForm(forms.ModelForm):
         })
 
         self.fields['start_time'].widget.attrs.update({
-            'class': 'form-select js-choice',
-            'data-search-enabled': 'true',
+            'class': 'form-control flatpickr text-sm-end flatpickr-input',
+            'data-enable-time': 'true',
+            'data-no-calendar': 'true',
+            'data-date-format': 'H:i',
+            'data-time_24hr': 'true',
         })
 
         self.fields['return_time'].widget.attrs.update({
@@ -128,5 +127,17 @@ class TripForm(forms.ModelForm):
             'role': 'switch',
             'id': "id_return_trip"
         })
+
+    def clean_start_time(self):
+        start_time = self.cleaned_data.get('start_time')
+        if start_time == "00:00":
+            return self.instance.start_time  # Renvoyer l'heure actuelle si "00:00" est détecté
+        return start_time
+
+    def clean_return_time(self):
+        return_time = self.cleaned_data.get('return_time')
+        if return_time == "00:00":
+            return self.instance.return_time  # Renvoyer l'heure actuelle si "00:00" est détecté
+        return return_time
 
 

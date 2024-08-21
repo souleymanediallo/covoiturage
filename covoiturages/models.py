@@ -38,3 +38,9 @@ class Covoiturage(models.Model):
 
     def get_absolute_url(self):
         return reverse("covoiturage_detail", kwargs={"pk": self.pk})
+
+    def get_absolute_url_update(self):
+        return reverse("covoiturage_update", kwargs={"pk": self.pk})
+
+    def get_absolute_url_delete(self):
+        return reverse("covoiturage_delete", kwargs={"pk": self.pk})

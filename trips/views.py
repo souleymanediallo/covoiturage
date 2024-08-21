@@ -103,21 +103,6 @@ class TripUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     context_object_name = "form"
     success_url = reverse_lazy('dashboard')
     template_name = 'trips/trip_form.html'
-    # fields = [
-    #     'start_city',
-    #     'end_city',
-    #     'start_date',
-    #     'start_time',
-    #     'seat_go',
-    #     'price',
-    #     'description',
-    #     'return_trip',
-    #     'return_date',
-    #     'return_time',
-    #     'car',
-    #     'weekdays',
-    #     'trip_type'
-    # ]
 
     def form_valid(self, form):
         print(form.cleaned_data)

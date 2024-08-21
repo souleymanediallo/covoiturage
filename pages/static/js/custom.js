@@ -3,6 +3,21 @@ flatpickr(".flatpickr", {
     minDate: "today",
 });
 
+flatpickr("#id_start_time", {
+    enableTime: true,
+    noCalendar: true,  // Désactive l'affichage du calendrier
+    dateFormat: "H:i",  // Format d'affichage de l'heure
+    time_24hr: true  // Utilise le format 24 heures
+});
+
+flatpickr(".time-covoiturage", {
+    enableTime: true,
+    noCalendar: true,  // Désactive l'affichage du calendrier
+    dateFormat: "H:i",  // Format d'affichage de l'heure
+    time_24hr: true  // Utilise le format 24 heures
+});
+
+
 // masquer ou afficher les champs de date et d'heure de retour en fonction de l'état
 document.addEventListener('DOMContentLoaded', function () {
     const statusField = document.querySelector('input[name="status"]:checked');

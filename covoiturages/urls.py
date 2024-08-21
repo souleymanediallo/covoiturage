@@ -7,4 +7,5 @@ urlpatterns = [
     path('create/', views.CovoiturageCreateView.as_view(), name='covoiturage_create'),
     path('<uuid:pk>/update/', views.CovoiturageUpdateView.as_view(), name='covoiturage_update'),
     path('<uuid:pk>/delete/', views.CovoiturageDeleteView.as_view(), name='covoiturage_delete'),
+    path('my-covoiturage/', views.my_covoiturage, name='my_covoiturage'),
 ]

@@ -5,5 +5,5 @@ from .models import Car
 # Register your models here.
 @admin.register(Car)
 class CarAdmin(admin.ModelAdmin):
-    list_display = ['brand', 'model', 'year', 'color']
+    list_display = ['brand', 'model', 'year', 'color', 'owner']
     search_fields = ["brand", "model", "year", "color"]
