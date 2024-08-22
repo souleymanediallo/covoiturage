@@ -3,7 +3,14 @@ flatpickr(".flatpickr", {
     minDate: "today",
 });
 
-flatpickr("#id_start_time", {
+flatpickr("#id_start_time",{
+    enableTime: true,
+    noCalendar: true,  // Désactive l'affichage du calendrier
+    dateFormat: "H:i",  // Format d'affichage de l'heure
+    time_24hr: true  // Utilise le format 24 heures
+});
+
+flatpickr("#id_return_time",{
     enableTime: true,
     noCalendar: true,  // Désactive l'affichage du calendrier
     dateFormat: "H:i",  // Format d'affichage de l'heure

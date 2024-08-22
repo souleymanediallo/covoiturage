@@ -15,7 +15,7 @@ class CovoiturageListView(ListView):
     paginate_by = 5
 
 
-class CovoiturageDetailView(DetailView):
+class CovoiturageDetailView(LoginRequiredMixin, DetailView):
     model = Covoiturage
     template_name = 'covoiturages/covoiturage_detail.html'
     context_object_name = 'covoiturage'

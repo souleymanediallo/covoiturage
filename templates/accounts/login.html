@@ -19,16 +19,17 @@ Main Content START -->
         <div class="row justify-content-center align-items-center m-auto">
             <div class="col-lg-6">
                 <div class="card border">
-                    <div class="card-header mb-0">
-
+                    <div class="card-header bg-primary rounded-0 text-center">
+                        <h4 class="text-light">Connexion</h4>
                     </div>
+
                     <div class="card-body mt-0">
                         <!-- Form START -->
                         <form class="mt-4 text-start" method="POST">
                             {% csrf_token %}
                             <!-- Email -->
                             <div class="mb-3">
-                               <label class="form-label">Enter email id</label>
+                               <label class="form-label">Email</label>
 										<input type="email" class="form-control" name="email">
                             </div>
                             <!-- Password -->
@@ -42,11 +43,14 @@ Main Content START -->
                             </div>
                             <!-- Button -->
                             <div>
-                                <button type="submit" class="btn btn-primary mb-0 w-100">Register</button>
+                                <button type="submit" class="btn btn-dark mb-0 w-100 rounded-0">Valider</button>
                             </div>
                         </form>
                         <!-- Form END -->
                     </div>
+                    <div class="card-footer bg-primary text-center rounded-0">
+                            <p class="mb-0 text-light"> <span class="text">Vous n'avez pas de compte ? <a href="{% url 'register' %}" class="text-light">Inscription</a></span> </p>
+                        </div>
                 </div>
             </div>
         </div>

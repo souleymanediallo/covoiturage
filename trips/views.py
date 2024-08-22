@@ -87,7 +87,7 @@ class TripCreateView(LoginRequiredMixin, CreateView):
         return super().form_invalid(form)
 
 
-class TripDetailView(DetailView):
+class TripDetailView(LoginRequiredMixin, DetailView):
     model = Trip
     template_name = 'trips/trip_detail.html'
     context_object_name = 'trip'

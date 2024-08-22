@@ -11,14 +11,6 @@ def generate_time_choices(interval=30):
 
 
 class CovoiturageForm(forms.ModelForm):
-
-    monday_return = forms.ChoiceField(choices=generate_time_choices(), label="Heure de retour", required=False)
-    tuesday_return = forms.ChoiceField(choices=generate_time_choices(), label="Heure de retour", required=False)
-    wednesday_return = forms.ChoiceField(choices=generate_time_choices(), label="Heure de retour", required=False)
-    thursday_return = forms.ChoiceField(choices=generate_time_choices(), label="Heure de retour", required=False)
-    friday_return = forms.ChoiceField(choices=generate_time_choices(), label="Heure de retour", required=False)
-    saturday_return = forms.ChoiceField(choices=generate_time_choices(), label="Heure de retour", required=False)
-    sunday_return = forms.ChoiceField(choices=generate_time_choices(), label="Heure de retour", required=False)
     return_trip = forms.BooleanField(label='Trajet retour', required=False)
 
     class Meta:
@@ -100,8 +92,12 @@ class CovoiturageForm(forms.ModelForm):
                 'data-time_24hr': 'true',
             })
 
+        for day in weeks:
             self.fields[f'{day}_return'].widget.attrs.update({
-                'class': 'form-select js-choice',
-                'data-search-enabled': 'true',
+                'class': 'form-control flatpickr text-sm-end flatpickr-input time-covoiturage',
+                'data-enable-time': 'true',
+                'data-no-calendar': 'true',
+                'data-date-format': 'H:i',
+                'data-time_24hr': 'true',
             })
 

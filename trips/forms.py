@@ -11,7 +11,6 @@ def generate_time_choices(interval=30):
 
 
 class TripForm(forms.ModelForm):
-    return_time = forms.ChoiceField(choices=generate_time_choices(), label="Heure de retour", required=False)
     return_trip = forms.BooleanField(label='Trajet retour', required=False)
 
     class Meta:
@@ -118,8 +117,11 @@ class TripForm(forms.ModelForm):
         })
 
         self.fields['return_time'].widget.attrs.update({
-            'class': 'form-select js-choice',
-            'data-search-enabled': 'true',
+            'class': 'form-control flatpickr text-sm-end flatpickr-input',
+            'data-enable-time': 'true',
+            'data-no-calendar': 'true',
+            'data-date-format': 'H:i',
+            'data-time_24hr': 'true',
         })
 
         self.fields['return_trip'].widget.attrs.update({

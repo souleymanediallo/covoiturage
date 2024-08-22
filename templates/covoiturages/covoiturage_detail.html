@@ -36,7 +36,7 @@
                                     {% if covoiturage.tuesday_departure and covoiturage.tuesday_departure|time:"H:i:s" != "00:00:00" %}
                                         <li>Mardi, Départ à {{ covoiturage.tuesday_departure|time:"H\h i\m" }}</li>
                                     {% endif %}
-                                    {% if covoiturage.wednesday_departure|time:"H:i:s" != "00:00:00" %}
+                                    {% if covoiturage.wednesday_departure and covoiturage.wednesday_departure|time:"H:i:s" != "00:00:00" %}
         <li>Mercredi, Départ à {{ covoiturage.wednesday_departure|time:"H\h i\m" }}</li>
     {% endif %}
                                     {% if covoiturage.thursday_departure and covoiturage.thursday_departure|time:"H:i:s" != "00:00:00" %}
