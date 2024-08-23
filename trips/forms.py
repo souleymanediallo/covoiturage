@@ -15,7 +15,7 @@ class TripForm(forms.ModelForm):
 
     class Meta:
         model = Trip
-        fields = ['start_city', 'end_city', 'start_date',
+        fields = ['start_city', 'end_city', 'start_date', 'cabin_baggage', 'checked_baggage',
                   'start_time', 'return_trip', 'return_date', 'return_time',
                   'seat_go', 'seat_back', 'price', 'description']
         labels = {
@@ -26,6 +26,8 @@ class TripForm(forms.ModelForm):
             'seat_go': 'Nombre de places aller',
             'seat_back': 'Nombre de places retour',
             'price': 'Prix',
+            'cabin_baggage': 'Bagage 12 kilos',
+            'checked_baggage': 'Bagage 23 kilos',
             'description': "Information supplémentaire",
             'return_trip': 'Trajet retour',
             'return_date': 'Date de retour',
@@ -38,6 +40,8 @@ class TripForm(forms.ModelForm):
             "seat_go": forms.Select(choices=[(i, i) for i in range(1, 10)], attrs={'class': 'form-control'}),
             "seat_back": forms.Select(choices=[(i, i) for i in range(0, 10)], attrs={'class': 'form-control'}),
             "price": forms.Select(choices=[(i, i) for i in range(500, 50000, 500)], attrs={'class': 'form-control'}),
+            "cabin_baggage": forms.Select(choices=[(i, i) for i in range(0, 3000, 300)], attrs={'class': 'form-control'}),
+            "checked_baggage": forms.Select(choices=[(i, i) for i in range(0, 6000, 400)], attrs={'class': 'form-control'}),
 
             "return_trip": forms.CheckboxInput(attrs={
                 'class': 'form-check-input flex-shrink-0',
@@ -106,6 +110,14 @@ class TripForm(forms.ModelForm):
             'data-search-enabled': 'true',
             'value': 500,
             'default': 500,
+        })
+
+        self.fields['cabin_baggage'].widget.attrs.update({
+            'class': 'form-select js-choice',
+        })
+
+        self.fields['checked_baggage'].widget.attrs.update({
+            'class': 'form-select js-choice',
         })
 
         self.fields['start_time'].widget.attrs.update({

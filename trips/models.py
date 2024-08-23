@@ -20,6 +20,8 @@ class Trip(models.Model):
     seat_go = models.PositiveIntegerField()
     seat_back = models.PositiveIntegerField(default=0, blank=True, null=True)
     price = models.PositiveIntegerField()
+    cabin_baggage = models.PositiveIntegerField(default=0, blank=True, null=True)
+    checked_baggage = models.PositiveIntegerField(default=0, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     return_trip = models.BooleanField(default=False)
     return_date = models.DateField(blank=True, null=True)

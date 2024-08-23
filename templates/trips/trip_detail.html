@@ -38,6 +38,16 @@
                             </div>
                         {% endif %}
                             <!-- one_time -->
+                            {% if trip.cabin_baggage != 0 or trip.cabin_baggage != 0%}
+                            <div class="p-3 bg-light rounded-2 d-sm-flex justify-content-sm-between align-items-center mb-4">
+                                {% if trip.cabin_baggage != 0 %}
+                                <h6 class="mb-0">1 bagage de 12 kilos : {{ trip.cabin_baggage }} FCFA</h6>
+                                {% endif %}
+                                {% if trip.cabin_baggage != 0%}
+                                <h6 class="mb-0">1 bagage de 23 kilos : {{ trip.checked_baggage }} FCFA</h6>
+                                {% endif %}
+                            </div>
+                            {% endif %}
 
 
 
@@ -102,7 +112,7 @@
                         </div>
                         <!-- Card body END -->
                         <div class="card-footer bg-light text-center">
-                            <h5>Prix total pour 1 passager : {{ trip.price }}F</h5>
+                            <h5>Prix total pour 1 passager : {{ trip.price }} FCFA</h5>
                         </div>
 
                     </div>

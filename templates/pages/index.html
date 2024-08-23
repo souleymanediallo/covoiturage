@@ -117,8 +117,10 @@ Search START -->
             <div class="row">
                 <div class="col-md-6">
                     <div class="card  border rounded-0 h-100">
+						<div class="card-header bg-primary rounded-0">
+							<h3 class="text-light fw-bold text-uppercase">Devenez Conducteur</h3>
+						</div>
                         <div class="card-body">
-                            <h3 class="text-success fw-bold text-uppercase">Devenez Conducteur</h3>
                             <div class="passager">
                                 <div class="position-relative d-flex align-items-center py-2 my-2">
 					<div class="icon-lg bg-light border rounded-circle flex-shrink-0">
@@ -151,13 +153,22 @@ Search START -->
 					</div>
 				</div>
                             </div>
+							<a href="{% url 'passager' %}" class="btn btn-dark rounded-0">En savoir plus</a>
+							{% if user.is_authenticated %}
+							<a href="{% url 'passager' %}" class="btn btn-dark rounded-0">Publier un trajet</a>
+							{% else %}
+							<a href="{% url 'register' %}" class="btn btn-dark rounded-0">Créer un compte</a>
+							{% endif %}
                         </div>
+
                     </div>
                 </div>
                  <div class="col-md-6">
                     <div class="card border rounded-0">
+						<div class="card-header bg-primary rounded-0">
+							<h3 class="text-light fw-bold text-uppercase">Devenez Passager</h3>
+						</div>
                         <div class="card-body h-100">
-                            <h3 class="text-uppercase fw-bold text-success">Devenez Passager</h3>
                             <div class="conducteur">
                                 <div class="position-relative d-flex align-items-center py-2 my-2">
 					<div class="icon-lg bg-light border rounded-circle flex-shrink-0">
@@ -187,6 +198,12 @@ Search START -->
 					</div>
 				</div>
                             </div>
+							<a href="{% url 'passager' %}" class="btn btn-dark rounded-0">En savoir plus</a>
+							{% if user.is_authenticated %}
+							<a href="{% url 'passager' %}" class="btn btn-dark rounded-0">Voir les trajets</a>
+							{% else %}
+							<a href="{% url 'register' %}" class="btn btn-dark rounded-0">Créer un compte</a>
+							{% endif %}
                     </div>
                 </div>
             </div>
