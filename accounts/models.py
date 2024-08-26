@@ -74,7 +74,7 @@ class CustomUser(AbstractBaseUser):
 
 class Profile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    image = models.ImageField(default="images/user.png", upload_to="photos/%Y/", blank=True, null=True)
+    image = models.ImageField(default="profile_pics/user.png", upload_to="profile_pics/%Y/", blank=True, null=True)
     description = models.TextField(max_length=300, blank=True, null=True)
     active = models.BooleanField(default=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
