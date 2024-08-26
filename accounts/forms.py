@@ -21,11 +21,21 @@ class CustomUserCreationForm(UserCreationForm):
         "user_type": forms.RadioSelect(),
         }
 
+    placeholders = {
+        'user_type': 'Vous êtes ?',
+        'email': 'Adresse email',
+        'first_name': 'Saisir votre prénom',
+        'last_name': 'Saisir votre nom',
+        'phone_number': '+221771234567',
+        'password1': 'Mot de passe, 8 caractères minimum',
+        'password2': 'Confirmez votre mot de passe',
+    }
+
     def __init__(self, *args, **kwargs):
         super(CustomUserCreationForm, self).__init__(*args, **kwargs)
 
         for name, field in self.fields.items():
-            field.widget.attrs.update({'class': 'form-control'})
+            field.widget.attrs.update({'class': 'form-control', 'placeholder': self.placeholders[name]})
 
         self.fields['user_type'].widget.attrs.update({
             'class': 'form-check-input'
@@ -45,6 +55,7 @@ class CustomUserUpdateForm(forms.ModelForm):
         }
         widgets = {
             "user_type": forms.RadioSelect(),
+
         }
 
     def __init__(self, *args, **kwargs):

@@ -15,6 +15,9 @@ class CarListView(ListView):
     ordering = ['brand', 'model']
     paginate_by = 5
 
+    def get_queryset(self):
+        return Car.objects.filter(owner=self.request.user)
+
 
 class CarCreateView(LoginRequiredMixin, CreateView):
     model = Car

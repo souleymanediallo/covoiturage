@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import Http404
 from django.views.generic import TemplateView
@@ -64,3 +65,8 @@ def faq(request):
 
 def page_404(request):
     raise Http404("Page non trouvée")
+
+
+@login_required
+def published_trips(request):
+    return render(request, 'pages/publier-trajet.html')

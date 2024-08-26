@@ -6,6 +6,7 @@ from django.db.models import Sum
 from cars.models import Car
 from django.urls import reverse
 from .city import CITY_SENEGAL
+from django.utils.text import slugify
 from django.core.exceptions import ValidationError
 from django.contrib.postgres.fields import ArrayField
 
@@ -44,13 +45,23 @@ class Trip(models.Model):
         return cls.objects.values('start_city').annotate(count=Count('start_city')).order_by('-count')[:5]
 
     def get_absolute_url(self):
-        return reverse("trip-detail", kwargs={"short_uuid": str(self.id)[:8]})
+        id_abbr = str(self.id)[:8]
+        start_city_slug = slugify(self.start_city)
+        end_city_slug = slugify(self.end_city)
+        return reverse("trip-detail",
+                       kwargs={"start_city_slug": start_city_slug, "end_city_slug": end_city_slug, "id_abbr": id_abbr})
 
     def get_absolute_url_update(self):
         return reverse("trip-update", kwargs={"pk": self.pk})
 
     def get_absolute_url_delete(self):
         return reverse("trip-delete", kwargs={"pk": self.pk})
+
+    def get_custom_url(self):
+        id_abbr = str(self.id)[:8]
+        start_city_slug = slugify(self.start_city)
+        end_city_slug = slugify(self.end_city)
+        return reverse("trip-detail", kwargs={"start_city_slug": start_city_slug, "end_city_slug": end_city_slug, "id_abbr": id_abbr})
 
 
 

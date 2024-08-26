@@ -92,9 +92,13 @@ class TripDetailView(LoginRequiredMixin, DetailView):
     template_name = 'trips/trip_detail.html'
     context_object_name = 'trip'
 
-    def get_object(self, queryset=None):
-        short_uuid = self.kwargs.get('short_uuid')
-        return get_object_or_404(Trip, id__startswith=short_uuid)
+    def get_object(self):
+        # Récupérer l'ID abrégé à partir de l'URL
+        id_abbr = self.kwargs.get("id_abbr")
+
+        # Rechercher l'objet Trip uniquement basé sur l'ID abrégé
+        trip = get_object_or_404(Trip, id__startswith=id_abbr)
+        return trip
 
 
 class TripUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
