@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'contact.apps.ContactConfig',
     'covoiturages.apps.CovoituragesConfig',
     'storages',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -148,3 +149,5 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

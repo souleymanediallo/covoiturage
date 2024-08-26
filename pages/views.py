@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import Http404
 from django.views.generic import TemplateView
 from trips.models import Trip
 from datetime import datetime
@@ -57,6 +58,9 @@ def passager(request):
     return render(request, 'pages/passager.html')
 
 
-
 def faq(request):
     return render(request, 'pages/aide.html')
+
+
+def page_404(request):
+    raise Http404("Page non trouvée")
