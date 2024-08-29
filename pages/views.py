@@ -5,7 +5,7 @@ from django.views.generic import TemplateView
 from trips.models import Trip
 from datetime import datetime
 from trips.city import CITY_SENEGAL
-
+from covoiturages.models import Covoiturage
 
 today_current = datetime.today().strftime('%Y-%m-%d')
 time_trip = datetime.now().strftime('%H:%M')
@@ -18,8 +18,9 @@ class HomePageView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['trips'] = Trip.objects.filter(start_date__gte=today_current)
+        context['trips'] = Trip.objects.filter(start_date__gte=today_current)[0:3]
         context['city_senegal'] = CITY_SENEGAL
+        context['covoiturages'] = Covoiturage.objects.all()[0:3]
         return context
 
 

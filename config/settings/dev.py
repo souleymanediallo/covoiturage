@@ -32,8 +32,10 @@ INSTALLED_APPS = [
     'cars.apps.CarsConfig',
     'contact.apps.ContactConfig',
     'covoiturages.apps.CovoituragesConfig',
+    'cities.apps.CitiesConfig',
     'storages',
     'crispy_forms',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [

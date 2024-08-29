@@ -1,0 +1,27 @@
+<section class="bg-light">
+	<div class="container">
+		<!-- Title -->
+		<div class="row mb-4">
+			<div class="col-12 text-center">
+				<h2 class="mb-0">Covoiturage Partout au Sénégal</h2>
+			</div>
+		</div>
+
+		<div class="row g-4 g-md-5">
+			<!-- Card item START -->
+            {% for city in cities %}
+			<div class="col-6 col-sm-4 col-lg-3 col-xl-2">
+				<div class="card bg-transparent text-center p-1 h-100">
+					<!-- Image -->
+					<div class="card-body p-0 pt-3">
+						<h6 class="card-title"><a href="{{ city.get_absolute_url }}" class="stretched-link">{{ city.name }}</a></h6>
+					</div>
+				</div>
+			</div>
+            {% endfor %}
+			<!-- Card item END -->
+
+
+		</div> <!-- Row END -->
+	</div>
+</section>

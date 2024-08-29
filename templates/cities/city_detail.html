@@ -4,145 +4,36 @@
 {% load city_tags %}
 
 {% block content %}
+
 <main>
+    <section class="pt-4 pt-md-5 pb-0 py-5 bg-primary text-light">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-12 mx-auto text-center">
+                    <h1 class="fs-2 mb-2 text-light">Covoiturage vers {{ city.name }}, Sénégal</h1>
+                    <p class="mb-0"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+	<section class="pt-4 pt-md-5 pb-0 text-dark">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mx-auto">
+
+						{% if city.description %}
+						{{ city.description|safe }}
+						{% else %}
+						Découvrez les offres de covoiturage pour voyager vers {{ city.name }} et ses environs.
+						{% endif %}
+
+                </div>
+            </div>
+        </div>
+    </section>
 <!-- =======================
 Search START -->
-{% include 'partials/search.html' %}
-
 <!-- ======================= Search START ================== -->
-    <section class="pt-3">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-12">
-                <div class="heading-title text-center">
-                    <h1 class="h3">Covoiturage au Sénégal</h1>
-                    <p>Les derniers trajets</p>
-                </div>
-            </div>
-        </div>
-		<div class="row justify-content-center">
-            <div class="col-md-9">
-                 {% for trip in covoiturages %}
-                <!-- Card item START -->
-                <a href="{{ trip.get_absolute_url }}" class="text-success">
-                <div class="card border rounded-2 mb-3 shadow">
-                    <!-- Card header -->
-                    <div class="bg-light py-3 rounded-top card-header border-bottom d-md-flex justify-content-md-between align-items-center">
-                        <!-- Icon and Title -->
-                        <div class="text-center">
-                            <!-- Title -->
-                            <div class="ms-2-">
-                                <h6 class="card-title mb-0">Trajet régulier</h6>
-                            </div>
-                        </div>
-
-                        <!-- Button -->
-                        <div class="text-center">
-                            {% if trip.price > 0 %}
-                            <h6 class="card-title mb-0">{{ trip.price }}F</h6>
-                            {% else %}
-                            <h6 class="card-title mb-0 text-success">Gratuit</h6>
-                            {% endif %}
-
-                        </div>
-                    </div>
-                    <!-- Card body -->
-                    <div class="card-body">
-                        <!-- Card header -->
-                        <div class="d-md-flex justify-content-sm-center justify-content-md-between align-items-center">
-                        <!-- Icon and Title -->
-                        <div class="d-flex align-items-center justify-content-center mb-2">
-                                    <div class="icon-lg bg-light rounded-circle flex-shrink-0"><i
-                                            class="fa-solid fa-car"></i></div>
-                                    <!-- Title -->
-                                    <div class="ms-2">
-                                        <h6 class="card-title mb-0">{{ trip.author.first_name }}</h6>
-                                        <span>{{ trip.user_type }}</span>
-                                    </div>
-                                </div>
-
-                         <div class="text-center">
-                            <h6 class="card-title mb-0">{{ trip.start_city }} <i class="bi bi-arrow-right"></i> {{ trip.end_city }}</h6>
-                            <span>{{ trip.trip_type }}</span>
-                        </div>
-
-                        <!-- Button -->
-                        <div class="text-center">
-                            <h6 class="card-title mb-0">{{ trip.seat_go }} Places</h6>
-                            <span>Voir le détail <i class="bi bi-arrow-right me-2"></i></span>
-                        </div>
-                    </div>
-                    <!-- Card body -->
-                    </div>
-                </div>
-                </a>
-                <!-- Card item END -->
-            {% endfor %}
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-9">
-                {% for trip in trips %}
-                <!-- Card item START -->
-                <a href="{{ trip.get_custom_url }}" class="text-success">
-                <div class="card border rounded-2 mb-3 shadow">
-                    <!-- Card header -->
-                    <div class="bg-light py-3 rounded-top card-header border-bottom d-md-flex justify-content-md-between align-items-center">
-                        <!-- Icon and Title -->
-                        <div class="text-center">
-                            <!-- Title -->
-                            <div class="ms-2-">
-                                <h6 class="card-title mb-0">{{ trip.start_date|date:"l d F Y" }} à {{ trip.start_time }}</h6>
-                            </div>
-                        </div>
-
-                        <!-- Button -->
-                        <div class="text-center">
-                            {% if trip.user_type == "Passager" %}
-                            <span> </span>
-                            {% elif trip.price > 0 %}
-                            <h6 class="card-title mb-0">{{ trip.price }}F</h6>
-                            {% else %}
-                            <h6 class="card-title mb-0 text-success">Gratuit</h6>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <!-- Card body -->
-                    <div class="card-body">
-                        <!-- Card header -->
-                        <div class="d-md-flex justify-content-sm-center justify-content-md-between align-items-center">
-                        <!-- Icon and Title -->
-                        <div class="d-flex align-items-center justify-content-center mb-2">
-                                    <div class="icon-lg bg-light rounded-circle flex-shrink-0"><i
-                                            class="fa-solid fa-car"></i></div>
-                                    <!-- Title -->
-                                    <div class="ms-2">
-                                        <h6 class="card-title mb-0">{{ trip.author.first_name }}</h6>
-                                        <span>{{ trip.user_type }}</span>
-                                    </div>
-                                </div>
-
-                         <div class="text-center">
-                            <h6 class="card-title mb-0">{{ trip.start_city }} <i class="bi bi-arrow-right"></i> {{ trip.end_city }}</h6>
-                            <span>{{ trip.trip_type }}</span>
-                        </div>
-
-                        <!-- Button -->
-                        <div class="text-center">
-                            <h6 class="card-title mb-0">{{ trip.seat_go }} Places</h6>
-                            <span>Voir le détail <i class="bi bi-arrow-right me-2"></i></span>
-                        </div>
-                    </div>
-                    <!-- Card body -->
-                    </div>
-                </div>
-                </a>
-                <!-- Card item END -->
-            {% endfor %}
-            </div>
-        </div>
-    </div>
-    </section>
     <section class="pt-0 pt-xl-5">
 		<section class="bg-light">
 			<div class="container text-center">
@@ -273,7 +164,7 @@ Search START -->
     </section>
 
 	{% show_all_cities %}
-	
+
 </main>
 {% endblock %}
 
