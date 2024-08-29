@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.http import Http404
 from django.views.generic import TemplateView
@@ -71,3 +72,15 @@ def page_404(request):
 @login_required
 def published_trips(request):
     return render(request, 'pages/publier-trajet.html')
+
+
+def robots_txt(request):
+    lines = [
+        "User-agent: *",
+        "Disallow: /admin/",
+        "Disallow: /accounts/",
+
+        "Allow: /",
+        "Sitemap: https://www.covoiturage.sn/sitemap.xml",
+    ]
+    return HttpResponse("\n".join(lines), content_type="text/plain")

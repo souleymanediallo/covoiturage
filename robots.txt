@@ -1,0 +1,17 @@
+User-agent: *
+Disallow: /*.pdf
+Disallow: /*.ppt
+Disallow: /*.doc
+Disallow: /*.xls
+Disallow: /*.txt
+Disallow: /manage
+Disallow: /static
+Disallow: /admin/
+Disallow: /search
+Disallow: /login
+Disallow: /logout
+Disallow: /register
+Disallow: /reset
+Disallow: /profile
+Disallow: /password*
+Allow: /

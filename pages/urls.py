@@ -10,4 +10,6 @@ urlpatterns = [
     path('passager/', views.passager, name='passager'),
     path('faq/', views.faq, name='faq'),
     path('publier-trajet/', views.published_trips, name='publier-trajet'),
+    path("robots.txt", views.robots_txt),
+
 ]
