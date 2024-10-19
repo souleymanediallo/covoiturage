@@ -3,6 +3,7 @@ from django.conf import settings
 import uuid
 from covoiturages.city import CITY_SENEGAL
 from django.urls import reverse
+from django.utils.text import slugify
 
 
 # Create your models here.
@@ -36,8 +37,13 @@ class Covoiturage(models.Model):
     def __str__(self):
         return f"Covoiturage régulier de {self.start_city} à {self.end_city} - {self.author}"
 
+
     def get_absolute_url(self):
-        return reverse("covoiturage_detail", kwargs={"pk": self.pk})
+        id_abbr = str(self.id)[:8]
+        start_city_slug = slugify(self.start_city)
+        end_city_slug = slugify(self.end_city)
+        return reverse("covoiturage_detail",
+                       kwargs={"start_city_slug": start_city_slug, "end_city_slug": end_city_slug, "id_abbr": id_abbr})
 
     def get_absolute_url_update(self):
         return reverse("covoiturage_update", kwargs={"pk": self.pk})

@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -19,6 +19,14 @@ class CovoiturageDetailView(DetailView):
     model = Covoiturage
     template_name = 'covoiturages/covoiturage_detail.html'
     context_object_name = 'covoiturage'
+
+    def get_object(self):
+        # Récupérer l'ID abrégé à partir de l'URL
+        id_abbr = self.kwargs.get("id_abbr")
+
+        # Rechercher l'objet Trip uniquement basé sur l'ID abrégé
+        covoiturage = get_object_or_404(Covoiturage, id__startswith=id_abbr)
+        return covoiturage
 
 
 class CovoiturageCreateView(LoginRequiredMixin, CreateView):
