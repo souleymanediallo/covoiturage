@@ -60,20 +60,6 @@ class TripCreateView(LoginRequiredMixin, CreateView):
     template_name = 'trips/trip_form.html'
     login_url = reverse_lazy('login')
 
-    def dispatch(self, request, *args, **kwargs):
-        # Premier contrôle pour l'authentification
-        if not request.user.is_authenticated:
-            messages.error(request, "Vous devez être connecté pour accéder à cette page.")
-            return redirect('login')
-
-        # Vérifications supplémentaires une fois que l'utilisateur est confirmé comme étant authentifié
-        if not Car.objects.filter(owner=request.user).exists():
-            messages.error(request, "Veuillez d'abord ajouter une voiture avant de pouvoir publier un trajet.")
-            return redirect('car_create')
-
-        # Appel de la méthode parent si toutes les vérifications sont passées
-        return super().dispatch(request, *args, **kwargs)
-
     def form_valid(self, form):
         messages.success(self.request, 'Votre trajet a été créé avec succès.')
         form.instance.author = self.request.user
@@ -108,6 +94,14 @@ class TripUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     success_url = reverse_lazy('dashboard')
     template_name = 'trips/trip_form.html'
 
+    def get_object(self):
+        # Récupérer l'ID abrégé à partir de l'URL
+        id_abbr = self.kwargs.get("id_abbr")
+
+        # Rechercher l'objet Trip uniquement basé sur l'ID abrégé
+        trip = get_object_or_404(Trip, id__startswith=id_abbr)
+        return trip
+
     def form_valid(self, form):
         print(form.cleaned_data)
         form.instance.author = self.request.user
@@ -130,12 +124,19 @@ class TripDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     success_url = reverse_lazy('dashboard')
     template_name = 'trips/trip_confirm_delete.html'
 
+    def get_object(self):
+        # Récupérer l'ID abrégé à partir de l'URL
+        id_abbr = self.kwargs.get("id_abbr")
+
+        # Rechercher l'objet Trip uniquement basé sur l'ID abrégé
+        trip = get_object_or_404(Trip, id__startswith=id_abbr)
+        return trip
+
     def test_func(self):
         trip = self.get_object()
         if self.request.user == trip.author:
             return True
         return False
-
 
 
 @login_required

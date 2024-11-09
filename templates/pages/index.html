@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-
+{% load humanize %}
 {% load static %}
 {% load city_tags %}
 
@@ -20,66 +20,6 @@ Search START -->
                 </div>
             </div>
         </div>
-		<div class="row justify-content-center">
-            <div class="col-md-9">
-                 {% for trip in covoiturages %}
-                <!-- Card item START -->
-                <a href="{{ trip.get_absolute_url }}" class="text-success">
-                <div class="card border rounded-2 mb-3 shadow">
-                    <!-- Card header -->
-                    <div class="bg-light py-3 rounded-top card-header border-bottom d-md-flex justify-content-md-between align-items-center">
-                        <!-- Icon and Title -->
-                        <div class="text-center">
-                            <!-- Title -->
-                            <div class="ms-2-">
-                                <h6 class="card-title mb-0">Trajet régulier</h6>
-                            </div>
-                        </div>
-
-                        <!-- Button -->
-                        <div class="text-center">
-                            {% if trip.price > 0 %}
-                            <h6 class="card-title mb-0">{{ trip.price }}F</h6>
-                            {% else %}
-                            <h6 class="card-title mb-0 text-success">Gratuit</h6>
-                            {% endif %}
-
-                        </div>
-                    </div>
-                    <!-- Card body -->
-                    <div class="card-body">
-                        <!-- Card header -->
-                        <div class="d-md-flex justify-content-sm-center justify-content-md-between align-items-center">
-                        <!-- Icon and Title -->
-                        <div class="d-flex align-items-center justify-content-center mb-2">
-                                    <div class="icon-lg bg-light rounded-circle flex-shrink-0"><i
-                                            class="fa-solid fa-car"></i></div>
-                                    <!-- Title -->
-                                    <div class="ms-2">
-                                        <h6 class="card-title mb-0">{{ trip.author.first_name }}</h6>
-                                        <span>{{ trip.user_type }}</span>
-                                    </div>
-                                </div>
-
-                         <div class="text-center">
-                            <h6 class="card-title mb-0">{{ trip.start_city }} <i class="bi bi-arrow-right"></i> {{ trip.end_city }}</h6>
-                            <span>{{ trip.trip_type }}</span>
-                        </div>
-
-                        <!-- Button -->
-                        <div class="text-center">
-                            <h6 class="card-title mb-0">{{ trip.seat_go }} Places</h6>
-                            <span>Voir le détail <i class="bi bi-arrow-right me-2"></i></span>
-                        </div>
-                    </div>
-                    <!-- Card body -->
-                    </div>
-                </div>
-                </a>
-                <!-- Card item END -->
-            {% endfor %}
-            </div>
-        </div>
         <div class="row justify-content-center">
             <div class="col-md-9">
                 {% for trip in trips %}
@@ -92,16 +32,14 @@ Search START -->
                         <div class="text-center">
                             <!-- Title -->
                             <div class="ms-2-">
-                                <h6 class="card-title mb-0">{{ trip.start_date|date:"l d F Y" }} à {{ trip.start_time }}</h6>
+                                <h6 class="card-title mb-0">{{ trip.start_date|date:"l d F Y"|capfirst }} à {{ trip.start_time }}</h6>
                             </div>
                         </div>
 
                         <!-- Button -->
                         <div class="text-center">
-                            {% if trip.user_type == "Passager" %}
-                            <span> </span>
-                            {% elif trip.price > 0 %}
-                            <h6 class="card-title mb-0">{{ trip.price }}F</h6>
+                            {% if trip.price > 0 %}
+                            <h6 class="card-title mb-0">{{ trip.price|intcomma }} FCFA</h6>
                             {% else %}
                             <h6 class="card-title mb-0 text-success">Gratuit</h6>
                             {% endif %}
@@ -118,13 +56,13 @@ Search START -->
                                     <!-- Title -->
                                     <div class="ms-2">
                                         <h6 class="card-title mb-0">{{ trip.author.first_name }}</h6>
-                                        <span>{{ trip.user_type }}</span>
+                                        <span>{{ trip.get_role_display }}</span>
                                     </div>
                                 </div>
 
                          <div class="text-center">
                             <h6 class="card-title mb-0">{{ trip.start_city }} <i class="bi bi-arrow-right"></i> {{ trip.end_city }}</h6>
-                            <span>{{ trip.trip_type }}</span>
+                            <span>{{ trip.get_trip_type_display }}</span>
                         </div>
 
                         <!-- Button -->
@@ -151,14 +89,14 @@ Search START -->
             <div class="col-md-4">
                 <div class="circle">1</div>
                 <h3 class="h6 text-uppercase">Proposer un trajet</h3>
-                <p>Le conducteur annonce son trajet, spécifiant les détails de l'itinéraire,
-                    comme les points de départ et d'arrivée (Dakar, Aéroport AIBD, Thies, Saly, etc.),
+                <p>Le conducteur ou le passager publie un trajet, spécifiant les détails de l'itinéraire,
+                    comme les points de départ et d'arrivée (Dakar, Aéroport AIBD, Thies, Saly, Ziguinchor etc.),
                     ainsi que les horaires prévus.</p>
             </div>
             <div class="col-md-4">
                 <div class="circle">2</div>
                 <h3 class="h6 text-uppercase">Réservation</h3>
-                <p class="text-justify">Le passager prend contact avec le conducteur pour réserver une place.
+                <p class="text-justify">Le demandeur peut être conducteur ou passager, prend contact pour réserver une place.
                     Ensemble, ils finalisent les détails de l'accord, qui peut être une participation aux frais ou
                     un covoiturage sans échange monétaire.</p>
             </div>
@@ -236,7 +174,7 @@ Search START -->
 						<i class="bi bi-file-earmark-text-fill heading-color"></i>
 					</div>
 					<div class="nav flex-column ps-3">
-						<h6 class="mb-2"><a href="#" class=" stretched-link p-0">1. Voyagez confortablement</a></h6>
+						<h6 class="mb-2"><a href="#" class="stretched-link p-0">1. Voyagez confortablement</a></h6>
 						<div class="small text-body-secondary">Laissez quelqu'un d'autre prendre le volant et profitez du trajet pour vous détendre, lire un livre, ou même faire une sieste. Le covoiturage vous permet d'arriver à destination frais et reposé.</div>
 					</div>
 				</div>
@@ -245,7 +183,7 @@ Search START -->
 						<i class="bi bi-file-earmark-text-fill heading-color"></i>
 					</div>
 					<div class="nav flex-column ps-3">
-						<h6 class="mb-2"><a href="#" class=" stretched-link p-0">2. Accédez à des destinations difficiles</a></h6>
+						<h6 class="mb-2"><a href="#" class="stretched-link p-0">2. Accédez à des destinations difficiles</a></h6>
 						<div class="small text-body-secondary">Trouvez des conducteurs qui vont exactement là où vous avez besoin d'aller, même si c'est hors des sentiers battus. Le covoiturage peut souvent vous emmener directement à des endroits non desservis par les transports en commun.</div>
 					</div>
 				</div>

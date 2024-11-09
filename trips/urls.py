@@ -1,5 +1,5 @@
 from django.urls import path
-#from .views import RequestBookingView, AcceptBookingView, CancelBookingView, RejectBookingView
+
 from . import views
 
 urlpatterns = [
@@ -7,8 +7,8 @@ urlpatterns = [
     path('', views.TripListView.as_view(), name='trip-list'),
     path('<slug:start_city_slug>-<slug:end_city_slug>/<str:id_abbr>', views.TripDetailView.as_view(), name='trip-detail'),
     path('my-trip-list', views.my_trip, name='my-trips'),
-    path('<str:pk>/update', views.TripUpdateView.as_view(), name='trip-update'),
-    path('<str:pk>/delete', views.TripDeleteView.as_view(), name='trip-delete'),
+    path('<slug:start_city_slug>-<slug:end_city_slug>/<str:id_abbr>/update', views.TripUpdateView.as_view(), name='trip-update'),
+    path('<slug:start_city_slug>-<slug:end_city_slug>/<str:id_abbr>/delete', views.TripDeleteView.as_view(), name='trip-delete'),
     path('<trip_id>/reservation', views.trip_reservation, name='trip-reservation'),
     # Booking
     #path('<trip_id>/booking/request/', RequestBookingView.as_view(), name='request_booking'),

@@ -15,7 +15,7 @@ class TripForm(forms.ModelForm):
 
     class Meta:
         model = Trip
-        fields = ['start_city', 'end_city', 'start_date', 'cabin_baggage', 'checked_baggage',
+        fields = ['role', 'trip_type', 'start_city', 'end_city', 'start_date', 'cabin_baggage', 'checked_baggage',
                   'start_time', 'return_trip', 'return_date', 'return_time',
                   'seat_go', 'seat_back', 'price', 'description']
         labels = {
@@ -28,20 +28,22 @@ class TripForm(forms.ModelForm):
             'price': 'Prix',
             'cabin_baggage': 'Bagage 12 kilos',
             'checked_baggage': 'Bagage 23 kilos',
-            'description': "Information supplémentaire",
+            'description': "Commentaire",
             'return_trip': 'Trajet retour',
             'return_date': 'Date de retour',
             'return_time': 'Heure de retour',
         }
 
         widgets = {
+            "role": forms.RadioSelect(),
+            "trip_type": forms.RadioSelect(),
             "start_time": forms.TimeInput(attrs={'class': 'form-control'}),
             "return_time": forms.TimeInput(attrs={'class': 'form-control'}),
             "seat_go": forms.Select(choices=[(i, i) for i in range(1, 10)], attrs={'class': 'form-control'}),
             "seat_back": forms.Select(choices=[(i, i) for i in range(0, 10)], attrs={'class': 'form-control'}),
             "price": forms.Select(choices=[(i, i) for i in range(500, 50000, 500)], attrs={'class': 'form-control'}),
-            "cabin_baggage": forms.Select(choices=[(i, i) for i in range(0, 3000, 300)], attrs={'class': 'form-control'}),
-            "checked_baggage": forms.Select(choices=[(i, i) for i in range(0, 6000, 400)], attrs={'class': 'form-control'}),
+            "cabin_baggage": forms.Select(choices=[(i, i) for i in range(0, 10)], attrs={'class': 'form-control'}),
+            "checked_baggage": forms.Select(choices=[(i, i) for i in range(0, 10)], attrs={'class': 'form-control'}),
 
             "return_trip": forms.CheckboxInput(attrs={
                 'class': 'form-check-input flex-shrink-0',
@@ -51,6 +53,9 @@ class TripForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        self.fields['start_city'].required = True
+        self.fields['end_city'].required = True
 
         # Vérifiez si l'heure existe avant d'essayer de la formater
         if self.instance.start_time:
@@ -68,6 +73,15 @@ class TripForm(forms.ModelForm):
 
         for name, field in self.fields.items():
             field.widget.attrs.update({'class': 'form-control'})
+
+        self.fields['role'].widget.attrs.update({
+            'class': 'form-check-input',
+
+        })
+        self.fields['trip_type'].widget.attrs.update({
+            'class': 'form-check-input',
+
+        })
 
         self.fields['start_city'].widget.attrs.update({
             'class': 'form-select js-choice',
@@ -153,5 +167,23 @@ class TripForm(forms.ModelForm):
         if return_time == "00:00":
             return self.instance.return_time  # Renvoyer l'heure actuelle si "00:00" est détecté
         return return_time
+
+    def clean(self):
+        cleaned_data = super().clean()
+        trip_type = cleaned_data.get("trip_type")
+        return_date = cleaned_data.get("return_date")
+        return_time = cleaned_data.get("return_time")
+        seat_back = cleaned_data.get("seat_back")
+
+        if trip_type == 'round_trip':
+            if not return_date:
+                self.add_error('return_date', "La date de retour est obligatoire pour un trajet aller-retour.")
+            if not return_time:
+                self.add_error('return_time', "L'heure de retour est obligatoire pour un trajet aller-retour.")
+            if seat_back is None or seat_back < 1:
+                self.add_error('seat_back',
+                               "Le nombre de places pour le retour doit être d'au moins 1 pour un trajet aller-retour.")
+
+        return cleaned_data
 
 

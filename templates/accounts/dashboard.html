@@ -72,9 +72,13 @@ Content START -->
 						<!-- Card item END -->
 						{% endfor %}
 						{% else %}
-						<div class="alert alert-success" role="alert">
+						<div class="alert alert-primary" role="alert">
 							<h4 class="alert-heading">Aucun trajet pubié</h4>
-							<p>Si vous possédez une voiture et désirez trouver des passagers pour partager vos trajets et réduire les frais de transport, <a href="{% url 'trip-create' %}"> publiez dès maintenant un trajet</a></p>
+							<p>Vous n'avez pas encore publié de trajet.</br> Cliquez sur le bouton ci-dessous pour publier
+								un trajet en tant que conducteur ou passager.
+							</p>
+							<hr>
+							<a href="{% url 'trip-create' %}" class="btn btn-primary">Publier un trajet</a>
 						</div>
 						{% endif %}
 					</div>

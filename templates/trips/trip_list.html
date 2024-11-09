@@ -57,13 +57,13 @@ Flight list START -->
                                     <!-- Title -->
                                     <div class="ms-2">
                                         <h6 class="card-title mb-0">{{ trip.author.first_name }}</h6>
-                                        <span>{{ trip.user_type }}</span>
+                                        <span>{{ trip.get_role_display }}</span>
                                     </div>
                                 </div>
 
                          <div class="text-center">
                             <h6 class="card-title mb-0">{{ trip.start_city }} <i class="bi bi-arrow-right"></i> {{ trip.end_city }}</h6>
-                            <span>{{ trip.trip_type }}</span>
+                            <span>{{ trip.get_trip_type_display }}</span>
                         </div>
 
                         <!-- Button -->
