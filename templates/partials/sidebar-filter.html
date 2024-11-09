@@ -3,7 +3,7 @@
 					<div class="offcanvas-xl offcanvas-end" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
 						<!-- Offcanvas header -->
 						<div class="offcanvas-header">
-							<h5 class="offcanvas-title" id="offcanvasSidebarLabel">Advance Filters</h5>
+							<h5 class="offcanvas-title" id="offcanvasSidebarLabel">Filtres</h5>
 							<button  type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasSidebar" aria-label="Close"></button>
 						</div>
 
@@ -47,19 +47,19 @@
 
 										<div class="d-flex-">
 											<div class="form-check mb-2">
-												<a href="{% url 'trip-list' %}?price_below=0" class="text-decoration-none">Moins de 2 000F</a>
+												<a href="{% url 'trip-list' %}?price_below=2000" class="text-decoration-none">Moins de 2 000F</a>
 											</div>
 											<div class="form-check mb-2">
-												<a href="{% url 'trip-list' %}?price_below=0" class="text-decoration-none">De 2000F à 6 000F</a>
+												<a href="{% url 'trip-list' %}?price_below=3000" class="text-decoration-none">De 2000F à 6 000F</a>
 											</div>
 											<div class="form-check mb-2">
-												<a href="{% url 'trip-list' %}?price_below=0" class="text-decoration-none">De 6000F à 10 000F</a>
+												<a href="{% url 'trip-list' %}?price_below=10000" class="text-decoration-none">De 6000F à 10 000F</a>
 											</div>
 											<div class="form-check mb-2">
-												<a href="{% url 'trip-list' %}?price_below=0" class="text-decoration-none">De 10 000F à 15 000F</a>
+												<a href="{% url 'trip-list' %}?price_below=15000" class="text-decoration-none">De 10 000F à 15 000F</a>
 											</div>
 											<div class="form-check mb-2">
-												<a href="{% url 'trip-list' %}?price_below=0" class="text-decoration-none">Plus de 15 000F</a>
+												<a href="{% url 'trip-list' %}?price_below=30000" class="text-decoration-none">Plus de 15 000F</a>
 											</div>
 
 										</div>

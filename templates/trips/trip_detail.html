@@ -62,9 +62,9 @@
                         <!-- Price -->
                         <div class="card-footer bg-light text-center">
                             {% if price == 0 %}
-                            <h5 class="h6">Prix total pour 1 passager : Gratuit</h5>
+                            <h5 class="h6">Prix pour 1 passager : Gratuit</h5>
                             {% else %}
-                            <h5 class="h6">Prix total pour 1 passager : {{ trip.price|intcomma }} FCFA / Trajet</h5>
+                            <h5 class="h6">Prix pour 1 passager : {{ trip.price|intcomma }} FCFA / Trajet</h5>
                             {% endif %}
                         </div>
 

@@ -16,14 +16,17 @@ Content START -->
 
 				<!-- Offcanvas menu button -->
 				<div class="d-grid mb-0 d-lg-none w-100">
-					<button class="btn btn-primary mb-4" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+					<button class="btn btn-primary mb-4"
+							type="button" data-bs-toggle="offcanvas"
+							data-bs-target="#offcanvasSidebar"
+							aria-controls="offcanvasSidebar">
 						<i class="fas fa-sliders-h"></i> Menu
 					</button>
 				</div>
 
-				<div class="card border bg-transparent rounded-2">
+				<div class="card border bg-transparent rounded-0">
 					<!-- Card header -->
-					<div class="card-header bg-light rounded-top border-bottom">
+					<div class="card-header bg-light rounded-top border-bottom rounded-0">
 						<h4 class="card-header-title text-uppercase">Gérer mes Trajets</h4>
 					</div>
 
@@ -32,16 +35,23 @@ Content START -->
 						{% if trips %}
 						{% for trip in trips %}
 						<!-- Card item START -->
-							<div class="card border rounded-2 mb-2">
+							<div class="card border rounded-0 mb-2">
 							<!-- Card header -->
-							<div class="card-header border-bottom d-md-flex justify-content-md-between align-items-center">
+							<div class="card-body d-md-flex justify-content-md-between align-items-center">
 								<!-- Icon and Title -->
 								<div class="d-flex align-items-center"><!-- Title -->
 									<div class="ms-2">
-										<h6 class="card-title mb-0">{{ trip.start_city }} <i class="bi bi-arrow-right mx-2"></i></span> {{ trip.end_city }}</h6>
+										<div class="d-flex justify-content-between align-items-center">
+										<h6 class="card-title mb-0">{{ trip.start_city }}
+											<i class="bi bi-arrow-right mx-2"></i>
+											{{ trip.end_city }}
+										</h6>
+											<div><span class="badge bg-light text-primary mb-3">{{ trip.get_trip_type_display }}</span></div>
+											</div>
 										<ul class="nav nav-divider small">
-											<li class="nav-item">{{ trip.start_date }}</li>
-											<li class="nav-item">{{ trip.start_time }}</li>
+											<li class="nav-item">Départ : {{ trip.start_date }}</li>
+											<li class="nav-item">à {{ trip.start_time }}</li>
+											<li class="nav-item">Prix : {{ trip.price }}FCFA</li>
 										</ul>
 									</div>
 								</div>
@@ -54,20 +64,7 @@ Content START -->
 								</div>
 							</div>
 
-							<!-- Card body -->
-							<div class="card-body">
-								<div class="row">
-									<div class="col-md-6">
-										<span>{{ trip.car }}</span>
-										<h6 class="mb-0">{{ trip.seat_go }} places</h6>
-									</div>
 
-									<div class="col-md-4 text-md-end">
-										<span>Prix par place</span>
-										<h4 class="mb-0">{{ trip.price }}F</h4>
-									</div>
-								</div>
-							</div>
 						</div>
 						<!-- Card item END -->
 						{% endfor %}

@@ -47,7 +47,7 @@ Content START -->
                                 <div class="row g-3">
                                     <!-- role -->
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Je suis : <span class="text-danger">*</span></label>
+                                        <label class="form-label"><span class="fw-bold text-dark"> Je suis : </span><span class="text-danger">*</span></label>
                                         {% for role in form.role %}
                                         <div class="d-flex gap-4">
                                             <div class="form-check radio-bg-light" id="tripTypeSection">
@@ -57,7 +57,7 @@ Content START -->
                                         {% endfor %}
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Type de trajet : <span
+                                        <label class="form-label"><span class="fw-bold text-dark">Type de trajet :</span><span
                                                 class="text-danger">*</span></label>
                                         {% for trip_type in form.trip_type %}
                                         <div class="d-flex gap-4">
@@ -68,33 +68,33 @@ Content START -->
                                         {% endfor %}
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">Départ</label>
+                                        <label class="form-label"><span class="fw-bold text-dark">Départ</span></label>
                                         {{ form.start_city }}
                                     </div>
                                     <!-- State -->
                                     <div class="col-md-6">
-                                        <label class="form-label">Arrivée</label>
+                                        <label class="form-label"><span class="fw-bold text-dark">Arrivée</span></label>
                                         {{ form.end_city }}
                                     </div>
                                     <!-- Contact number -->
                                     <div class="col-md-4">
-                                        <label class="form-label">Date Départ</label>
+                                        <label class="form-label"><span class="fw-bold text-dark">Date Départ</span></label>
                                         {{ form.start_date }}
                                     </div>
                                     <!-- Email -->
                                     <div class="col-md-4">
-                                        <label class="form-label">Heure Départ</label>
+                                        <label class="form-label"><span class="fw-bold text-dark">Heure Départ</span></label>
                                         {{ form.start_time }}
                                     </div>
                                     <!-- Contact number -->
                                     <div class="col-md-4 item">
-                                        <label class="form-label">Nombre de Place Aller</label>
+                                        <label class="form-label"><span class="fw-bold text-dark">Nombre de Place Aller</span></label>
                                         <h5 class="guest-selector-count mb-0 adults">{{ form.seat_go }}</h5>
                                     </div>
                                     <!-- Email -->
                                 </div>
                                 <!-- round trip -->
-                                <div class="row g-3" id="roundTripFields" style="display: none;">
+                                <div class="row g-3 mt-2">
                                         <!-- round_trip -->
                                     <div class="col-md-4">
                                         <label class="form-label">Date Retour</label>
@@ -121,7 +121,7 @@ Content START -->
                                 <div class="row justify-content-between text-sm-center">
                                     <!-- Item start -->
                                     <div class="col-md-4 item div" id="id_price">
-                                        <label class="form-label">Prix par place en FCA</label>
+                                        <label class="form-label"><span class="fw-bold text-dark">Prix par place en FCA</span></label>
                                         <h5 class="guest-selector-count mb-0 adults">{{ form.price }}</h5>
                                     </div>
                                     <!-- end Item -->

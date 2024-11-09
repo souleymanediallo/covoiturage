@@ -134,21 +134,41 @@ class TripForm(forms.ModelForm):
             'class': 'form-select js-choice',
         })
 
-        self.fields['start_time'].widget.attrs.update({
-            'class': 'form-control flatpickr text-sm-end flatpickr-input',
-            'data-enable-time': 'true',
-            'data-no-calendar': 'true',
-            'data-date-format': 'H:i',
-            'data-time_24hr': 'true',
-        })
+        if self.instance.start_time:
+            self.fields['start_time'].widget.attrs.update({
+                'class': 'form-control flatpickr text-sm-end flatpickr-input',
+                'data-enable-time': 'true',
+                'data-no-calendar': 'true',
+                'data-date-format': 'H:i',
+                'data-time_24hr': 'true',
+                'data-default-date': self.instance.start_time.strftime('%H:%M')  # Définir l'heure initiale
+            })
+        else:
+            self.fields['start_time'].widget.attrs.update({
+                'class': 'form-control flatpickr text-sm-end flatpickr-input',
+                'data-enable-time': 'true',
+                'data-no-calendar': 'true',
+                'data-date-format': 'H:i',
+                'data-time_24hr': 'true'
+            })
 
-        self.fields['return_time'].widget.attrs.update({
-            'class': 'form-control flatpickr text-sm-end flatpickr-input',
-            'data-enable-time': 'true',
-            'data-no-calendar': 'true',
-            'data-date-format': 'H:i',
-            'data-time_24hr': 'true',
-        })
+        if self.instance.return_time:
+            self.fields['return_time'].widget.attrs.update({
+                'class': 'form-control flatpickr text-sm-end flatpickr-input',
+                'data-enable-time': 'true',
+                'data-no-calendar': 'true',
+                'data-date-format': 'H:i',
+                'data-time_24hr': 'true',
+                'data-default-date': self.instance.return_time.strftime('%H:%M')  # Définir l'heure initiale
+            })
+        else:
+            self.fields['return_time'].widget.attrs.update({
+                'class': 'form-control flatpickr text-sm-end flatpickr-input',
+                'data-enable-time': 'true',
+                'data-no-calendar': 'true',
+                'data-date-format': 'H:i',
+                'data-time_24hr': 'true'
+            })
 
         self.fields['return_trip'].widget.attrs.update({
             'class': 'form-check-input form-check-input flex-shrink-0',

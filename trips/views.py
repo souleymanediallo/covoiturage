@@ -15,7 +15,6 @@ from django.utils import timezone
 from datetime import datetime, timedelta
 today_current = datetime.today().strftime('%Y-%m-%d')
 time_expired = datetime.now().strftime('%H:%M')
-from cars.models import Car
 
 
 class TripListView(ListView):
