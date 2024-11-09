@@ -33,11 +33,30 @@ class TripListView(ListView):
         role = self.request.GET.get('role')
         # filter by user type
         if role:
-            queryset = queryset.filter(user_type=role)
+            queryset = queryset.filter(role=role)
         # Filter by date
         start_date = self.request.GET.get('start_date')
         if start_date:
             queryset = queryset.filter(start_date=start_date)
+
+        # Filtrer par plage de prix
+        price_below = self.request.GET.get('price_below')
+        if price_below:
+            try:
+                price_limit = int(price_below)
+                if price_limit == 2000:
+                    queryset = queryset.filter(price__lt=2000)
+                elif price_limit == 3000:
+                    queryset = queryset.filter(price__gte=2000, price__lt=6000)
+                elif price_limit == 10000:
+                    queryset = queryset.filter(price__gte=6000, price__lt=10000)
+                elif price_limit == 15000:
+                    queryset = queryset.filter(price__gte=10000, price__lt=15000)
+                elif price_limit == 30000:
+                    queryset = queryset.filter(price__gte=15000)
+            except ValueError:
+                pass  # Ignore si le prix n'est pas un entier valide
+
         return queryset
 
     def get_context_data(self, *args, **kwargs):

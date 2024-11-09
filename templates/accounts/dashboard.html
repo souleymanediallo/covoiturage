@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-
+{% load humanize %}
 {% block content %}
 <!-- **************** MAIN CONTENT START **************** -->
 <main>
@@ -50,9 +50,18 @@ Content START -->
 											</div>
 										<ul class="nav nav-divider small">
 											<li class="nav-item">Départ : {{ trip.start_date }}</li>
-											<li class="nav-item">à {{ trip.start_time }}</li>
-											<li class="nav-item">Prix : {{ trip.price }}FCFA</li>
+											<li class="nav-item">{{ trip.start_time }}</li>
+											<li class="nav-item">{{ trip.seat_go }} Place{{ trip.seat_go|pluralize }}</li>
+											<li class="nav-item">{{ trip.price|intcomma }} FCFA</li>
 										</ul>
+										{% if trip.trip_type == 'round_trip' %}
+										<ul class="nav nav-divider small">
+											<li class="nav-item">Retour : {{ trip.return_date }}</li>
+											<li class="nav-item">{{ trip.return_time }}</li>
+											<li class="nav-item">{{ trip.seat_back }} Place{{ trip.seat_back|pluralize }}</li>
+											<li class="nav-item">{{ trip.price|intcomma }} FCFA</li>
+										</ul>
+										{% endif %}
 									</div>
 								</div>
 

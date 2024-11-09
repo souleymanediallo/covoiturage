@@ -32,7 +32,8 @@ Search START -->
                         <div class="text-center">
                             <!-- Title -->
                             <div class="ms-2-">
-                                <h6 class="card-title mb-0">{{ trip.start_date|date:"l d F Y"|capfirst }} à {{ trip.start_time }}</h6>
+                                <h6 class="card-title mb-0">{{ trip.start_date|date:"l d F Y"|capfirst }}
+                                    à {{ trip.start_time|time:"H\h i\m"  }}</h6>
                             </div>
                         </div>
 
@@ -77,6 +78,9 @@ Search START -->
                 </a>
                 <!-- Card item END -->
             {% endfor %}
+                <p class="text-center">
+                <a href="{% url 'trip-list' %}" class="btn btn-primary">Voir tous les trajets</a>
+                </p>
             </div>
         </div>
     </div>

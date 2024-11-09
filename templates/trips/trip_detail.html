@@ -79,7 +79,7 @@
                                             class="fa-solid fa-car"></i></div>
                                     <!-- Title -->
                                     <div class="ms-2">
-                                        <h6 class="card-title mb-0">{{ trip.author.first_name }}</h6>
+                                        <h6 class="card-title mb-0">{{ trip.author.first_name|capfirst }}</h6>
                                         <span>{{ trip.get_role_display }}</span>
                                     </div>
                                 </div>

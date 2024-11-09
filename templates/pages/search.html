@@ -1,8 +1,7 @@
 {% extends "layout.html" %}
-
+{% load humanize %}
 {% load static %}
 {% load search_tags %}
-
 
 
 {% block content %}
@@ -13,23 +12,21 @@ Search START -->
 {% show_search_results %}
 <!-- =======================
 Search START -->
-
     <section class="pt-3">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="heading-title text-center">
                     <h1 class="h3">Covoiturage au Sénégal</h1>
-                    <p>Résultats de recherche</p>
                 </div>
             </div>
         </div>
-        {% if regular %}
+        {% if trips %}
         <div class="row justify-content-center">
-            {% for trip in regular %}
+            {% for trip in trips %}
             <div class="col-lg-12">
                 <!-- Card item START -->
-                <h3 class="text-center">Trajet régulier</h3>
+                <h3 class="text-center h5 my-3">Résultats de recherche</h3>
                 <a href="{{ trip.get_absolute_url }}" class="text-success">
                 <div class="card border rounded-2 mb-3 shadow">
                     <!-- Card header -->
@@ -38,14 +35,15 @@ Search START -->
                         <div class="text-center">
                             <!-- Title -->
                             <div class="ms-2-">
-                                <h6 class="card-title mb-0">{{ trip.start_date }} à {{ trip.start_time }}</h6>
+                                <h6 class="card-title mb-0">{{ trip.start_date|date:"l d F Y"|capfirst }}
+                                    à {{ trip.start_time|time:"H\h i\m" }}</h6>
                             </div>
                         </div>
 
                         <!-- Button -->
                         <div class="text-center">
                             {% if trip.price > 0 %}
-                            <h6 class="card-title mb-0">{{ trip.price }}F</h6>
+                            <h6 class="card-title mb-0">{{ trip.price|intcomma }} FCFA</h6>
                             {% else %}
                             <h6 class="card-title mb-0 text-success">Gratuit</h6>
                             {% endif %}
@@ -62,13 +60,13 @@ Search START -->
                                     <!-- Title -->
                                     <div class="ms-2">
                                         <h6 class="card-title mb-0">{{ trip.author.first_name }}</h6>
-                                        <span>{{ trip.user_type }}</span>
+                                        <span>{{ trip.get_role_display }}</span>
                                     </div>
                                 </div>
 
                          <div class="text-center">
                             <h6 class="card-title mb-0">{{ trip.start_city }} <i class="bi bi-arrow-right"></i> {{ trip.end_city }}</h6>
-                            <span>{{ trip.trip_type }}</span>
+                            <span>{{ trip.get_trip_type_display  }}</span>
                         </div>
 
                         <!-- Button -->
@@ -87,83 +85,22 @@ Search START -->
         </div>
         {% else %}
         <div class="row justify-content-center">
-            <div class="col-lg-12">
-                <div class="alert alert-warning" role="alert">
-                    Aucun trajet régulier trouvé
+            <div class="col-md-8">
+                <div class="alert alert-primary" role="alert">
+                    Aucun trajet trouvé
+                    <br>
+                    <p>
+                        Proposez ce trajet pour aider la communauté à se déplacer plus facilement.
+                    </p>
+                    <hr>
+                    <a href="{% url 'trip-create' %}" class="btn btn-primary"> <i class="bi bi-emoji-smile"></i> Proposer un trajet</a>
+
+                    <a href="{% url 'search' %}" class="btn btn-dark"> <i class="bi bi-emoji-frown"></i> Revenir à la page de recherche</a>
                 </div>
             </div>
         </div>
         {% endif %}
-        {% if occasional %}
-        <div class="row justify-content-center">
-            {% for trip in occasional %}
-            <div class="col-lg-12">
-                <!-- Card item START -->
-                <h3 class="text-center">Trajet ponctuel</h3>
-                <a href="{{ trip.get_absolute_url }}" class="text-success">
-                <div class="card border rounded-2 mb-3 shadow">
-                    <!-- Card header -->
-                    <div class="bg-light py-3 rounded-top card-header border-bottom d-md-flex justify-content-md-between align-items-center">
-                        <!-- Icon and Title -->
-                        <div class="text-center">
-                            <!-- Title -->
-                            <div class="ms-2-">
-                                <h6 class="card-title mb-0">{{ trip.start_date }} à {{ trip.start_time }}</h6>
-                            </div>
-                        </div>
 
-                        <!-- Button -->
-                        <div class="text-center">
-                            {% if trip.price > 0 %}
-                            <h6 class="card-title mb-0">{{ trip.price }}F</h6>
-                            {% else %}
-                            <h6 class="card-title mb-0 text-success">Gratuit</h6>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <!-- Card body -->
-                    <div class="card-body">
-                        <!-- Card header -->
-                        <div class="d-md-flex justify-content-sm-center justify-content-md-between align-items-center">
-                        <!-- Icon and Title -->
-                        <div class="d-flex align-items-center justify-content-center mb-2">
-                                    <div class="icon-lg bg-light rounded-circle flex-shrink-0"><i
-                                            class="fa-solid fa-car"></i></div>
-                                    <!-- Title -->
-                                    <div class="ms-2">
-                                        <h6 class="card-title mb-0">{{ trip.author.first_name }}</h6>
-                                        <span>{{ trip.user_type }}</span>
-                                    </div>
-                                </div>
-
-                         <div class="text-center">
-                            <h6 class="card-title mb-0">{{ trip.start_city }} <i class="bi bi-arrow-right"></i> {{ trip.end_city }}</h6>
-                            <span>{{ trip.trip_type }}</span>
-                        </div>
-
-                        <!-- Button -->
-                        <div class="text-center">
-                            <h6 class="card-title mb-0">{{ trip.seat_go }} Places</h6>
-                            <span>Voir le détail <i class="bi bi-arrow-right me-2"></i></span>
-                        </div>
-                    </div>
-                    <!-- Card body -->
-                    </div>
-                </div>
-                </a>
-                <!-- Card item END -->
-            </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        <div class="row justify-content-center">
-            <div class="col-lg-12">
-                <div class="alert alert-warning" role="alert">
-                    Aucun trajet ponctuel trouvé
-                </div>
-            </div>
-        </div>
-        {% endif %}
 
     </div>
 </section>

@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-
+{% load humanize %}
 {% block content %}
 <main>
 
@@ -32,14 +32,15 @@ Flight list START -->
                         <div class="text-center">
                             <!-- Title -->
                             <div class="ms-2-">
-                                <h6 class="card-title mb-0">{{ trip.start_date|date:"l d F Y"|capfirst }} à {{ trip.start_time }}</h6>
+                                <h6 class="card-title mb-0">{{ trip.start_date|date:"l d F Y"|capfirst }}
+                                    à {{ trip.start_time|time:"H\h i\m" }}</h6>
                             </div>
                         </div>
 
                         <!-- Button -->
                         <div class="text-center">
                             {% if trip.price > 0 %}
-                            <h6 class="card-title mb-0">{{ trip.price }}F</h6>
+                            <h6 class="card-title mb-0">{{ trip.price|intcomma }} FCFA</h6>
                             {% else %}
                             <h6 class="card-title mb-0 text-success">Gratuit</h6>
                             {% endif %}
@@ -56,7 +57,7 @@ Flight list START -->
                                             class="fa-solid fa-car"></i></div>
                                     <!-- Title -->
                                     <div class="ms-2">
-                                        <h6 class="card-title mb-0">{{ trip.author.first_name }}</h6>
+                                        <h6 class="card-title mb-0">{{ trip.author.first_name|capfirst }}</h6>
                                         <span>{{ trip.get_role_display }}</span>
                                     </div>
                                 </div>

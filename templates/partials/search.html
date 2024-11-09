@@ -1,48 +1,44 @@
 <section class="pt-5">
-	<div class="container pt-5">
-		<div class="row">
-			<div class="col-12">
-				<!-- Booking from START -->
-				<form class="bg-mode border rounded position-relative px-4 pt-4 mb-4 mb-sm-0" action="{% url 'search' %}" method="GET">
-
-					<div class="row g-4">
-								<!-- Leaving From -->
-								<div class="col-md-6 col-lg-6 position-relative">
-									<div class="form-border-transparent form-fs-lg bg-light rounded-3 h-100 p-3">
-										<!-- Input field -->
-										<label class="mb-1"><i class="bi bi-geo-alt me-2"></i>Départ</label>
-										<select class="form-select js-choice" data-search-enabled="true" name="start_city">
-											{% for key, value in city_senegal %}
-											<option value="{{ key }}">{{ value }}</option>
-											{% endfor %}
-										</select>
-									</div>
-
-									<!-- Auto fill button -->
-
-								</div>
-
-								<!-- Going To -->
-								<div class="col-md-6 col-lg-6">
-									<div class="form-border-transparent form-fs-lg bg-light rounded-3 h-100 p-3">
-										<!-- Input field -->
-										<label class="mb-1"><i class="bi bi-geo-altpytho me-2"></i>Arrivée</label>
-										<select class="form-select js-choice" data-search-enabled="true" name="end_city">
-											{% for key, value in city_senegal %}
-											<option value="{{ key }}">{{ value }}</option>
-											{% endfor %}
-										</select>
-									</div>
-								</div>
-
-								<div class="col-12 text-end pt-0">
-									<button  type="submit" class="btn btn-primary mb-n4">Rechercher <i class="bi bi-arrow-right ps-3"></i></button>
-								</div>
-							</div>
-
-				</form>
-				<!-- Booking from END -->
-			</div>
-		</div>
-	</div>
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col-12">
+                <!-- Search -->
+                <form class="bg-mode border rounded position-relative px-4 pt-4 mb-4 mb-sm-0"
+                      action="{% url 'search' %}" method="GET">
+                    <div class="row g-4">
+                        <!-- Start city -->
+                        <div class="col-md-6 col-lg-6 position-relative">
+                            <div class="form-border-transparent form-fs-lg bg-light rounded-3 h-100 p-3">
+                                <!-- Input field -->
+                                <label class="mb-1"><i class="bi bi-geo-alt me-2"></i>Départ</label>
+                                <select class="form-select js-choice" data-search-enabled="true" name="start_city">
+                                    {% for key, value in city_senegal %}
+                                    <option value="{{ key }}">{{ value }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <!-- End  city -->
+                        <div class="col-md-6 col-lg-6">
+                            <div class="form-border-transparent form-fs-lg bg-light rounded-3 h-100 p-3">
+                                <!-- Input field -->
+                                <label class="mb-1"><i class="bi bi-geo-altpytho me-2"></i>Arrivée</label>
+                                <select class="form-select js-choice" data-search-enabled="true" name="end_city">
+                                    {% for key, value in city_senegal %}
+                                    <option value="{{ key }}">{{ value }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+						<!-- button -->
+                        <div class="col-12 text-end pt-0">
+                            <button type="submit" class="btn btn-primary mb-n4">Rechercher
+                                <i class="bi bi-arrow-right ps-3"></i></button>
+                        </div>
+                    </div>
+                </form>
+                <!-- Search END -->
+            </div>
+        </div>
+    </div>
 </section>
