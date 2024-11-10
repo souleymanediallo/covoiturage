@@ -7,21 +7,18 @@
 			</div>
 		</div>
 
-		<div class="row g-4 g-md-5">
+
 			<!-- Card item START -->
+			<div class="d-flex flex-wrap">
             {% for city in cities %}
-			<div class="col-6 col-sm-4 col-lg-3 col-xl-2">
-				<div class="card bg-transparent text-center p-1 h-100">
-					<!-- Image -->
-					<div class="card-body p-0 pt-3">
-						<h6 class="card-title"><a href="{{ city.get_absolute_url }}" class="stretched-link">{{ city.name }}</a></h6>
-					</div>
-				</div>
-			</div>
+			<h6 class="card-title">
+				<a href="{{ city.get_absolute_url }}"
+				   class="btn btn-outline-primary text-dark fw-bold rounded-0 p-2 mb-3 text-decoration-none me-2 ms-2">
+
+							{{ city.name }}</a>
+						</h6>
             {% endfor %}
-			<!-- Card item END -->
+			</div>
 
-
-		</div> <!-- Row END -->
 	</div>
 </section>

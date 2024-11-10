@@ -15,8 +15,7 @@ Search START -->
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="heading-title text-center">
-                    <h1 class="h3">Covoiturage au Sénégal</h1>
-                    <p>Les derniers trajets</p>
+                    <h2 class="h3 mb-4">Trouver un Covoiturage au Sénégal</h2>
                 </div>
             </div>
         </div>
@@ -79,7 +78,8 @@ Search START -->
                 <!-- Card item END -->
             {% endfor %}
                 <p class="text-center">
-                <a href="{% url 'trip-list' %}" class="btn btn-primary">Voir tous les trajets</a>
+                <a href="{% url 'trip-list' %}" class="btn btn-primary">Voir Tous Les trajets</a>
+                    <a href="{% url 'trip-create' %}" class="btn btn-dark">Publier Votre Trajet</a>
                 </p>
             </div>
         </div>
