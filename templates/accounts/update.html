@@ -31,9 +31,9 @@
 				</div>
 				<div class="vstack gap-4">
 					<!-- Personal info START -->
-					<div class="card border">
+					<div class="card border rounded-0">
 						<!-- Card header -->
-						<div class="card-header border-bottom bg-light">
+						<div class="card-header border-bottom bg-light rounded-0">
 							<h4 class="card-header-title">Profil et paramètres</h4>
 						</div>
 						<!-- Card body START -->
@@ -105,6 +105,23 @@
 						<!-- Card body END -->
 					</div>
 					<!-- Personal info END -->
+					<!-- delete account START -->
+					<div class="card border rounded-0">
+						<!-- Card header -->
+						<div class="card-header border-bottom bg-light rounded-0">
+							<h4 class="card-header-title">Supprimer mon compte</h4>
+						</div>
+						<!-- Card body START -->
+						<div class="card-body bg-light">
+							<p>
+								La suppression de compte est définitive. Vos données personnelles ainsi que vos trajets seront supprimées.
+								Voulez-vous vraiment supprimer votre compte ?
+							</p>
+							<!-- Form START -->
+							<a href="{% url 'delete' %}" class="btn btn-danger">Supprimer mon compte</a>
+							<!-- Form END -->
+						</div>
+					</div>
 				</div>
 			</div>
 			<!-- Main content END -->
