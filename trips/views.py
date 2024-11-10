@@ -26,6 +26,13 @@ class TripListView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
+        now = timezone.now()
+        # Filtrer les trajets qui n'ont pas encore expiré
+        queryset = queryset.filter(start_date__gt=now.date()) | queryset.filter(
+            start_date=now.date(),
+            start_time__gte=now.time()
+        )
+
         # filter by city
         city = self.request.GET.get('city')
         if city:

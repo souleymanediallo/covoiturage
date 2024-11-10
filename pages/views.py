@@ -5,8 +5,10 @@ from django.http import Http404
 from django.views.generic import TemplateView
 from trips.models import Trip
 from datetime import datetime
+from django.utils import timezone
 from trips.city import CITY_SENEGAL
 from covoiturages.models import Covoiturage
+
 
 today_current = datetime.today().strftime('%Y-%m-%d')
 time_trip = datetime.now().strftime('%H:%M')
@@ -19,9 +21,15 @@ class HomePageView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['trips'] = Trip.objects.filter(start_date__gte=today_current)[0:7]
+        now = timezone.now()
+        context['trips'] = Trip.objects.filter(
+            start_date__gt=now.date()
+        ) | Trip.objects.filter(
+            start_date=now.date(),
+            start_time__gte=now.time()
+        ).order_by('start_date', 'start_time')[:6]
+
         context['city_senegal'] = CITY_SENEGAL
-        context['covoiturages'] = Covoiturage.objects.all()[0:3]
         return context
 
 
