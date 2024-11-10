@@ -1,38 +1,59 @@
-<section class="pt-5">
-    <div class="container pt-5">
+{% load static %}
+{% load i18n %}
+<section class="pt-5 my-5 bg-primary">
+    <div class="container">
         <div class="row">
+            <div class="col-12 mx-auto text-center">
+                <h1 class="h4 fs-2 mb-5 text-light">
+                    Votre plateforme de</br> covoiturage au Sénégal
+                </h1>
+            </div>
             <div class="col-12">
                 <!-- Search -->
-                <form class="bg-mode border rounded position-relative px-4 pt-4 mb-4 mb-sm-0"
+                <form class="bg-mode border rounded-0 position-relative mb-sm-0"
                       action="{% url 'search' %}" method="GET">
                     <div class="row g-4">
                         <!-- Start city -->
-                        <div class="col-md-6 col-lg-6 position-relative">
-                            <div class="form-border-transparent form-fs-lg bg-light rounded-3 h-100 p-3">
+                        <div class="col-md-5 col-lg-5">
+                            <div class="form-border-transparent form-fs-lg bg-light rounded-0 h-100">
                                 <!-- Input field -->
-                                <label class="mb-1"><i class="bi bi-geo-alt me-2"></i>Départ</label>
-                                <select class="form-select js-choice" data-search-enabled="true" name="start_city">
-                                    {% for key, value in city_senegal %}
-                                    <option value="{{ key }}">{{ value }}</option>
-                                    {% endfor %}
-                                </select>
+                                <div class="row align-items-center">
+                                    <div class="col-md-3">
+                                        <label class="mb-1 px-1 text-dark"><i class="bi bi-geo-alt me-2"></i>Départ</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <select class="form-select js-choice" data-search-enabled="true" name="start_city">
+                                            {% for key, value in city_senegal %}
+                                            <option value="{{ key }}">{{ value }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                         <!-- End  city -->
-                        <div class="col-md-6 col-lg-6">
-                            <div class="form-border-transparent form-fs-lg bg-light rounded-3 h-100 p-3">
+                        <div class="col-md-5 col-lg-5">
+                            <div class="form-border-transparent form-fs-lg bg-light rounded-0 h-100">
                                 <!-- Input field -->
-                                <label class="mb-1"><i class="bi bi-geo-altpytho me-2"></i>Arrivée</label>
-                                <select class="form-select js-choice" data-search-enabled="true" name="end_city">
-                                    {% for key, value in city_senegal %}
-                                    <option value="{{ key }}">{{ value }}</option>
-                                    {% endfor %}
-                                </select>
+                                <div class="row align-items-center">
+                                    <div class="col-md-3">
+                                        <label class="mb-1 px-1 text-dark"><i class="bi bi-geo-alt me-2"></i>Arrivée</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <select class="form-select js-choice" data-search-enabled="true" name="end_city">
+                                            {% for key, value in city_senegal %}
+                                            <option value="{{ key }}">{{ value }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
 						<!-- button -->
-                        <div class="col-12 text-end pt-0">
-                            <button type="submit" class="btn btn-primary mb-n4">Rechercher
+                        <div class="col-md-2 col-lg-2 pt-0">
+                            <button type="submit" class="btn btn-dark mb-n4">Rechercher
                                 <i class="bi bi-arrow-right ps-3"></i></button>
                         </div>
                     </div>
