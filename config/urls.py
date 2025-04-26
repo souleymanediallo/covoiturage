@@ -18,6 +18,7 @@ urlpatterns = [
     path("trajets/", include("trips.urls")),
     path("trajets-reguliers/", include("covoiturages.urls")),
     path("cars/", include("cars.urls")),
+    path("bus-tata-itineraire/", include("aftu.urls")),
     path("conversations/", include("conversations.urls")),
     path("contact/", include("contact.urls")),
     path("destination/", include("cities.urls")),

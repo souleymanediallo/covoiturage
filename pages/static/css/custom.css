@@ -56,4 +56,43 @@ img.my-profile-image {
 .choices__inner {
     border-radius: 0px !important;
 }
-/* Home trajet */
+
+/* stop bus */
+
+.stop-line {
+    position: relative;
+    margin-left: 20px;
+    padding-left: 30px;
+}
+
+.stop-line::before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 29px;
+    width: 3px;
+    height: 99%;
+    background-color: #000;
+    z-index: 0;
+}
+
+.stop-item {
+    position: relative;
+    margin-bottom: 24px;
+}
+
+.stop-dot {
+    position: absolute;
+    top: 4px;
+    left: -6px;
+    width: 12px;
+    height: 12px;
+    background-color: #000;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.stop-name {
+    padding-left: 10px;
+    font-weight: 500;
+}

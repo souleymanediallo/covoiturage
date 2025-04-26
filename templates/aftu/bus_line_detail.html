@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block content %}
+<main>
+<section class="pt-5">
+    <div class="container pt-5">
+        <div class="row">
+            {% include 'partials/sidebar-filter.html' %}
+            <div class="col-xl-8 col-xxl-9">
+                <div class="mb-4">
+                    <h3>Ligne {{ line.number }} — {{ line.departure }} ⇔ {{ line.arrival }}</h3>
+                </div>
+                <div class="stop-line">
+                     <div class="stop-item first">
+                        <div class="stop-dot"></div>
+                         <div class="stop-name"><h6>{{ line.departure }}</h6></div>
+                    </div>
+                    {% for stop in stops %}
+                    <div class="stop-item">
+                        <div class="stop-dot"></div>
+                        <div class="stop-name">{{ stop.stop.name }}</div>
+                    </div>
+                    {% endfor %}
+                    <div class="stop-item last">
+                        <div class="stop-dot"></div>
+                        <div class="stop-name"><h6>{{ line.arrival }}</h6></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+</main>
+{% endblock %}

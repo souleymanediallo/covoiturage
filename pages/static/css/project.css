@@ -61,6 +61,34 @@ btn-primary, bg-primary {
     font-size: 16px;
 }
 
+.stop-line {
+    position: relative;
+    margin-left: 20px;
+    padding-left: 30px;
+    border-left: 3px solid #000;
+}
+
+.stop-item {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.stop-dot {
+    position: absolute;
+    left: -18px;
+    top: 4px;
+    width: 12px;
+    height: 12px;
+    background-color: #000;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.stop-name {
+    padding-left: 10px;
+    font-weight: 500;
+}
+
 @media (min-width: 768px) {
     .step:before {
         height: 0;

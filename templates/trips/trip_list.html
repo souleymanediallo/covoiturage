@@ -80,33 +80,9 @@ Flight list START -->
                 <!-- Card item END -->
             {% endfor %}
                     <!-- end simple -->
-                    {% if is_paginated %}
-					<!-- Pagination START -->
-					<nav class="d-flex justify-content-center" aria-label="navigation">
-						<ul class="pagination pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
-                            {% if page_obj.has_previous %}
-							<li class="page-item mb-0"><a class="page-link" href="?page={{ page_obj.previous_page_number }}"><i class="fa-solid fa-angle-left"></i></a></li>
-                            {% else %}
-                            <li class="page-item disabled mb-0"><span class="page-link"><i class="fa-solid fa-angle-left"></i></span></li>
-                            {% endif %}
-
-                            {% for num in page_obj.paginator.page_range %}
-                                {% if page_obj.number == num %}
-							<li class="page-item mb-0 active"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-                                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-							<li class="page-item mb-0"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-                                 {% endif %}
-                            {% endfor %}
-
-                            {% if page_obj.has_next %}
-							<li class="page-item mb-0"><a class="page-link" href="?page={{ page_obj.next_page_number }}"><i class="fa-solid fa-angle-right"></i></a></li>
-                            {% else %}
-                            <li class="page-item disabled mb-0"><span class="page-link"><i class="fa-solid fa-angle-right"></i></span></li>
-                            {% endif %}
-						</ul>
-					</nav>
-					<!-- Pagination END -->
-                    {% endif %}
+                   <!-- pagination -->
+                    {% include 'partials/pagination.html' %}
+                    <!-- end pagination -->
 				</div>
 			</div>
 			<!-- Main content END -->

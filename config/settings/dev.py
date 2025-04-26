@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'cars.apps.CarsConfig',
     'contact.apps.ContactConfig',
     'covoiturages.apps.CovoituragesConfig',
+    'aftu.apps.AftuConfig',
     'cities.apps.CitiesConfig',
     'storages',
     'crispy_forms',
