@@ -1,6 +1,6 @@
 asgiref==3.8.1
 crispy-bootstrap5==2025.4
-Django==5.2
+Django==4.2.11
 django-ckeditor==6.7.2
 django-crispy-forms==2.4
 django-environ==0.12.0
