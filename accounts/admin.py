@@ -10,8 +10,12 @@ class CustomUserAdmin(admin.ModelAdmin):
         (None, {'fields': ('email', 'password', 'first_name', 'last_name', 'user_type', 'phone_number')}),
         ('Permissions', {'fields': ('is_admin', 'is_staff', 'is_superuser', 'is_active')})
     )
-    list_display = ['first_name', 'email', 'last_name', 'user_type', 'phone_number', 'date_joined', 'last_login']
+    list_display = ['date_joined', 'first_name', 'email', 'last_name', 'user_type', 'phone_number', 'last_login']
     search_fields = ["email", "first_name", "last_name", "user_type", "phone_number"]
+    ordering = ['-date_joined']
+    list_per_page = 20
+
+
 
     filter_horizontal = ()
     list_filter = ()

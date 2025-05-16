@@ -7,17 +7,18 @@ class StopAdmin(admin.ModelAdmin):
     list_display = ('name',)
     search_fields = ('name',)
     prepopulated_fields = {'slug': ('name',)}
+    list_per_page = 20
 
 class BusLineAdmin(admin.ModelAdmin):
     list_display = ('number', 'departure', 'arrival')
     search_fields = ('number', 'departure', 'arrival')
-    list_filter = ('departure', 'arrival')
+    list_per_page = 20
 
 
 class BusStopAdmin(admin.ModelAdmin):
     list_display = ('line', 'stop', 'order')
     search_fields = ('line__number', 'stop__name')
-    list_filter = ('line',)
+    list_per_page = 20
 
 
 admin.site.register(Stop, StopAdmin)
