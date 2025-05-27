@@ -96,8 +96,9 @@
                     {% if user.is_authenticated %}
                         {% if homework.description %}
                         <div class="card border rounded-2 mt-2 p-4">
-                            <h5 class="mb-3">Commentaire</h5>
-                            <p>{{ trip.description|truncatewords:200 }}</p>
+                            <h5 class="mb-0">Message</h5>
+                            <hr class="mt-2">
+                            <p>{{ homework.description|truncatewords:200 }}</p>
                         </div>
                         {% endif %}
                     {% endif %}
