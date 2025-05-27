@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'pages.apps.PagesConfig',
     'accounts.apps.AccountsConfig',
     'trips.apps.TripsConfig',
+    'homework.apps.HomeworkConfig',
     'phonenumber_field',
     'conversations.apps.ConversationsConfig',
     'cars.apps.CarsConfig',

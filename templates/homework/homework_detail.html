@@ -1,0 +1,113 @@
+{% extends "layout.html" %}
+
+{% load humanize %}
+{% load custom_tags %}
+
+{% block content %}
+<!-- **************** MAIN CONTENT START **************** -->
+<main>
+    <section class="pt-4 pt-md-5 pb-0 py-5 bg-primary text-light">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-12 mx-auto text-center">
+                    <h1 class="fs-2 mb-2 text-light">Covoiturage au Sénégal</h1>
+                    <p class="mb-0">Je fais ce trajet tous les jours en tant que {{ homework.get_role_display }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="pt-5">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card border rounded-2">
+                        <!-- Card header -->
+                        <div class="card-header bg-light rounded-0 text-center">
+                            <h5>{{ homework.start_city }} <i class="bi bi-arrow-right"></i> {{ homework.end_city }}</h5>
+                            <h6 class="small">Aller : {{ homework.seat_go }} place{{ homework.seat_go|places }}
+                                / Retour :  {{ homework.seat_return }} place{{ homework.seat_return|places }}</h6>
+                        </div>
+                        <!-- Card body START -->
+                        <div class="card-body">
+                        <div class="table-responsive">
+                          <table class="table table-bordered align-middle text-center">
+                            <thead class="table-light">
+                              <tr>
+                                <th>Jour</th>
+                                <th>Heure de Départ</th>
+                                <th>Heure de Retour</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                             {% for row in active_rows %}
+                                <tr>
+                                  <td>{{ row.label }}</td>
+                                <td>{{ row.start|time:"H:i" }}</td>
+                                <td>{{ row.end|time:"H:i" }}</td>
+                                </tr>
+                              {% endfor %}
+                            </tbody>
+                          </table>
+                        </div>
+                             </div>
+                        <!-- end second choises -->
+                        <!-- Price -->
+                        <div class="card-footer bg-light text-center">
+                            {% if price == 0 %}
+                            <h5 class="h6">Prix pour 1 passager : Gratuit</h5>
+                            {% else %}
+                            <h5 class="h6">Prix pour 1 passager : {{ homework.price|intcomma }} FCFA / Trajet</h5>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                    <!-- Information de contact -->
+                    {% if user.is_authenticated %}
+                    <div class="card border rounded-2 mt-2 p-4">
+                        <div class="row justify-content-between">
+                                <div class="col-6">
+                                    <div class="d-flex align-items-center justify-content-start mb-2">
+                                    <div class="icon-lg bg-light rounded-circle flex-shrink-0"><i
+                                            class="fa-solid fa-car"></i></div>
+                                    <!-- Title -->
+                                    <div class="ms-2">
+                                        <h6 class="card-title mb-0">{{ homework.author.first_name|capfirst }}</h6>
+                                        <span>{{ homework.get_role_display }}</span>
+                                    </div>
+                                </div>
+                                </div>
+
+                            <!-- number phone -->
+                                <div class="col-6 text-end">
+                                    <button class="btn btn-primary btn-lg btn-block" id="afficherNumero" data-phone="{{ trip.author.phone_number }}">
+                                        +221*********
+                                      </button>
+                                </div>
+                            <!-- number phone -->
+
+                            </div>
+                    </div>
+                    {% else %}
+                    <p class="mt-3">
+                        <a href="{% url 'login' %}" class="btn btn-primary w-100 mb-0 rounded-0">Connectez-vous pour voir les informations de contact</a>
+                    </p>
+                    {% endif %}
+                    <!-- Commentaire -->
+                    {% if user.is_authenticated %}
+                        {% if homework.description %}
+                        <div class="card border rounded-2 mt-2 p-4">
+                            <h5 class="mb-3">Commentaire</h5>
+                            <p>{{ trip.description|truncatewords:200 }}</p>
+                        </div>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- =======================
+Steps END -->
+</main>
+<!-- **************** MAIN CONTENT END **************** -->
+
+{% endblock %}

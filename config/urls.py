@@ -17,6 +17,7 @@ urlpatterns = [
     path("accounts/", include("accounts.urls")),
     path("trajets/", include("trips.urls")),
     path("trajets-reguliers/", include("covoiturages.urls")),
+    path("domicile-travail/", include("homework.urls")),
     path("cars/", include("cars.urls")),
     path("bus-tata-itineraire/", include("aftu.urls")),
     path("conversations/", include("conversations.urls")),

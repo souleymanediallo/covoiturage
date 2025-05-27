@@ -8,6 +8,7 @@ from datetime import datetime
 from django.utils import timezone
 from trips.city import CITY_SENEGAL
 from covoiturages.models import Covoiturage
+from homework.models import Homework
 
 
 today_current = datetime.today().strftime('%Y-%m-%d')
@@ -22,6 +23,7 @@ class HomePageView(TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         now = timezone.now()
+        context['homeworks'] = Homework.objects.all().order_by('-created_at')[:6]
         context['trips'] = Trip.objects.filter(
             start_date__gt=now.date()
         ) | Trip.objects.filter(

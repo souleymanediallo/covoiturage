@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+{% load humanize %}
+{% block content %}
+<main>
+
+<!-- =======================
+Search START -->
+{% include 'partials/search.html' %}
+<!-- =======================
+Search START -->
+
+<!-- =======================
+Flight list START -->
+<section class="pt-0">
+	<div class="container">
+		<div class="row">
+			<!-- Left sidebar START -->
+			{% include 'partials/sidebar-filter.html' %}
+			<!-- Left sidebar END -->
+			<!-- Main content START -->
+			<div class="col-xl-8 col-xxl-9">
+				<div class="vstack">
+
+                    <!-- simple -->
+                    {% for trip in homeworks %}
+                <!-- Card item START -->
+                <a href="{{ trip.get_absolute_url }}" class="text-success">
+                <div class="card border rounded-2 mb-3 shadow">
+                    <!-- Card header -->
+                    <div class="bg-light py-3 rounded-top card-header border-bottom d-md-flex justify-content-md-between align-items-center">
+                        <!-- Icon and Title -->
+                        <div class="text-center">
+                            <!-- Title -->
+                            <div class="ms-2-">
+                                <h6 class="card-title mb-0"></h6>
+                            </div>
+                        </div>
+                        <!-- Button -->
+                        <div class="text-center">
+                            {% if trip.price > 0 %}
+                            <h6 class="card-title mb-0">{{ trip.price|intcomma }} FCFA / Pour 1 Passger</h6>
+                            {% else %}
+                            <h6 class="card-title mb-0 text-success">Gratuit</h6>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <!-- Card body -->
+                    <div class="card-body">
+                        <!-- Card header -->
+                        <div class="d-md-flex justify-content-sm-center justify-content-md-between align-items-center">
+                        <!-- Icon and Title -->
+                        <div class="d-flex align-items-center justify-content-center mb-2">
+                                    <div class="icon-lg bg-light rounded-circle flex-shrink-0">
+                                        <i class="fa-solid fa-car"></i></div>
+                                    <!-- Title -->
+                                    <div class="ms-2">
+                                        <h6 class="card-title mb-0">{{ trip.author.first_name|capfirst }}</h6>
+                                        <span>{{ trip.get_role_display }}</span>
+                                    </div>
+                                </div>
+
+                         <div class="text-center">
+                            <h6 class="card-title mb-0">{{ trip.start_city }} <i class="bi bi-arrow-right"></i> {{ trip.end_city }}</h6>
+                            <span>Domicile-Travail</span>
+                        </div>
+
+                        <!-- Button -->
+                        <div class="text-center">
+                            <p class="card-title mb-0 text-dark">
+                                Aller : {{ trip.seat_go }} Place{{ trip.seat_go|pluralize }}
+                                / Retour : {{ trip.seat_return }} Place{{ trip.seat_return|pluralize }}
+                            </p>
+                            <span>Voir le détail <i class="bi bi-arrow-right me-2"></i></span>
+                        </div>
+                    </div>
+                    <!-- Card body -->
+                    </div>
+                </div>
+                </a>
+                <!-- Card item END -->
+                   {% endfor %}
+                    <!-- end simple -->
+                   <!-- pagination -->
+                    {% include 'partials/pagination.html' %}
+                    <!-- end pagination -->
+				</div>
+			</div>
+			<!-- Main content END -->
+
+		</div> <!-- Row END -->
+	</div>
+</section>
+<!-- =======================
+Flight list END -->
+
+</main>
+
+{% endblock %}

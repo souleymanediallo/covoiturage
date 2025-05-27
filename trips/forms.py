@@ -18,6 +18,7 @@ class TripForm(forms.ModelForm):
         fields = ['role', 'trip_type', 'start_city', 'end_city', 'start_date', 'cabin_baggage', 'checked_baggage',
                   'start_time', 'return_trip', 'return_date', 'return_time',
                   'seat_go', 'seat_back', 'price', 'description']
+        
         labels = {
             'start_city': 'Ville de départ',
             'end_city': "Ville d'arrivée",

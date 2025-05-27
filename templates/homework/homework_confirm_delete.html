@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<main>
+
+<!-- =======================
+Content START -->
+<section class="pt-5">
+	<div class="container py-5">
+		<div class="row">
+
+			<!-- Sidebar START -->
+            {% include "partials/sidebar-admin.html" %}
+			<!-- Sidebar END -->
+
+			<!-- Main content START -->
+			<div class="col-lg-8 col-xl-9">
+                <div class="card border mb-0 border-radius-0 bg-light">
+                    <!-- Card header -->
+                    <div class="card-header bg-light rounded-top border-bottom">
+                        <h4 class="card-header-title text-uppercase">Supprimer une annonce</h4>
+                    </div>
+                    <!-- Card body -->
+                    <div class="card-body bg-white">
+                        <h6>Confirmer la suppression de votre trajet</h6>
+                            <p>Êtes-vous sûr de vouloir supprimer cet trajet ?
+                            Cette action est irréversible. </p>
+                            <p>Si vous êtes sûr de vouloir supprimer ce trajet, cliquez sur le bouton "Supprimer".</p>
+                            <p>Sinon, cliquez sur le bouton "Annuler" pour revenir à la page précédente..
+                            <form method="POST">
+                                {% csrf_token %}
+                            <div class="form-group">
+                                <button class="btn btn-outline-danger" type="submit">Supprimer</button>
+                                <a class="btn btn-outline-dark" href="{% url 'dashboard' %}">Annuler</a>
+                            </div>
+                            </form>
+                    </div>
+                </div>
+			</div>
+			<!-- Main content END -->
+		</div>
+	</div>
+</section>
+<!-- =======================
+Content END -->
+
+</main>
+{% endblock %}

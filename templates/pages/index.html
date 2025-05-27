@@ -21,6 +21,7 @@ Search START -->
         </div>
         <div class="row justify-content-center">
             <div class="col-md-9">
+                <!-- trip list -->
                 {% for trip in trips %}
                 <!-- Card item START -->
                 <a href="{{ trip.get_custom_url }}" class="text-success">
@@ -77,6 +78,69 @@ Search START -->
                 </a>
                 <!-- Card item END -->
             {% endfor %}
+                <!-- end trip list -->
+
+                <!-- start homework list -->
+                {% for trip in homeworks %}
+                <!-- Card item START -->
+                <a href="{{ trip.get_absolute_url }}" class="text-success">
+                <div class="card border rounded-2 mb-3 shadow">
+                    <!-- Card header -->
+                    <div class="bg-light py-3 rounded-top card-header border-bottom d-md-flex justify-content-md-between align-items-center">
+                        <!-- Icon and Title -->
+                        <div class="text-center">
+                            <!-- Title -->
+                            <div class="ms-2-">
+                                <h6 class="card-title mb-0"></h6>
+                            </div>
+                        </div>
+                        <!-- Button -->
+                        <div class="text-center">
+                            {% if trip.price > 0 %}
+                            <h6 class="card-title mb-0">{{ trip.price|intcomma }} FCFA / Pour 1 Passger</h6>
+                            {% else %}
+                            <h6 class="card-title mb-0 text-success">Gratuit</h6>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <!-- Card body -->
+                    <div class="card-body">
+                        <!-- Card header -->
+                        <div class="d-md-flex justify-content-sm-center justify-content-md-between align-items-center">
+                        <!-- Icon and Title -->
+                        <div class="d-flex align-items-center justify-content-center mb-2">
+                                    <div class="icon-lg bg-light rounded-circle flex-shrink-0">
+                                        <i class="fa-solid fa-car"></i></div>
+                                    <!-- Title -->
+                                    <div class="ms-2">
+                                        <h6 class="card-title mb-0">{{ trip.author.first_name|capfirst }}</h6>
+                                        <span>{{ trip.get_role_display }}</span>
+                                    </div>
+                                </div>
+
+                         <div class="text-center">
+                            <h6 class="card-title mb-0">{{ trip.start_city }} <i class="bi bi-arrow-right"></i> {{ trip.end_city }}</h6>
+                            <span>Domicile-Travail</span>
+                        </div>
+
+                        <!-- Button -->
+                        <div class="text-center">
+                            <p class="card-title mb-0 text-dark">
+                                Aller : {{ trip.seat_go }} Place{{ trip.seat_go|pluralize }}
+                                / Retour : {{ trip.seat_return }} Place{{ trip.seat_return|pluralize }}
+                            </p>
+                            <span>Voir le détail <i class="bi bi-arrow-right me-2"></i></span>
+                        </div>
+                    </div>
+                    <!-- Card body -->
+                    </div>
+                </div>
+                </a>
+                <!-- Card item END -->
+                   {% endfor %}
+                <!-- end homework list -->
+
+
                 <p class="text-center">
                 <a href="{% url 'trip-list' %}" class="btn btn-primary">Voir Tous Les trajets</a>
                     <a href="{% url 'trip-create' %}" class="btn btn-dark">Publier Votre Trajet</a>
@@ -215,6 +279,44 @@ Search START -->
     </section>
 
 	{% show_all_cities %}
+
+    <section class="bg-light">
+        <div class="container">
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <p class="small text-dark">
+                        Le covoiturage au Sénégal est une solution de transport en plein essor qui consiste à partager
+                        un trajet en voiture entre un conducteur et un ou plusieurs passagers se rendant dans la même direction.
+                        Cette pratique s’inscrit dans une démarche économique, écologique et sociale. Qu’est-ce que le covoiturage ?
+                        Le covoiturage permet à un conducteur disposant de places libres dans son véhicule de proposer
+                        ces places à d'autres personnes, en échange d’une participation aux frais (carburant, péage, etc.).
+                        Le covoiturage peut concerner : des trajets quotidiens, comme domicile-travail, des trajets ponctuels, comme Dakar-Thiès, Dakar-Saint-Louis ou Dakar-Kaolack,
+                        ou des trajets longue distance, comme Dakar-Tambacounda, ou même Dakar-Ziguinchor.
+                        Avantages du covoiturage pour les conducteurs, réduction des frais de transport :
+                        partage du coût du carburant, des péages et de l’entretien, voyager accompagné : fini les trajets ennuyeux seul au volant.
+                        contribution à l’environnement : moins de voitures sur la route = moins de pollution.
+                        optimisation de l’utilisation de sa voiture : valorisation des sièges libres.
+                        Avantages du covoiturage pour les passagers :
+                        trajets économiques : le prix du trajet est souvent inférieur à celui des transports classiques,
+                        confort et flexibilité : accès à un véhicule confortable, avec possibilité de s’arrêter selon les besoins,
+                        rencontres et convivialité : partager un trajet, c’est aussi l’occasion d’échanger,
+                        gain de temps : des trajets directs ou avec moins d’arrêts que les bus ou cars.
+                         Pourquoi faire du covoiturage au Sénégal ?
+                        Répondre à la crise du transport public : dans certaines régions, les taxis et les bus sont rares ou bondés.
+                        Économie locale : le covoiturage favorise la mobilité à moindre coût.
+                        Respect de l’environnement : en limitant le nombre de véhicules en circulation.
+                        Solidarité : entraide entre citoyens, surtout lors des fêtes, événements ou déplacements en zones rurales.
+                        Le covoiturage au Sénégal, une tendance d’avenir de plus en plus de Sénégalais adoptent le covoiturage pour leurs déplacements quotidiens ou occasionnels. Avec la montée des prix du carburant, le besoin de mobilité, et la conscience écologique qui grandit, le covoiturage devient une alternative crédible et pratique.
+                        Sur notre plateforme, vous pouvez facilement :
+                        publier ou rechercher un trajet de covoiturage,
+                        choisir votre conducteur ou passager selon vos préférences,
+                        bénéficier d’un service sécurisé et transparent.
+                        Faites du covoiturage au Sénégal dès aujourd’hui ! Que vous soyez conducteur ou passager, rejoignez notre communauté et voyagez mieux, moins cher et plus durable.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 	
 </main>
 {% endblock %}

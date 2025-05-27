@@ -5,6 +5,7 @@ from django.contrib import messages
 
 from .forms import CustomUserCreationForm, CustomUserUpdateForm, ProfileUpdateForm
 from trips.models import Trip
+from homework.models import Homework
 
 
 # Create your views here.
@@ -81,5 +82,6 @@ def delete_user(request):
 @login_required
 def dashboard(request):
     trips = Trip.objects.filter(author=request.user)
-    context = {"trips": trips}
+    homeworks = Homework.objects.filter(author=request.user)
+    context = {"trips": trips, "homeworks": homeworks}
     return render(request, 'accounts/dashboard.html', context)

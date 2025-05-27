@@ -4,18 +4,6 @@
 <!-- **************** MAIN CONTENT START **************** -->
 <main>
 
- <section class="pt-4 pt-md-5 pb-0 py-5 bg-primary text-light">
-        <div class="container py-5">
-            <div class="row">
-                <div class="col-12 mx-auto text-center">
-                    <h1 class="fs-2 mb-2 text-light">Publier un trajet Régulier ou Ponctuel</h1>
-                    <p class="mb-0">
-
-                        </p>
-                </div>
-            </div>
-        </div>
-    </section>
 <section class="pt-5">
 	<div class="container pt-5">
 		<div class="row g-2 g-lg-2">
@@ -40,7 +28,7 @@
 
 					<!-- Card body START -->
 					<div class="card-body p-3">
-						<h2 class="h4 my-4">
+						<h2 class="h6 my-4">
 							Choisissez le type de trajet que vous souhaitez publier.
 
 						</h2>
@@ -48,21 +36,21 @@
 							<div class="col-lg-6">
 								<div class="card border rounded-0 h-100">
 									<div class="card-header bg-primary text-light rounded-0">
-										<h2 class="h4 card-title text-light">Je fais ce trajet tous les jours</h2>
+										<h2 class="h6 card-title text-light">Je fais ce trajet tous les jours</h2>
 									</div>
 									<div class="card-body rounded-0">
 										<p class="text-dark">
 											En publiant un trajet régulier, vous permettez aux passagers de réserver des places pour des trajets récurrents (domicile-travail, école, etc.).
 											Les passagers peuvent réserver des places pour une semaine entière ou pour une période plus longue.
 										</p>
-										<a href="{% url 'covoiturage_create' %}"  class="btn btn-primary-soft my-4">Publier un trajet régulier</a>
+										<a href="{% url 'homework-create' %}"  class="btn btn-primary-soft my-4">Publier un trajet Domicile-Travail</a>
 									</div>
 								</div>
 							</div>
 							<div class="col-lg-6">
 								<div class="card border rounded-0 h-100">
 									<div class="card-header bg-primary text-light rounded-0">
-										<h2 class="h4 card-title text-light">Je fais trajet occasionnellement</h2>
+										<h2 class="h6 card-title text-light">Je fais ce trajet occasionnellement</h2>
 									</div>
 									<div class="card-body rounded-0">
 										<p class="text-dark">
@@ -86,6 +74,7 @@
 			</div>
 			<!-- Main content END -->
 		</div>
+	</div>
 	</div>
 </section>
 <!-- =======================
