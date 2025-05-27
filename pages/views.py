@@ -23,13 +23,13 @@ class HomePageView(TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         now = timezone.now()
-        context['homeworks'] = Homework.objects.all().order_by('-created_at')[:6]
+        context['homeworks'] = Homework.objects.all().order_by('-created_at')[:3]
         context['trips'] = Trip.objects.filter(
             start_date__gt=now.date()
         ) | Trip.objects.filter(
             start_date=now.date(),
             start_time__gte=now.time()
-        ).order_by('start_date', 'start_time')[:4]
+        ).order_by('start_date', 'start_time')[:3]
 
         context['city_senegal'] = CITY_SENEGAL
         return context
