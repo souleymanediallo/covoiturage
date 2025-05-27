@@ -29,7 +29,7 @@ class HomePageView(TemplateView):
         ) | Trip.objects.filter(
             start_date=now.date(),
             start_time__gte=now.time()
-        ).order_by('start_date', 'start_time')[:6]
+        ).order_by('start_date', 'start_time')[:4]
 
         context['city_senegal'] = CITY_SENEGAL
         return context
