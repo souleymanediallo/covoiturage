@@ -1,0 +1,114 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{# SEO du listing (facultatif) #}
+{% block head_extra %}
+  <title>Blog — covoiturage.sn</title>
+  <meta name="description" content="Actualités, conseils et guides sur le covoiturage, les trajets et la mobilité au Sénégal.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="{{ request.build_absolute_uri }}">
+{% endblock head_extra %}
+
+{% block content %}
+<main>
+    <section class="pt-4 pt-md-5 pb-0 py-5 bg-primary text-light">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-12 mx-auto text-center">
+                    <h1 class="fs-2 mb-2 text-light">Blog</h1>
+                    <p class="mb-0">
+                        Suivre les actualités, bon plans et conseils sur le covoiturage au Sénégal.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- ======================= Blog content START -->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 mx-auto">
+
+        {# Breadcrumb / Catégorie #}
+        <nav class="mb-3 small">
+          <a href="{% url 'blog:post_list' %}" class="text-decoration-none">Blog</a>
+          {% if object.category %} &nbsp;›&nbsp;
+            <a class="text-decoration-none" href="{% url 'blog:category_detail' object.category.slug %}">
+              {{ object.category.name }}
+            </a>
+          {% endif %}
+        </nav>
+
+        {# Titre #}
+        <h1 class="mb-2">{{ object.title }}</h1>
+
+        {# Meta ligne: auteur, date, temps de lecture #}
+        <div class="text-muted mb-3">
+          Publié le {{ object.publish_at|date:"d/m/Y" }} • {{ object.reading_time_min }} min de lecture
+        </div>
+
+        {# Image de couverture #}
+        {% if object.cover %}
+          <figure class="mb-4">
+            <img src="{{ object.cover.url }}" class="img-fluid rounded" alt="{{ object.cover_alt|default:object.meta_title }}">
+          </figure>
+        {% endif %}
+
+        {# CONTENU DE L’ARTICLE #}
+        <article class="entry-content">
+          {{ object.content|safe }}
+        </article>
+
+
+        {# Partage réseaux #}
+        <div class="d-lg-flex justify-content-lg-between mt-4">
+          <div class="align-items-center mb-3 mb-lg-0">
+            <h6 class="d-inline-block mb-2 me-3">Partager :</h6>
+            {% with u=request.build_absolute_uri t=object.title %}
+              <ul class="list-inline hstack flex-wrap gap-3 h6 fw-normal mb-0">
+                <li class="list-inline-item">
+                  <a href="https://www.facebook.com/sharer/sharer.php?u={{ u|urlencode }}" target="_blank" rel="noopener">
+                    Facebook
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="https://twitter.com/intent/tweet?url={{ u|urlencode }}&text={{ t|urlencode }}" target="_blank" rel="noopener">
+                    X/Twitter
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ u|urlencode }}&title={{ t|urlencode }}" target="_blank" rel="noopener">
+                    LinkedIn
+                  </a>
+                </li>
+              </ul>
+            {% endwith %}
+          </div>
+        </div>
+
+        {# Navigation précédent / suivant (si fournis par la vue) #}
+        {% if prev_post or next_post %}
+        <hr class="my-4">
+        <div class="d-flex justify-content-between">
+          <div>
+            {% if prev_post %}
+              ← <a href="{{ prev_post.get_absolute_url }}">{{ prev_post.title }}</a>
+            {% endif %}
+          </div>
+          <div class="text-end">
+            {% if next_post %}
+              <a href="{{ next_post.get_absolute_url }}">{{ next_post.title }}</a> →
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ======================= Blog content END -->
+</main>
+{% endblock content %}

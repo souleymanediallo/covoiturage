@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
+    'blog.apps.BlogConfig',
     'pages.apps.PagesConfig',
     'accounts.apps.AccountsConfig',
     'trips.apps.TripsConfig',
@@ -39,7 +40,7 @@ INSTALLED_APPS = [
     'cities.apps.CitiesConfig',
     'storages',
     'crispy_forms',
-    'ckeditor',
+    'django_ckeditor_5',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,57 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# --- CKEditor 5 ---
+CKEDITOR_5_FILE_UPLOAD_PATH = "uploads/blog/"  # dossier des uploads
+CKEDITOR_5_UPLOAD_FILE_TYPES = [  # types autorisés
+    "jpeg", "jpg", "png", "gif", "bmp", "webp", "tiff", "svg", "pdf"
+]
+
+CKEDITOR_5_CONFIGS = {
+    "blog_ckeditor": {  # <<— la config attendue par ton champ
+        "language": "fr",
+        "toolbar": [
+            "heading", "|",
+            "bold", "italic", "underline", "link", "|",
+            "bulletedList", "numberedList", "todoList", "|",
+            "blockQuote", "horizontalLine", "insertTable", "|",
+            "imageUpload", "mediaEmbed", "|",
+            "undo", "redo", "|",
+            "sourceEditing"
+        ],
+        # Titres disponibles
+        "heading": {
+            "options": [
+                {"model": "paragraph", "title": "Paragraphe", "class": "ck-heading_paragraph"},
+                {"model": "heading2", "view": "h2", "title": "Titre 2", "class": "ck-heading_heading2"},
+                {"model": "heading3", "view": "h3", "title": "Titre 3", "class": "ck-heading_heading3"},
+                {"model": "heading4", "view": "h4", "title": "Titre 4", "class": "ck-heading_heading4"},
+            ]
+        },
+        # Outils de tableau (insérer/supprimer lignes/colonnes, fusion…)
+        "table": {
+            "contentToolbar": [
+                "tableColumn", "tableRow", "mergeTableCells",
+                "tableCellProperties", "tableProperties"
+            ]
+        },
+        # Outils d’image (alignements, alt, légende…)
+        "image": {
+            "toolbar": [
+                "imageTextAlternative",
+                "toggleImageCaption",
+                "imageStyle:inline", "imageStyle:block",
+                "imageStyle:side"
+            ]
+        },
+        # Prévisualisation des médias embarqués
+        "mediaEmbed": {"previewsInData": True},
+
+        # (facultatif) Autoriser du HTML personnalisé — attention sécurité
+        # "htmlSupport": { "allow": [ {"name": r".*", "attributes": True, "classes": True, "styles": True} ] },
+    },
+}
 
 # Custom user model
 AUTH_USER_MODEL = "accounts.CustomUser"

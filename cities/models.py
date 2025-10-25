@@ -1,14 +1,14 @@
 from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
-from ckeditor.fields import RichTextField
+from django_ckeditor_5.fields import CKEditor5Field
 
 
 class City(models.Model):
     name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
     ordering = models.PositiveIntegerField(default=0)
-    description = RichTextField(blank=True, null=True)
+    description = CKEditor5Field(blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:

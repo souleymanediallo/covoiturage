@@ -15,6 +15,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("pages.urls")),
     path("accounts/", include("accounts.urls")),
+    path("blog/", include("blog.urls")),
     path("trajets/", include("trips.urls")),
     path("trajets-reguliers/", include("covoiturages.urls")),
     path("domicile-travail/", include("homework.urls")),
@@ -23,6 +24,7 @@ urlpatterns = [
     path("conversations/", include("conversations.urls")),
     path("contact/", include("contact.urls")),
     path("destination/", include("cities.urls")),
+    path("ckeditor5/", include("django_ckeditor_5.urls")),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 ]
 
