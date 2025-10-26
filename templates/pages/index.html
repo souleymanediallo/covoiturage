@@ -14,20 +14,6 @@ Search START -->
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-9">
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2440797581171261"
-     crossorigin="anonymous"></script>
-<!-- horizontal_display_sn -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-2440797581171261"
-     data-ad-slot="1589238865"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-            </div>
-            <div class="col-md-9">
                 {% if trips %}
                 <div class="heading-title text-center">
                     <h2 class="h3 mb-4">Covoiturage Ponctuel</h2>
@@ -166,6 +152,11 @@ Search START -->
                     <a href="{% url 'homework-create' %}" class="btn btn-dark">Publier Votre Trajet</a>
                 </p>
             </div>
+            <div class="col-md-3">
+                <!-- Advertisement START -->
+                {% include 'partials/adsense_horizontal.html' %}
+                <!-- Advertisement END -->
+            </div>
         </div>
     </div>
     </section>
@@ -297,6 +288,41 @@ Search START -->
         </div>
     </div>
     </section>
+
+<section>
+	<div class="container">
+		<!-- Title -->
+		<div class="row mb-4">
+			<div class="col-12 text-center">
+				<h2 class="mb-4">Actualités, bon plans et conseils</h2>
+			</div>
+		</div>
+
+		<div class="row">
+			<!-- Card item START -->
+            {% for post in categories %}
+			<div class="col-6 col-sm-4 col-lg-3 col-xl-2">
+				<div class="card bg-transparent text-center p-1 h-100">
+					<!-- Image -->
+					<img src="{{ post.cover.url }}" class="rounded-circle" alt=""
+                    style="object-fit: cover; height: 140px; width: 140px;"
+                    >
+
+					<div class="card-body p-0 pt-3">
+						<p class="card-title fw-bold" style="font-size: 12px;">
+                            <a href="{{ post.get_absolute_url }}" class="stretched-link">{{ post.name }}</a>
+                        </p>
+
+					</div>
+				</div>
+			</div>
+            {% endfor %}
+			<!-- Card item END -->
+
+		</div>
+	</div>
+</section>
+
 
 	{% show_all_cities %}
 

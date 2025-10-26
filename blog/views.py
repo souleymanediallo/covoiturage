@@ -1,6 +1,13 @@
 # blog/views.py
+from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
 from .models import Post, Category
+
+
+class PostListView(ListView):
+    queryset = Post.objects.published().select_related("category")
+    template_name = "blog/post_list.html"
+    context_object_name = "posts"
 
 
 class CategoryListView(ListView):
@@ -37,7 +44,17 @@ class CategoryDetailView(ListView):
     context_object_name = "posts"
     paginate_by = 10
 
+    def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
+        # défini une fois pour toute
+        self.category = get_object_or_404(Category, slug=kwargs["slug"])
+
     def get_queryset(self):
         return (Post.objects.published()
-                .filter(category__slug=self.kwargs["slug"])
-                .select_related("category"))
+                .filter(category=self.category)
+                .select_related("category", "author"))
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx["category"] = self.category
+        return ctx
