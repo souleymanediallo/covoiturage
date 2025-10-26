@@ -7,7 +7,7 @@ import django_ckeditor_5.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cities', '0003_alter_city_description'),
+        ('cities', '0002_city_ordering'),
     ]
 
     operations = [

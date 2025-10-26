@@ -5,9 +5,9 @@ from blog.models import Category, Post
 register = template.Library()
 
 
-@register.simple_tag(name="categories")
-def all_categories():
-    return Category.objects.annotate(post_count=Count("posts")).order_by("name")
+#@register.simple_tag(name="categories")
+#def all_categories():
+#    return Category.objects.annotate(post_count=Count("posts")).order_by("name")
     ## return Category.objects.annotate(post_count=Count('post')).order_by('name')
 
 
