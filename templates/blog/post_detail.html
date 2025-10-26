@@ -29,7 +29,7 @@
 <section>
   <div class="container">
     <div class="row">
-      <div class="col-lg-10">
+      <div class="col-lg-9">
 
         {# Breadcrumb / Catégorie #}
         <nav class="mb-3 small">
@@ -106,9 +106,11 @@
         {% endif %}
 
       </div>
-      <div class="col-lg-2 mt-3 mt-lg-0">
-        {% include "partials/adsense_vertical.html" %}
-      </div>
+      <div class="col-lg-3 mt-3 mt-lg-0">
+            {% include "partials/aside_category.html" %}
+
+            {% include "partials/adsense_vertical.html" %}
+          </div>
     </div>
   </div>
 </section>

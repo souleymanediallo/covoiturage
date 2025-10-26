@@ -1,0 +1,17 @@
+<div class="card border rounded-0 mb-3">
+    <div class="card-header bg-light rounded-0">
+        <h5 class="mb-0">Catégories</h5>
+    </div>
+    <div class="card-body rounded-0 p-0 border-0">
+        <ul class="list-group list-group-flush">
+            {% for category in categories %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a href="{% url 'blog:category_detail' category.slug %}" class="text-decoration-none fw-bold">
+                    {{ category.name }}
+                </a>
+                <!--<span class="badge bg-primary rounded-pill">{{ category.post_count }}</span>-->
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

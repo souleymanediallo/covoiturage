@@ -82,6 +82,9 @@ class Category(TimeStamped, SeoFields):
     def get_absolute_url(self):
         return reverse("blog:category_detail", args=[self.slug])
 
+    def post_count(self) -> int:
+        return self.posts.filter(is_deleted=False).count()
+
 
 class PostQuerySet(models.QuerySet):
     def published(self):

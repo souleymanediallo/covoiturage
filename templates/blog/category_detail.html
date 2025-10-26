@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 
 {% load static %}
+{% load custom_tags %}
 
 {# SEO du listing (facultatif) #}
 {% block head_extra %}
@@ -26,15 +27,8 @@
     </section>
 <!-- ======================= Blog grid START -->
 <section class="pt-0 pt-sm-5">
-  <div class="container-fluid">
+  <div class="container">
 
-    <!-- adsense -->
-    <div class="row mb-4">
-      <div class="col-12 text-center">
-
-      </div>
-    </div>
-  <!-- end adsense -->
       <div class="row mb-4">
           <!-- main content -->
           <div class="col-md-9">
@@ -81,7 +75,11 @@
           </div>
           <!-- end main content -->
           <!-- side adsense -->
-          <div class="col-md-9"></div>
+          <div class="col-lg-3 mt-3 mt-lg-0">
+            {% include "partials/aside_category.html" %}
+
+            {% include "partials/adsense_vertical.html" %}
+          </div>
           <!-- end side adsense -->
       </div>
 

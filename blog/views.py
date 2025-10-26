@@ -28,6 +28,7 @@ class PostDetailView(DetailView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         post = self.object
+        ctx["categories"] = Category.objects.only("name", "slug").order_by("name")
         ctx["prev_post"] = (Post.objects.published()
                             .filter(publish_at__lt=post.publish_at)
                             .order_by("-publish_at")
@@ -57,4 +58,5 @@ class CategoryDetailView(ListView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx["category"] = self.category
+        ctx["categories"] = Category.objects.only("name", "slug").order_by("name")
         return ctx
