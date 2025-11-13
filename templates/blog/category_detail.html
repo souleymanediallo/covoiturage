@@ -41,11 +41,11 @@
           <div class="card-body p-3 pb-0">
             <!-- Title -->
             <h5 class="card-title mt-2">
-              <a href="{{ post.get_absolute_url }}">{{ post.category.name }}</a>
+              <a href="{{ post.get_absolute_url }}">{{ post.title|upper|truncatechars:90 }}</a>
             </h5>
 
             <!-- Aperçu du contenu -->
-            <p class="mb-2">{{ post.category.description|truncatechars:190 }}</p>
+            <p class="mb-2">{{ post.content|striptags|truncatechars:140 }}</p>
 
           </div>
         </div>

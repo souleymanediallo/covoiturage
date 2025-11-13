@@ -30,3 +30,15 @@ input[type=number]:focus{
     opacity: 0.5;
     color: #ccc;
 }
+
+.entry-content h2,
+.entry-content h2 * {
+  font-size: 2em !important;
+}
+
+.entry-content p {
+    font-size: 1.1em;
+    line-height: 1.6em;
+    color: #000000!important;
+
+}

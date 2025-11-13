@@ -1,3 +1,19 @@
+/* titles */
+article.entry-content h1,
+article.entry-content h2,
+article.entry-content h3,
+article.entry-content h4,
+article.entry-content h1 * ,
+article.entry-content h2 * ,
+article.entry-content h3 * ,
+article.entry-content h4 * {
+    font-size: 1.2rem !important;
+    line-height: 1.3 !important;
+    margin-top: 1em !important;
+    margin-bottom: 0.5em !important;
+    text-transform: uppercase !important;
+}
+
 ul#profile,  ul#trip, ul#sexe {
     list-style-type: none;
 }
