@@ -7,7 +7,6 @@ from trips.models import Trip
 from datetime import datetime
 from django.utils import timezone
 from trips.city import CITY_SENEGAL
-from covoiturages.models import Covoiturage
 from homework.models import Homework
 from blog.models import Category
 
@@ -94,6 +93,13 @@ def robots_txt(request):
         "User-agent: *",
         "Disallow: /admin/",
         "Disallow: /accounts/",
+        "Disallow: /trajets/create",
+        "Disallow: /domicile-travail/create/",
+        "Disallow: /cars/create/",
+        "Disallow: /publier-trajet/",
+        "Disallow: /profile/",
+        "Disallow: /dashboard/",
+        "Disallow: /search/",
 
         "Allow: /",
         "Sitemap: https://www.covoiturage.sn/sitemap.xml",
